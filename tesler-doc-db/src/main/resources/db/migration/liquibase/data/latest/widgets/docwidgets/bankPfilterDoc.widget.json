@@ -1,0 +1,43 @@
+{
+  "name": "bankPfilterDoc",
+  "title": "",
+  "type": "List",
+  "bc": "bankDoc",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input",
+      "drillDown": "true"
+    },
+    {
+      "title": "Active Projects Amount",
+      "key": "activeProjectsAmount",
+      "type": "number"
+    },
+    {
+      "title": "National",
+      "key": "isNational",
+      "type": "checkbox"
+    },
+    {
+      "title": "Size",
+      "key": "size",
+      "type": "dictionary"
+    },
+    {
+      "title": "Country",
+      "key": "country",
+      "type": "dictionary"
+    },
+    {
+      "title": "Notes",
+      "key": "notes",
+      "type": "text"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {}
+}

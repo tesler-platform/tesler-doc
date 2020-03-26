@@ -1,0 +1,93 @@
+{
+  "name": "bankCardDoc",
+  "title": "Bank Card",
+  "type": "Form",
+  "bc": "bankDoc",
+  "showCondition": [],
+  "fields": [
+    {
+      "label": "Name",
+      "key": "name",
+      "type": "input"
+    },
+    {
+      "label": "Active Projects Amount",
+      "key": "activeProjectsAmount",
+      "type": "number"
+    },
+    {
+      "label": "National",
+      "key": "isNational",
+      "type": "checkbox"
+    },
+    {
+      "label": "Size",
+      "key": "size",
+      "type": "dictionary"
+    },
+    {
+      "label": "Country",
+      "key": "country",
+      "type": "input"
+    },
+    {
+      "label": "Notes",
+      "key": "notes",
+      "type": "text"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {
+      "include": [
+        "save",
+        "cancel-create"
+      ],
+      "exclude": [
+        "create",
+        "delete"
+      ]
+    },
+    "layout": { 
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "name",
+              "span": 12
+            },
+            {
+              "fieldKey": "activeProjectsAmount",
+              "span": 12
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "size",
+              "span": 12
+            },
+            {
+              "fieldKey": "country",
+              "span": 12
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "isNational",
+              "span": 12
+            },
+            {
+              "fieldKey": "notes",
+              "span": 12
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

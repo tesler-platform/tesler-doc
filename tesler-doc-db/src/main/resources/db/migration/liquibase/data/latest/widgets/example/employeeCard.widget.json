@@ -1,0 +1,53 @@
+{
+  "name": "employeeCard",
+  "title": "Employee Card",
+  "type": "Form",
+  "bc": "employee",
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input"
+    },
+    {
+      "title": "Success Rate",
+      "key": "successRate",
+      "type": "input"
+    },
+    {
+      "title": "Position",
+      "key": "position",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {
+    },
+    "layout": {
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "name",
+              "span": 8
+            },
+            {
+              "fieldKey": "successRate",
+              "span": 8
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "position",
+              "span": 8
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

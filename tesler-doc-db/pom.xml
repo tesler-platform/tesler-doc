@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>tesler-doc-db</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>TESLERDOC - Database</name>
+
+  <parent>
+    <groupId>io.tesler</groupId>
+    <artifactId>tesler-doc-base</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../tesler-doc-base/pom.xml</relativePath>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.tesler</groupId>
+      <artifactId>tesler-liquibase</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.8</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <configuration>
+          <skip>false</skip>
+          <driver>${jdbc.driver}</driver>
+          <url>${jdbc.url}</url>
+          <username>${jdbc.user}</username>
+          <password>${jdbc.password}</password>
+          <changeLogFile>${liquibase.changelog}</changeLogFile>
+          <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+          <logging>WARNING</logging>
+          <systemProperties>
+            <org.slf4j.simpleLogger.log.liquibase.executor.jvm.JdbcExecutor>warn</org.slf4j.simpleLogger.log.liquibase.executor.jvm.JdbcExecutor>
+          </systemProperties>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

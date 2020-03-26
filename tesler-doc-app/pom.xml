@@ -1,0 +1,118 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>tesler-doc-app</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>TESLERDOC - APP</name>
+
+    <parent>
+        <groupId>io.tesler</groupId>
+        <artifactId>tesler-doc-base</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../tesler-doc-base/pom.xml</relativePath>
+    </parent>
+
+    <properties>
+        <docker.project.name>tesler-doc</docker.project.name>
+        <docker.module.name>tesler-doc-app</docker.module.name>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.tesler</groupId>
+            <artifactId>tesler-doc-source</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.tesler</groupId>
+            <artifactId>tesler-doc-db</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.tesler</groupId>
+            <artifactId>tesler-doc-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>tesler-doc-app</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <resources>
+                        <resource>
+                            <directory>src/main/resources</directory>
+                            <filtering>${resource.filtering}</filtering>
+                            <includes>
+                                <include>application-dev.properties</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <directory>src/main/resources</directory>
+                            <filtering>false</filtering>
+                            <excludes>
+                                <exclude>application-dev.properties</exclude>
+                            </excludes>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>io.tesler.app.TESLERDOCApplication</mainClass>
+                    <profiles>${spring.active.profiles}</profiles>
+                    <classifier>exec</classifier>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>build</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>push</id>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                        <phase>${docker.deploy.phase}</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

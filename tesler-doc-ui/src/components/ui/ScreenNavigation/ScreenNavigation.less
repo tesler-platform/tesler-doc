@@ -1,0 +1,131 @@
+/*
+ * TESLERDOC - UI
+ * Copyright (C) 2020 Tesler Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@import "~assets/styles/theme.less";
+
+.icon {
+    color: #595959;
+}
+
+.MenuItemLink {
+    font-size: 16px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    width: 240px;
+}
+
+.Container {
+    border-right: 0;
+
+    :global {
+        .ant-menu {
+            border: 0;
+        }
+
+        .anticon {
+            font-size: 24px !important;
+            line-height: 2;
+        }
+
+        .ant-menu-submenu > .ant-menu-submenu-title {
+            height: auto;
+            padding-right: 16px;
+
+            &::after {
+                right: 6px;
+            }
+        }
+
+        .ant-menu-item:not(:last-child) {
+            margin-bottom: 0;
+        }
+    }
+
+    .Item {
+        display: flex;
+        margin: 0 !important;
+        align-items: center;
+        font-weight: initial;
+        white-space: normal;
+    }
+
+    .ItemCollapsed {
+        height: 48px;
+        display: flex;
+        margin: 0 !important;
+        align-items: center;
+        font-weight: initial;
+        white-space: normal;
+    }
+    .Item:global(.ant-menu-item),
+    .ItemCollapsed:global(.ant-menu-item) {
+        height: 48px;
+        padding-right: 5px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        font-family: Roboto;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 3;
+        letter-spacing: normal;
+    }
+
+    .ItemCollapsed:global(.ant-menu-item) {
+        padding-left: 12px;
+    }
+}
+
+.Container:global(.ant-menu-vertical) {
+    border-right: 0;
+}
+
+.MenuDivider{
+    margin-right: 16px !important;
+    margin-left: 16px !important;
+}
+
+.MenuDividerCollapsed{
+    margin-right: 8px !important;
+    margin-left: 8px !important;
+}
+
+.Category {
+    font-weight: 600;
+
+    :global(.ant-menu-submenu-title) {
+        white-space: normal;
+    }
+}
+
+.sideMenuCollapsed {
+    display: none;
+}
+
+.Notification {
+    margin: 10px 0px 0px auto;
+    padding: 0 7px;
+    height: 24px;
+    border-radius: 12px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: @menu-text;
+    background-color: @butterscotch;
+}

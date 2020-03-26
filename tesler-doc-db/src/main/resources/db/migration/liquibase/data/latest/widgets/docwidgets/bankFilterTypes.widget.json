@@ -1,0 +1,11 @@
+{
+  "name": "bankFilterTypesDoc",
+  "title": "",
+  "type": "List",
+  "bc": "bankDoc",
+  "showCondition": [],
+  "fields": [ ],
+  "axisFields": [],
+  "chart": [],
+  "options": {}
+}

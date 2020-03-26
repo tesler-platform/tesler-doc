@@ -1,0 +1,7 @@
+{
+  "name": "hiddenview",
+  "title": "hiddenview",
+  "template": "DashboardView",
+  "url": "/screen/doc/view/hidden",
+  "widgets": []
+}

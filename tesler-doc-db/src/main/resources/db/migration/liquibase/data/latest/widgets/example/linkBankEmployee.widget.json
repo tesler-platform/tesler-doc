@@ -1,0 +1,34 @@
+{
+  "name": "linkBankEmployee",
+  "title": "",
+  "type": "List",
+  "bc": "linkBankEmployee",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "employee",
+      "type": "input"
+    },
+    {
+      "title": "Success Rate",
+      "key": "successRate",
+      "type": "input"
+    },
+    {
+      "title": "Position",
+      "key": "position",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {
+      "include": [
+        "associate"
+      ]
+    },
+    "layout": {}
+  }
+}

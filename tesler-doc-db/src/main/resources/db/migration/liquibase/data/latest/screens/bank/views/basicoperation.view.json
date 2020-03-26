@@ -1,0 +1,19 @@
+{
+    "name": "basicoperation",
+    "title": "Basic Operation",
+    "template": "DashboardView",
+    "url": "/screen/doc/view/basicoperation",
+    "widgets": [
+      {
+        "widgetName": "SecondLevelMenu",
+        "position": 0,
+        "gridWidth": 2
+      },
+      {
+        "widgetName": "bankListDoc",
+        "position": 1,
+        "gridWidth": 2,
+        "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/BasicOperation.md"
+      }
+    ]
+  }

@@ -1,0 +1,45 @@
+{
+  "name": "bankList",
+  "title": "",
+  "type": "List",
+  "bc": "bank",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input",
+      "drillDown": "true"
+    },
+    {
+      "title": "Active Projects Amount",
+      "key": "activeProjectsAmount",
+      "type": "input"
+    },
+    {
+      "title": "National",
+      "key": "isNational",
+      "type": "checkbox"
+    },
+    {
+      "title": "Size",
+      "key": "size",
+      "type": "dictionary"
+    },
+    {
+      "title": "Country",
+      "key": "country",
+      "type": "dictionary"
+    },
+    {
+      "title": "Notes",
+      "key": "notes",
+      "type": "text"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "editable": "true"
+  }
+}

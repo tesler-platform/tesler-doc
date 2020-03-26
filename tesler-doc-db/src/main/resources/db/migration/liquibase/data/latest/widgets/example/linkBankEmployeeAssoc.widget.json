@@ -1,0 +1,26 @@
+{
+  "name": "linkBankEmployeeAssoc",
+  "title": "Employees related to bank",
+  "type": "AssocListPopup",
+  "bc": "linkBankEmployeeAssoc",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input"
+    },
+    {
+      "title": "Success Rate",
+      "key": "successRate",
+      "type": "input"
+    },
+    {
+      "title": "Position",
+      "key": "position",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": []
+}

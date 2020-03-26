@@ -1,0 +1,83 @@
+/*
+ * TESLERDOC - UI
+ * Copyright (C) 2020 Tesler Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 
+@import "~assets/styles/theme.less";
+
+.Container {
+    height: 100%;
+    width: 100%;
+}
+
+.sideMenu {
+    z-index: 1;
+    box-shadow: @sliderShadow;
+}
+
+.spinContainer {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinCard {
+    width: 300px;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form {
+        width: 100%;
+    }
+}
+
+:global(.ant-layout) {
+    height: inherit;
+    background: #fff !important;
+}
+
+:global(.ant-layout-header) {
+    padding: 0 !important;
+}
+
+:global(body) {
+    overflow-y: hidden;
+}
+
+body :global(.ant-popover) {
+    z-index: 1060;
+}
+
+body :global(.ant-notification) {
+    z-index: 2000;
+}
+
+.headerWrapper {
+    box-shadow: 0 2px 0 0 #d5d5d5;
+    background: #001529;
+}
+
+.loginWithSsoErrorContainer {
+    width: 221px;
+    text-align: center;
+}
+
+.errorText {
+    margin-bottom: 20px;
+    color: @grapefruit;
+}

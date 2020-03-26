@@ -1,0 +1,23 @@
+{
+  "name": "example",
+  "title": "Example",
+  "primaryViewName": "banklist",
+  "primaryViews": [
+    "banklist"
+  ],
+  "navigation": {
+    "menu": [
+      {
+        "title": "Banks",
+        "child": [
+          {
+            "viewName": "banklist"
+          },
+          {
+            "viewName": "bankcard"
+          }
+        ]
+      }
+    ]
+  }
+}

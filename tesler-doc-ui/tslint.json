@@ -1,0 +1,54 @@
+{
+    "extends": [
+        "tslint:recommended",
+        "tslint-eslint-rules"
+    ],
+    "rules": {
+        "ter-indent": [
+            true,
+            4,
+            {
+                "SwitchCase": 1,
+                "outerIIFEBody": 0,
+                "FunctionDeclaration": {
+                    "body": 1,
+                    "parameters": 1
+                },
+                "FunctionExpression": {
+                    "body": 1,
+                    "parameters": 1
+                },
+                "CallExpression": {
+                    "arguments": 1
+                }
+            }
+        ],
+        "semicolon": {
+            "options": "never"
+        },
+        "member-access": [
+            true,
+            "no-public"
+        ],
+        "quotemark": {
+            "options": [
+                "single",
+                "jsx-double"
+            ]
+        },
+        "arrow-parens": false,
+        "trailing-comma": false,
+        "ordered-imports": false,
+        "no-var-requires": false,
+        "no-console": false,
+        "object-literal-sort-keys": false,
+        "no-trailing-whitespace": [
+            true,
+            "ignore-jsdoc"
+        ],
+        "interface-name": false,
+        "no-empty-interface": false
+    },
+    "jsRules": true,
+    "rulesDirectory": []
+}

@@ -1,0 +1,33 @@
+{
+  "name": "banklist",
+  "title": "Banks",
+  "template": "DashboardView",
+  "url": "/screen/example/view/banklist",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "bankList",
+      "position": 1,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "employeeCard",
+      "position": 3,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "linkBankEmployee",
+      "position": 4,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "linkBankEmployeeAssoc",
+      "position": 5,
+      "gridWidth": 4
+    }
+  ]
+}

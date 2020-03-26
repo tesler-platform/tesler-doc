@@ -1,0 +1,38 @@
+# Maven template
+target/
+
+# overlays
+overlays/
+
+# IntelliJ
+/out/
+.idea/
+src/main/resources/jdbc.properties
+*.iml
+*.ipr
+*.iws
+*.ids
+
+# Eclipse IDE
+.project
+.classpath
+.settings/
+
+# Windows template
+Thumbs.db
+
+/*.iml
+/*.classpath
+/*.project
+/src/main/resources/jdbc.properties
+
+node_modules/
+
+.flattened-pom.xml
+
+/tesler-doc-ui/dist/
+/tesler-doc-ui/node_modules/
+
+yarn.lock
+
+elasticsearch/
