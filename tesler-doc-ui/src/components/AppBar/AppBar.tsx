@@ -49,7 +49,13 @@ export function AppBar(props: AppBarProps) {
     const views: ViewNavigationItem[] = useViewNavigation(props.menu, props.views)
     return <Row className={styles.headerContainer} type="flex" justify="center">
         <div
-            className={cn(styles.container, {[styles.mobileContainer]: props.mobileMenu})}
+            className={
+                cn(
+                    styles.container,
+                    { [styles.mobileContainer]: props.mobileMenu },
+                    { [styles.menuVisible]: props.menuVisible }
+                )
+            }
             style={props.headerWidth}
         >
         {props.mobileMenu

@@ -36,7 +36,8 @@
 }
 
 .headerContainer {
-    width: 100%;
+    justify-content: space-between;
+    flex-wrap: nowrap;
     background: #001529;
 }
 
@@ -45,6 +46,7 @@
     height: 63px;
     display: flex;
     justify-content: space-between;
+    margin-left: 170px;
     
     :global(.ant-tabs-bar) {
         border: none;
@@ -66,24 +68,26 @@
 
 .mobileContainer{
     justify-content: left;
+    margin-left: 0;
+}
+
+.menuVisible:not(.mobileContainer) {
+    margin-left: 64px;
 }
 
 :global(.ant-avatar).userIcon {
     z-index: 1000;
     cursor: pointer;
-    margin-left: 16px;
-    margin-right: 16px;
     background-color: @bright-sky-blue;
 }
 
 .controls {
-    height: 64px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     flex-shrink: 0;
-    position: absolute;
-    right: 0;
+    margin-right: 16px;
 }
 
 .userInfoPopover {
