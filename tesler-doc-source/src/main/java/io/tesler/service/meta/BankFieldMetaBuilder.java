@@ -55,10 +55,14 @@ public class BankFieldMetaBuilder extends FieldMetaBuilder<BankDTO> {
 				country,
 				testPercent,
 				testMoney,
-				testDate
+				testDate,
+				testInput,
+				testPickList,
+				testDictionary
 		);
 		fields.setRequired(name);
 		fields.setDictionaryTypeWithAllValues(country, TDDictionaryType.COUNTRY);
+		fields.setDictionaryTypeWithAllValues(testDictionary, TDDictionaryType.DOC_TEST);
 		fields.setDictionaryTypeWithAllValues(size, TDDictionaryType.SIZE);
 		if (innerBcDescription.getName().toLowerCase().equals("bankdoc")) {
 			fields.setDrilldown(

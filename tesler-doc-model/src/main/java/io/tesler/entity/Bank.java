@@ -57,6 +57,9 @@ public class Bank extends BaseEntity {
 	private LOV country;
 
 	@Column
+	private String testInput;
+
+	@Column
 	private Long testPercent;
 
 	@Column
@@ -65,5 +68,9 @@ public class Bank extends BaseEntity {
 	@Column
 	private LocalDateTime testDate;
 
+	@Column
+	private String testPickList;
 
+	@Column
+	private LOV testDictionary;
 }

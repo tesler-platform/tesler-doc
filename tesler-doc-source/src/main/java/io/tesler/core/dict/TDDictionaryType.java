@@ -36,7 +36,8 @@ public enum TDDictionaryType implements Serializable, IDictionaryType {
 	INTERNAL_ROLE,
 	SIZE,
 	SYSTEM_PREF,
-	TYPE;
+	TYPE,
+	DOC_TEST;
 
 
 	@Override

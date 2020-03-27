@@ -35,9 +35,12 @@
       <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
         <constraints nullable="false"/>
       </column>
+      <column name="TEST_INPUT" type="VARCHAR2(255)"/>
+      <column name="TEST_PICK_LIST" type="VARCHAR2(255)"/>
       <column name="TEST_DATE" type="TIMESTAMP(6)"/>
       <column name="TEST_PERCENT" type="NUMBER(3, 0)"/>
       <column name="TEST_MONEY" type="NUMBER(19, 2)"/>
+      <column name="TEST_DICTIONARY" type="VARCHAR2(255)"/>
     </createTable>
   </changeSet>
 

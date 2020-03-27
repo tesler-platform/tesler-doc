@@ -44,6 +44,26 @@
       "label": "Date and Time (with seconds)",
       "key": "testDate",
       "type": "dateTimeWithSeconds"
+    },
+    {
+      "label": "Test Input",
+      "key": "testInput",
+      "type": "input"
+    },
+    {
+      "label": "Pick List",
+      "key": "testPickList",
+      "type": "pickList",
+      "popupBcName": "bankDocPicklist",
+      "pickMap": {
+        "testPickList": "name",
+        "testInput": "activeProjectsAmount"
+      }
+    },
+    {
+      "label" : "Dictionary",
+      "key" : "testDictionary",
+      "type" : "dictionary"
     }
   ],
   "axisFields": [],
@@ -95,6 +115,26 @@
             {
               "fieldKey": "testPercent",
               "span": 12
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "testInput",
+              "span": 12
+            },
+            {
+              "fieldKey": "testPickList",
+              "span": 12
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "testDictionary",
+              "span": 24
             }
           ]
         }

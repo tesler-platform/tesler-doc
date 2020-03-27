@@ -1,0 +1,21 @@
+{
+  "title": "Test Pick List",
+  "name": "bankDocPickList",
+  "type": "PickListPopup",
+  "bc": "bankDocPicklist",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Number",
+      "key": "activeProjectsAmount",
+      "type": "input"
+    },
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": []
+}

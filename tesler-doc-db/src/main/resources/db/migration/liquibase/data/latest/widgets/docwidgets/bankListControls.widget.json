@@ -45,6 +45,26 @@
       "title": "Date and Time (with seconds)",
       "key": "testDate",
       "type": "dateTimeWithSeconds"
+    },
+    {
+      "title": "Test Input",
+      "key": "testInput",
+      "type": "input"
+    },
+    {
+      "title": "Pick List",
+      "key": "testPickList",
+      "type": "pickList",
+      "popupBcName": "bankDocPicklist",
+      "pickMap": {
+        "testPickList": "name",
+        "testInput": "activeProjectsAmount"
+      }
+    },
+    {
+      "title" : "Dictionary",
+      "key" : "testDictionary",
+      "type" : "dictionary"
     }
   ],
   "axisFields": [],

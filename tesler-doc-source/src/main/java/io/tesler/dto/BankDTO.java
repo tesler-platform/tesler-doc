@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,6 +29,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+
+import static io.tesler.core.util.filter.SearchParameterType.LOV;
 
 @Getter
 @Setter
@@ -54,6 +56,16 @@ public class BankDTO extends DataResponseDTO {
 	private String country;
 
 	@SearchParameter
+	private String testInput;
+
+	@SearchParameter
+	private String testPickList;
+
+	@SearchParameter(type = LOV)
+	@TDLov(TDDictionaryType.DOC_TEST)
+	private String testDictionary;
+
+	@SearchParameter
 	private Long testPercent;
 
 	@SearchParameter
@@ -73,6 +85,9 @@ public class BankDTO extends DataResponseDTO {
 		this.testPercent = bank.getTestPercent();
 		this.testMoney = bank.getTestMoney();
 		this.testDate = bank.getTestDate();
+		this.testInput = bank.getTestInput();
+		this.testPickList = bank.getTestPickList();
+		this.testDictionary = TDDictionaryType.DOC_TEST.lookupValue(bank.getTestDictionary());
 	}
 
 }

@@ -93,6 +93,9 @@ public class BankServiceImpl extends VersionAwareResponseService<BankDTO, Bank> 
 			if (bankDTO.isFieldChanged(BankDTO_.isNational)) {
 				bank.setNational(bankDTO.getIsNational());
 			}
+			if (bankDTO.isFieldChanged(BankDTO_.testInput)) {
+				bank.setTestInput(bankDTO.getTestInput());
+			}
 			if (bankDTO.isFieldChanged(BankDTO_.testPercent)) {
 				bank.setTestPercent(bankDTO.getTestPercent());
 			}
@@ -101,6 +104,12 @@ public class BankServiceImpl extends VersionAwareResponseService<BankDTO, Bank> 
 			}
 			if (bankDTO.isFieldChanged(BankDTO_.testDate)) {
 				bank.setTestDate(bankDTO.getTestDate());
+			}
+			if (bankDTO.isFieldChanged(BankDTO_.testDictionary)) {
+				bank.setTestDictionary(TDDictionaryType.DOC_TEST.lookupName(bankDTO.getTestDictionary()));
+			}
+			if (bankDTO.isFieldChanged(BankDTO_.testPickList)) {
+				bank.setTestPickList(bankDTO.getTestPickList());
 			}
 		}
 
