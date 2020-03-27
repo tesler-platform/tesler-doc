@@ -28,6 +28,10 @@
       <artifactId>tesler-testing</artifactId>
       <classifier>tests</classifier>
     </dependency>
+    <dependency>
+      <groupId>io.tesler</groupId>
+      <artifactId>tesler-dictionary-all</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>javax.xml.bind</groupId>

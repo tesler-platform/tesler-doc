@@ -41,6 +41,7 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 			linkBankEmployeeAssoc(bank, EmployeeService.class),
 
 	bankDoc(BankService.class),
+		bankDocPicklist(bankDoc, BankService.class),
 		linkBankDocEmployee(bankDoc,LinkBankEmployeeService.class),
 			linkBankDocEmployeeAssoc(bankDoc,EmployeeService.class),
 
