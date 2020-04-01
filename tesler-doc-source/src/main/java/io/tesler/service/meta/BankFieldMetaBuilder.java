@@ -29,6 +29,9 @@ import static io.tesler.dto.BankDTO_.size;
 import static io.tesler.dto.BankDTO_.testPercent;
 import static io.tesler.dto.BankDTO_.testMoney;
 import static io.tesler.dto.BankDTO_.testDate;
+import static io.tesler.dto.BankDTO_.testInput;
+import static io.tesler.dto.BankDTO_.testPickList;
+import static io.tesler.dto.BankDTO_.testDictionary;
 
 import io.tesler.core.crudma.bc.impl.InnerBcDescription;
 import io.tesler.core.dict.TDDictionaryType;
