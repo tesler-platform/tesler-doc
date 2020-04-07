@@ -8,15 +8,10 @@
   "navigation": {
     "menu": [
       {
-        "title": "Banks",
-        "child": [
-          {
-            "viewName": "banklist"
-          },
-          {
-            "viewName": "bankcard"
-          }
-        ]
+        "viewName": "banklist"
+      },
+      {
+        "viewName": "bankcard"
       }
     ]
   }

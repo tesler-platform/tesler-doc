@@ -8,100 +8,95 @@
   "navigation": {
     "menu": [
       {
-        "title": "Documentation",
+        "title": "Hello World in Tesler",
         "child": [
           {
-            "title": "Hello World in Tesler",
-            "child": [
-              {
-                "viewName": "hello"
-              },
-              {
-                "viewName": "teslerinfo"
-              }
-            ]
+            "viewName": "hello"
           },
           {
-            "title": "UI",
-            "child": [
-              {
-                "viewName": "screen"
-              },
-              {
-                "viewName": "view"
-              },
-              {
-                "viewName": "widget"
-              }
-            ]
+            "viewName": "teslerinfo"
+          }
+        ]
+      },
+      {
+        "title": "UI",
+        "child": [
+          {
+            "viewName": "screen"
           },
           {
-            "title": "Widgets",
-            "child": [
-              {
-                "viewName": "list"
-              },
-              {
-                "viewName": "form"
-              }
-            ]
+            "viewName": "view"
           },
           {
-            "title": "Controls",
-            "child": [
-              {
-                "viewName": "controls"
-              },
-              {
-                "viewName": "input"
-              },
-              {
-                "viewName": "number"
-              },
-              {
-                "viewName": "date"
-              },
-              {
-                "viewName": "checkbox"
-              },
-              {
-                "viewName": "dictionary"
-              },
-              {
-                "viewName": "picklist"
-              }
-            ]
+            "viewName": "widget"
+          }
+        ]
+      },
+      {
+        "title": "Widgets",
+        "child": [
+          {
+            "viewName": "list"
           },
           {
-            "title": "Filter and Sort",
-            "child": [
-              {
-                "viewName": "filter"
-              },
-              {
-                "viewName": "sort"
-              },
-              {
-                "viewName": "pfilter"
-              },
-              {
-                "viewName": "filtertypes"
-              }
-            ]
+            "viewName": "form"
+          }
+        ]
+      },
+      {
+        "title": "Controls",
+        "child": [
+          {
+            "viewName": "controls"
           },
           {
-            "title": "Operations",
-            "child": [
-              {
-                "viewName": "action"
-              },
-              {
-                "viewName": "actiongroup"
-              },
-              {
-                "viewName": "basicoperation"
-              }
-            ]
+            "viewName": "input"
+          },
+          {
+            "viewName": "number"
+          },
+          {
+            "viewName": "date"
+          },
+          {
+            "viewName": "checkbox"
+          },
+          {
+            "viewName": "dictionary"
+          },
+          {
+            "viewName": "picklist"
+          }
+        ]
+      },
+      {
+        "title": "Filter and Sort",
+        "child": [
+          {
+            "viewName": "filter"
+          },
+          {
+            "viewName": "sort"
+          },
+          {
+            "viewName": "pfilter"
+          },
+          {
+            "viewName": "filtertypes"
+          }
+        ]
+      },
+      {
+        "title": "Operations",
+        "child": [
+          {
+            "viewName": "action"
+          },
+          {
+            "viewName": "actiongroup"
+          },
+          {
+            "viewName": "basicoperation"
           }
         ]
       }
