@@ -20,29 +20,14 @@ import {Tabs} from 'antd'
 import {
     historyObj,
     Link,
-    isViewNavigationGroup,
-    isViewNavigationItem
+    useViewTabs
 } from '@tesler-ui/core'
-import {ViewMetaResponse} from '@tesler-ui/core/interfaces/view'
 import styles from './SecondLevelTabs.less'
-import {
-    ViewNavigationItem,
-    MenuItem
-} from '@tesler-ui/core/interfaces/navigation'
-import {ViewNavigationGroup} from 'interfaces/navigation'
+import {NavigationLevel} from '@tesler-ui/core/interfaces/navigation'
 
 export interface ViewNavigationProps {
-    views: ViewMetaResponse[],
-    activeView: string,
-    navigationMenu: MenuItem[],
     bcPath: string,
-    navigationLevel?: number
-}
-
-interface ViewParseInfo {
-    name: string,
-    customTitle?: string,
-    selected?: boolean,
+    navigationLevel?: NavigationLevel
 }
 
 export function SecondLevelTabs(props: ViewNavigationProps) {
@@ -50,128 +35,26 @@ export function SecondLevelTabs(props: ViewNavigationProps) {
         historyObj.push(key)
     }
 
-    let parsedViews: ViewParseInfo[] = []
-    const activeView = props.views.find((v) => v.url === props.activeView)
-    const activeViewName = activeView && activeView.name
-
-    if (activeViewName) {
-        let getTabsResult: any = null
-        props.navigationMenu.some((navItem) => {
-            return !!(getTabsResult = getTabsFromNavGroup(activeViewName, navItem, props.navigationLevel || 2, 1))
-        })
-
-        if (getTabsResult && 'tabList' in getTabsResult) {
-            parsedViews = getTabsResult.tabList
-        }
-    }
-
-    let selectedTabViewName = props.activeView
-    const levelViews: Array<{name: string, url: string}> = []
-    parsedViews.forEach((parsedView) => {
-        const view = props.views.find((v) => v.name === parsedView.name)
-        if (view) {
-            levelViews.push({
-                name: (parsedView.customTitle) ? parsedView.customTitle : view.title,
-                url: view.url
-            })
-
-            if (parsedView.selected) {
-                selectedTabViewName = view.url
-            }
-        }
-    })
+    const tabs = useViewTabs(props.navigationLevel || 2)
+    const activeTab = tabs?.find(item => item.selected)
 
     return <nav className={styles.container}>
         <Tabs
-            activeKey={`${selectedTabViewName}/${props.bcPath}`}
+            activeKey={`${activeTab?.url}/${props.bcPath}`}
             tabBarGutter={24}
             size="large"
             onChange={handleChange}
         >
-            {levelViews.map((item) =>
+            {tabs.map(item =>
                 <Tabs.TabPane
                     key={`${item.url}/${props.bcPath}`}
                     tab={<Link href={`${item.url}/${props.bcPath}`} className={styles.link}>
-                        <span>{item.name}</span>
+                        <span>{item.title}</span>
                     </Link>}
                 />
             )}
         </Tabs>
     </nav>
-}
-
-const getItemInfo = (menuItem: ViewNavigationGroup | ViewNavigationItem): ViewParseInfo => {
-    if (isViewNavigationGroup(menuItem)) {
-        return {
-            name: getItemInfo(menuItem.child[0] as ViewNavigationItem).name,
-            customTitle: menuItem.title
-        }
-    } else if (isViewNavigationItem(menuItem)) {
-        return {
-            name: menuItem.viewName
-        }
-    }
-}
-
-const getCategoryTabs = (
-    categoryData: ViewNavigationGroup,
-    selectedItem: ViewNavigationItem
-) => {
-    const tabs: ViewParseInfo[] = []
-
-    categoryData.child.forEach((child) => {
-        const tab = getItemInfo(child)
-        if (child === selectedItem) {
-            tab.selected = true
-        }
-        tabs.push(tab)
-    })
-
-    return tabs
-}
-
-/**
- * TODO: JSDOC
- */
-const getTabsFromNavGroup = (
-    viewName: string, menuItem: MenuItem, targetLevel: number, currentLevel: number
-): { tabList: ViewParseInfo[] } | MenuItem => {
-    if (isViewNavigationGroup(menuItem) && currentLevel < 2) {
-        let tabList: {tabList: ViewParseInfo[]}
-
-        menuItem.child.find((child) => {
-            const searchResult = getTabsFromNavGroup(viewName, child, targetLevel, currentLevel + 1)
-            if (searchResult && 'tabList' in searchResult) {
-                tabList = searchResult
-                return true
-            }
-        })
-
-        return tabList
-    } else if (isViewNavigationGroup(menuItem) && currentLevel > 1) {
-        let tabList: {tabList: ViewParseInfo[]}
-
-        const selectedChild = menuItem.child.find((child) => {
-            const searchResult = getTabsFromNavGroup(viewName, child, targetLevel, currentLevel + 1)
-
-            if (searchResult && 'tabList' in searchResult) {
-                tabList = searchResult
-                return false
-            }
-
-            return !!searchResult
-        })
-
-        if (selectedChild && currentLevel === targetLevel) {
-            return {tabList: getCategoryTabs(menuItem as ViewNavigationGroup, selectedChild as ViewNavigationItem)}
-        }
-
-        return tabList || selectedChild
-    } else if (isViewNavigationItem(menuItem) && menuItem.viewName === viewName) {
-        return menuItem
-    }
-
-    return null
 }
 
 export default React.memo(SecondLevelTabs)
