@@ -1,36 +1,81 @@
 ## Filter types
 
-The system has the ability to filter for entries by value in the field. To do this, you must indicate that this field is allowed to filter in FieldMetaBuilder, and also indicate in the DTO the @SearchParameter annotation for the field that is being searched.
+The system has the ability to filter for entries by value in the field. To do this, you must indicate that this field is allowed to filter in FieldMetaBuilder, and also indicate in the DTO the @SearchParameter annotation for the field that is being searched.  
+
+
+Different types of fields have different filtering operations for field records.
 
 Filter available column types:
-* number
-* input
-* date
-* dateTime
-* dateTimeWithSeconds
-* dictionary
-* text
-* percent
-* money
-* checkbox
-* pickList
 
-
-For the listed types of widget fields, it is possible to add a filter with the necessary filtering condition, which is specified by the filter type in the field `type: "equals"`.
-
-Supported Filter Operations:
-
-| Type | Description
+| Field | Filter type
 |:---|:---|
-| **equals** | equal values
-| **greaterThan** | values are greater than specified
-| **lessThan** | values are less than specified
-| **greaterOrEqualThan** | values are greater than or equal to the specified
-| **lessOrEqualThan** | values are less than or equal to the specified
+| **input** | contains
+| **text** | contains
+| **checkbox** | specified
+| **dictionary** | equalsOneOf
+| **multivalue** | equalsOneOf
+| **number** | equals
+| **date** | equals
+| **dateTime** | equals
+| **dateTimeWithSeconds** | equals
+| **pickList** | equals
+| **inlinePickList** | equals
+| **percent** | equals
+| **money** | equals
+| **multifield** | equals
+| **default (other)** | equals  
+
+Description supported Filter Operations:  
+
+| Filter type | Description
+|:---|:---|
 | **contains** | values containing specified
 | **specified** | certain values
-| **specifiedBooleanSql** | certain boolean values for SQL widgets
 | **equalsOneOf** | equal to one of these
-| **containsOneOf** | includes one of these
+| **equals** | equal values
+
+### Multivalue field filter specification
+---
+
+Filtering fields of type `multivalue` is implemented not like other types. This type of filter pass filter field keys 
+in the url parameters, when other types pass values directly. Filtered values keys are assigned from AssocListPopup widget,
+ where the user marked the necessary entries.
+ 
+Popup widget should be added to the some view. Widget with `multivalue` field filter should have additional keys in the field meta.
+
+Addition widget meta keys for `multivalue` field popup:  
+`popupBcName: string` - name BC popup  
+`assocValueKey: string` - field key which key values will be filtered  
+`associateFieldKey: string` - field key to be added to the filter  
+
+
+Example widget field meta that has filter by multivalue field:
+```json
+{
+  "id": 1111111,
+  "name": "Widget Name",
+  "title": "Title",
+  "type": "Form",
+  "bc": "testBcName",
+  "fields": [
+    ...
+    {
+      "label": "Field Name",
+      "key": "fieldKey",
+      "type": "multivalue",
+      "popupBcName": "popupAssocBcName",
+      "assocValueKey": "popupValueFieldKey",
+      "associateFieldKey": "fieldKey"
+    }
+    ...
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {}
+}
+```
+
+
+
 
 
