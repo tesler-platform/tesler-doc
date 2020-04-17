@@ -1,0 +1,22 @@
+{
+  "name": "components",
+  "title": "Documentation",
+  "navigation": {
+    "menu": [
+      {
+        "title": "Navigation",
+        "child": [
+          {
+            "viewName": "navigationScreen"
+          },
+          {
+            "viewName": "navigationView"
+          },
+          {
+            "viewName": "navigationModel"
+          }
+        ]
+      }
+    ]
+  }
+}
