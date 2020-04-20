@@ -1,0 +1,11 @@
+{
+  "name": "navigation-overview",
+  "title": "Overview",
+  "template": "DashboardView",
+  "url": "/screen/components/view/navigation-overview",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu"
+    }
+  ]
+}

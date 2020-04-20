@@ -1,0 +1,8 @@
+{
+  "name": "features",
+  "title": "Features",
+  "template": "DashboardView",
+  "url": "/screen/features/view/features",
+  "widgets": [
+  ]
+}

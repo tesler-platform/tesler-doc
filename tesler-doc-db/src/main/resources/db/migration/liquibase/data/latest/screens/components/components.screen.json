@@ -1,0 +1,21 @@
+{
+  "name": "components",
+  "title": "Components Overview",
+  "primaryViewName": "navigation-overview",
+  "primaryViews": [
+    "navigation-overview"
+  ],
+  "navigation": {
+    "menu": [
+      {
+        "title": "Navigation",
+        "child": [
+            { "viewName": "navigation-overview" },
+            { "viewName": "navigation-screens" },
+            { "viewName": "navigation-views" },
+            { "viewName": "navigation-tabs" }
+        ]
+      }
+    ]
+  }
+}

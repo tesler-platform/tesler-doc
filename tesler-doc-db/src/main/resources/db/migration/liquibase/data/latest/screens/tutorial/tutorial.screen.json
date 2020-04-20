@@ -1,0 +1,15 @@
+{
+  "name": "tutorial",
+  "title": "Tutorial",
+  "primaryViewName": "tutorial",
+  "primaryViews": [
+    "tutorial"
+  ],
+  "navigation": {
+    "menu": [
+      {
+        "viewName": "tutorial"
+      }
+    ]
+  }
+}

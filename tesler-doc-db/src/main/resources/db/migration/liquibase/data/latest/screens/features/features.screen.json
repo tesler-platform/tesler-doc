@@ -1,0 +1,15 @@
+{
+  "name": "features",
+  "title": "Features",
+  "primaryViewName": "features",
+  "primaryViews": [
+    "features"
+  ],
+  "navigation": {
+    "menu": [
+      {
+        "viewName": "features"
+      }
+    ]
+  }
+}
