@@ -2,7 +2,7 @@
   "name": "teslerinfo",
   "title": "General Tesler Info",
   "template": "DashboardView",
-  "url": "/screen/doc/view/teslerinfo",
+  "url": "/screen/getting-started/view/teslerinfo",
   "widgets": [
     {
       "widgetName": "SecondLevelMenu",

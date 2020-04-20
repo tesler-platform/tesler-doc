@@ -2,7 +2,7 @@
   "name": "hello",
   "title": "Hello World",
   "template": "DashboardView",
-  "url": "/screen/doc/view/hello",
+  "url": "/screen/getting-started/view/hello",
   "widgets": [
     {
       "widgetName": "SecondLevelMenu",

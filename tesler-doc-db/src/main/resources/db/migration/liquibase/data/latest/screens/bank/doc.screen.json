@@ -8,17 +8,6 @@
   "navigation": {
     "menu": [
       {
-        "title": "Hello World in Tesler",
-        "child": [
-          {
-            "viewName": "hello"
-          },
-          {
-            "viewName": "teslerinfo"
-          }
-        ]
-      },
-      {
         "title": "UI",
         "child": [
           {
