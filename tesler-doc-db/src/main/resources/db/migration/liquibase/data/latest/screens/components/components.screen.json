@@ -50,6 +50,9 @@
           },
           {
             "viewName": "picklist"
+          },
+          {
+            "viewName": "radio"
           }
         ]
       }

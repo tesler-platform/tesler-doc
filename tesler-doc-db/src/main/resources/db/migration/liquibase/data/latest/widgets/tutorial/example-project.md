@@ -143,11 +143,11 @@ fieldsMeta.enableFilter(
 fieldsMeta.setAllFilterValuesByLovType(country, TDDictionaryType.COUNTRY);
 ```
 
- # Step 6: Creating Child Entity
+# Step 6: Creating Child Entity
  
- - Use steps 1-5 of this guide
- 
- # Step 7: Creating Entity dependency and creating bc for Entity's
+- Use steps 1-5 of this guide   
+
+# Step 7: Creating Entity dependency and creating bc for Entity's
 
 - To create widgets on entities, we will use the [ServiceAssociation.java](https://github.com/tesler-platform/tesler-doc/blob/master/tesler-doc-source/src/main/java/io/tesler/crudma/config/TESLERDOCServiceAssociation.java)
 - Example of creating a Business Component for entity (without parent-child relationship)
@@ -176,7 +176,6 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 		linkBankEmployee(bank,LinkBankEmployeeService.class),
 			linkBankEmployeeAssoc(bank, EmployeeService.class),
 	// @formatter:on
-    // ...
 }
  ```
 # Step 8: Creating Screen, View and Widgets

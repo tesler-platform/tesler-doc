@@ -41,6 +41,7 @@
       <column name="TEST_PERCENT" type="NUMBER(3, 0)"/>
       <column name="TEST_MONEY" type="NUMBER(19, 2)"/>
       <column name="TEST_DICTIONARY" type="VARCHAR2(255)"/>
+      <column name="TEST_RADIO" type="VARCHAR2(255)"/>
     </createTable>
   </changeSet>
 

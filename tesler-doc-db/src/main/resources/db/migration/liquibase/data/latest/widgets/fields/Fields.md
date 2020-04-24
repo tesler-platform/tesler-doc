@@ -8,6 +8,7 @@ List/Form fields display special data type.
 - When a numeric value needs to be provided.
 - When a value needs to be selected from a predefined list of values.
 - Used if you need checkbox.
+- Used if you need radio buttons.
 - By clicking the input box, you can select a date from a popup calendar.
 - By clicking the input button, you can select a value from a popup list.
 
@@ -85,6 +86,11 @@ Set the required type in fields meta and use the special application components.
       "title" : "Dictionary",
       "key" : "testDictionary",
       "type" : "dictionary"
+    },
+    {
+      "title" : "Radio",
+      "key" : "testRadio",
+      "type" : "radio"
     }
   ],
   "axisFields": [],

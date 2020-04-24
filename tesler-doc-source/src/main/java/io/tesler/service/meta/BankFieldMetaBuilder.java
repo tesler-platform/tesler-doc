@@ -32,6 +32,7 @@ import static io.tesler.dto.BankDTO_.testDate;
 import static io.tesler.dto.BankDTO_.testInput;
 import static io.tesler.dto.BankDTO_.testPickList;
 import static io.tesler.dto.BankDTO_.testDictionary;
+import static io.tesler.dto.BankDTO_.testRadio;
 
 import io.tesler.core.crudma.bc.impl.InnerBcDescription;
 import io.tesler.core.dict.TDDictionaryType;
@@ -61,12 +62,16 @@ public class BankFieldMetaBuilder extends FieldMetaBuilder<BankDTO> {
 				testDate,
 				testInput,
 				testPickList,
-				testDictionary
+				testDictionary,
+				testRadio
 		);
 		fields.setRequired(name);
 		fields.setDictionaryTypeWithAllValues(country, TDDictionaryType.COUNTRY);
 		fields.setDictionaryTypeWithAllValues(testDictionary, TDDictionaryType.DOC_TEST);
+		fields.setDictionaryTypeWithAllValues(testRadio, TDDictionaryType.DOC_TEST);
 		fields.setDictionaryTypeWithAllValues(size, TDDictionaryType.SIZE);
+		fields.setPlaceholder(testInput, "PlaceholderInput test");
+		fields.setPlaceholder(testDate, "PlaceholderDate test");
 		if (innerBcDescription.getName().toLowerCase().equals("bankdoc")) {
 			fields.setDrilldown(
 					name,
