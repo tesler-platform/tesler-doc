@@ -77,3 +77,21 @@ Set specific fields in field meta:
   "type": "input"
 }
 ```
+
+### Placeholder
+
+Allows you to specify a hint to fill in the field.
+
+#### Example for using
+
+Add to field meta builder:
+
+```java
+@Service
+public class BankFieldMetaBuilder extends FieldMetaBuilder<BankDTO> {
+    @Override
+    public void buildRowDependentMeta( /*<...>*/ ) {
+        // <...>
+        fields.setPlaceholder(testInput, "PlaceholderInput test");
+    }
+}

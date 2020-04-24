@@ -64,6 +64,10 @@ public class BankDTO extends DataResponseDTO {
 	@TDLov(TDDictionaryType.DOC_TEST)
 	private String testDictionary;
 
+	@SearchParameter(type = LOV)
+	@TDLov(TDDictionaryType.DOC_TEST)
+	private String testRadio;
+
 	@SearchParameter
 	private Long testPercent;
 
@@ -87,6 +91,7 @@ public class BankDTO extends DataResponseDTO {
 		this.testInput = bank.getTestInput();
 		this.testPickList = bank.getTestPickList();
 		this.testDictionary = TDDictionaryType.DOC_TEST.lookupValue(bank.getTestDictionary());
+		this.testRadio = TDDictionaryType.DOC_TEST.lookupValue(bank.getTestRadio());
 	}
 
 }

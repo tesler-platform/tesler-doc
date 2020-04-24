@@ -23,7 +23,7 @@ package io.tesler.core.extractor;
 import com.google.common.collect.Lists;
 import io.tesler.core.ui.field.BaseFieldExtractor;
 import io.tesler.core.ui.model.BcField;
-import io.tesler.core.ui.model.json.FieldMeta;
+import io.tesler.core.ui.model.json.field.FieldMeta;
 import io.tesler.core.util.JsonUtils;
 import io.tesler.model.ui.entity.Widget;
 import java.util.HashSet;

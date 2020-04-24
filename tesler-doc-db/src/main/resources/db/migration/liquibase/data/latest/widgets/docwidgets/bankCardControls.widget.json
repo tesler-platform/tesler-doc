@@ -64,6 +64,11 @@
       "label" : "Dictionary",
       "key" : "testDictionary",
       "type" : "dictionary"
+    },
+    {
+      "label" : "Radio",
+      "key" : "testRadio",
+      "type" : "radio"
     }
   ],
   "axisFields": [],
@@ -134,6 +139,14 @@
           "cols": [
             {
               "fieldKey": "testDictionary",
+              "span": 24
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "testRadio",
               "span": 24
             }
           ]

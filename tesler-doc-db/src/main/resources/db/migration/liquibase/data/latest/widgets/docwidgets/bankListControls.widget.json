@@ -65,6 +65,11 @@
       "title" : "Dictionary",
       "key" : "testDictionary",
       "type" : "dictionary"
+    },
+    {
+      "title" : "Radio",
+      "key" : "testRadio",
+      "type" : "radio"
     }
   ],
   "axisFields": [],

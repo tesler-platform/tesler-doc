@@ -108,6 +108,9 @@ public class BankServiceImpl extends VersionAwareResponseService<BankDTO, Bank> 
 			if (bankDTO.isFieldChanged(BankDTO_.testDictionary)) {
 				bank.setTestDictionary(TDDictionaryType.DOC_TEST.lookupName(bankDTO.getTestDictionary()));
 			}
+			if (bankDTO.isFieldChanged(BankDTO_.testRadio)) {
+				bank.setTestRadio(TDDictionaryType.DOC_TEST.lookupName(bankDTO.getTestRadio()));
+			}
 			if (bankDTO.isFieldChanged(BankDTO_.testPickList)) {
 				bank.setTestPickList(bankDTO.getTestPickList());
 			}

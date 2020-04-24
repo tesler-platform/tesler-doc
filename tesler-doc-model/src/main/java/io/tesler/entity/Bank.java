@@ -73,4 +73,7 @@ public class Bank extends BaseEntity {
 
 	@Column
 	private LOV testDictionary;
+
+	@Column
+	private LOV testRadio;
 }
