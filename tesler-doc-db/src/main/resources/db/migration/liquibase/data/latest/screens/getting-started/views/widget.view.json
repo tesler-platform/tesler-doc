@@ -1,8 +1,8 @@
 {
-    "name": "screen",
-    "title": "Screen",
+    "name": "widget",
+    "title": "Widget",
     "template": "DashboardView",
-    "url": "/screen/doc/view/screen",
+    "url": "/screen/getting-started/view/widget",
     "widgets": [
       {
         "widgetName": "SecondLevelMenu",
@@ -10,10 +10,10 @@
         "gridWidth": 2
       },
       {
-        "widgetName": "emptyDoc",
+        "widgetName": "bankCard",
         "position": 1,
         "gridWidth": 2,
-        "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/Screen.md"
+        "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/Widget.md"
       }
     ]
   }

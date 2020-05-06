@@ -8,20 +8,6 @@
   "navigation": {
     "menu": [
       {
-        "title": "UI",
-        "child": [
-          {
-            "viewName": "screen"
-          },
-          {
-            "viewName": "view"
-          },
-          {
-            "viewName": "widget"
-          }
-        ]
-      },
-      {
         "title": "Widgets",
         "child": [
           {

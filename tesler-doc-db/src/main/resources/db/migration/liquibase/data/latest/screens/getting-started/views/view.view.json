@@ -2,7 +2,7 @@
     "name": "view",
     "title": "View",
     "template": "DashboardView",
-    "url": "/screen/doc/view/view",
+    "url": "/screen/getting-started/view/view",
     "widgets": [
       {
         "widgetName": "SecondLevelMenu",
