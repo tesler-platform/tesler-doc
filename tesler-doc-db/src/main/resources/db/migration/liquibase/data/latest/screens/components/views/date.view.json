@@ -1,8 +1,8 @@
 {
-  "name": "dictionary",
-  "title": "Dictionary",
+  "name": "date",
+  "title": "Date",
   "template": "DashboardView",
-  "url": "/screen/doc/view/dictionary",
+  "url": "/screen/components/view/date",
   "widgets": [
     {
       "widgetName": "SecondLevelMenu",
@@ -13,7 +13,7 @@
       "widgetName": "bankListControls",
       "position": 1,
       "gridWidth": 2,
-      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/Dictionary.md"
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/fields/Date.md"
     },
     {
       "widgetName": "bankCardControls",

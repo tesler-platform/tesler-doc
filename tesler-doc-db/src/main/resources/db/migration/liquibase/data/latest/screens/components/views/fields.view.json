@@ -1,8 +1,8 @@
 {
-  "name": "controls",
-  "title": "Controls",
+  "name": "fields",
+  "title": "Fields",
   "template": "DashboardView",
-  "url": "/screen/doc/view/controls",
+  "url": "/screen/components/view/fields",
   "widgets": [
     {
       "widgetName": "SecondLevelMenu",
@@ -13,7 +13,7 @@
       "widgetName": "bankListControls",
       "position": 1,
       "gridWidth": 2,
-      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/Controls.md"
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/fields/Fields.md"
     },
     {
       "widgetName": "bankCardControls",

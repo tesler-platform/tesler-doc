@@ -1,8 +1,8 @@
 {
-  "name": "form",
-  "title": "Form",
+  "name": "list",
+  "title": "List",
   "template": "DashboardView",
-  "url": "/screen/doc/view/form",
+  "url": "/screen/components/view/list",
   "widgets": [
     {
       "widgetName": "SecondLevelMenu",
@@ -10,19 +10,24 @@
       "gridWidth": 2
     },
     {
-      "widgetName": "bankCardDoc",
+      "widgetName": "bankListDoc",
       "position": 1,
       "gridWidth": 2,
-      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/Form.md"
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/List.md"
+    },
+    {
+      "widgetName": "employeeCard",
+      "position": 3,
+      "gridWidth": 2
     },
     {
       "widgetName": "linkBankDocEmployee",
-      "position": 2,
+      "position": 4,
       "gridWidth": 2
     },
     {
       "widgetName": "linkBankDocEmployeeAssoc",
-      "position": 3,
+      "position": 5,
       "gridWidth": 4
     }
   ]

@@ -8,43 +8,6 @@
   "navigation": {
     "menu": [
       {
-        "title": "Widgets",
-        "child": [
-          {
-            "viewName": "list"
-          },
-          {
-            "viewName": "form"
-          }
-        ]
-      },
-      {
-        "title": "Controls",
-        "child": [
-          {
-            "viewName": "controls"
-          },
-          {
-            "viewName": "input"
-          },
-          {
-            "viewName": "number"
-          },
-          {
-            "viewName": "date"
-          },
-          {
-            "viewName": "checkbox"
-          },
-          {
-            "viewName": "dictionary"
-          },
-          {
-            "viewName": "picklist"
-          }
-        ]
-      },
-      {
         "title": "Filter and Sort",
         "child": [
           {

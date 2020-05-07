@@ -2,7 +2,7 @@
   "name": "picklist",
   "title": "Picklist",
   "template": "DashboardView",
-  "url": "/screen/doc/view/picklist",
+  "url": "/screen/components/view/picklist",
   "widgets": [
     {
       "widgetName": "SecondLevelMenu",
@@ -13,7 +13,7 @@
       "widgetName": "bankListControls",
       "position": 1,
       "gridWidth": 2,
-      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/Picklist.md"
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/fields/Picklist.md"
     },
     {
       "widgetName": "bankCardControls",

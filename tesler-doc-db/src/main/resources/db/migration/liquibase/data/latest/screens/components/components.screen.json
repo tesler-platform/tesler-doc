@@ -15,6 +15,43 @@
             { "viewName": "navigation-views" },
             { "viewName": "navigation-tabs" }
         ]
+      },
+      {
+        "title": "Widgets",
+        "child": [
+          {
+            "viewName": "list"
+          },
+          {
+            "viewName": "form"
+          }
+        ]
+      },
+      {
+        "title": "Fields",
+        "child": [
+          {
+            "viewName": "fields"
+          },
+          {
+            "viewName": "input"
+          },
+          {
+            "viewName": "number"
+          },
+          {
+            "viewName": "date"
+          },
+          {
+            "viewName": "checkbox"
+          },
+          {
+            "viewName": "dictionary"
+          },
+          {
+            "viewName": "picklist"
+          }
+        ]
       }
     ]
   }

@@ -1,8 +1,8 @@
 {
-  "name": "checkbox",
-  "title": "Checkbox",
+  "name": "dictionary",
+  "title": "Dictionary",
   "template": "DashboardView",
-  "url": "/screen/doc/view/checkbox",
+  "url": "/screen/components/view/dictionary",
   "widgets": [
     {
       "widgetName": "SecondLevelMenu",
@@ -13,7 +13,7 @@
       "widgetName": "bankListControls",
       "position": 1,
       "gridWidth": 2,
-      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/Checkbox.md"
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/fields/Dictionary.md"
     },
     {
       "widgetName": "bankCardControls",

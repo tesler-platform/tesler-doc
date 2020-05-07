@@ -24,8 +24,8 @@ The layout specifics of each navigation component are explained in their corresp
 
 <!-- TODO: A lot of clarification is needed for each trigger -->
 * `<a />` html tags
-* [\<Link /\>` component](https://github.com/tesler-platform/tesler-ui/blob/master/src/components/ui/Link/Link.tsx)
-* [\<ActionLink /\> component](https://github.com/tesler-platform/tesler-ui/blob/master/src/components/ui/ActionLink/ActionLink.tsx)
+* [<Link /\> component](https://github.com/tesler-platform/tesler-ui/blob/master/src/components/ui/Link/Link.tsx)
+* [<ActionLink /\> component](https://github.com/tesler-platform/tesler-ui/blob/master/src/components/ui/ActionLink/ActionLink.tsx)
 * [changeLocation helper](https://github.com/tesler-platform/tesler-ui/blob/ed5e3e6851955efb331a05e3ce65590df0c10861/src/reducers/router.ts#L15)
 * [Drilldowns](https://github.com/tesler-platform/tesler-ui/blob/ed5e3e6851955efb331a05e3ce65590df0c10861/src/epics/router.ts#L153)
 * [History object instance](https://github.com/tesler-platform/tesler-ui/blob/ed5e3e6851955efb331a05e3ce65590df0c10861/src/reducers/router.ts#L8)

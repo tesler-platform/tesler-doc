@@ -30,6 +30,8 @@ import {WidgetMeta, WidgetTypes} from '@tesler-ui/core/interfaces/widget'
 import Login from 'components/Login/Login'
 import {ApplicationError} from '@tesler-ui/core/interfaces/view'
 import {setMenuVisible, setMobileMenu} from 'actions/actions'
+import NavEx1 from 'components/widgets/navigationExamples/NavEx1'
+import NavEx2 from 'components/widgets/navigationExamples/NavEx2'
 
 interface LayoutProps {
     screenName: string,
@@ -53,6 +55,11 @@ const skipWidgetTypes = [
     WidgetTypes.HeaderWidget,
     WidgetTypes.SecondLevelMenu,
 ]
+
+const customWidgets = {
+    'NavEx1': NavEx1,
+    'NavEx2': NavEx2
+}
 
 export function Layout(props: LayoutProps) {
     const isInfoPanelLayout = props.widgets.some(widget => widget.type !== WidgetTypes.List)
@@ -136,6 +143,7 @@ export function Layout(props: LayoutProps) {
                                 <div style={bodyWidth}>
                                     <View
                                         card={Card as any}
+                                        customWidgets={customWidgets}
                                         skipWidgetTypes={skipWidgetTypes}
                                     />
                                 </div>
