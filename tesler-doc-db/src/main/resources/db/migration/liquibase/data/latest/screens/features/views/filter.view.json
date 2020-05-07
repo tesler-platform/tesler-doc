@@ -2,7 +2,7 @@
   "name": "filter",
   "title": "Filter",
   "template": "DashboardView",
-  "url": "/screen/doc/view/filter",
+  "url": "/screen/features/view/filter",
   "widgets": [
     {
       "widgetName": "SecondLevelMenu",
@@ -13,7 +13,7 @@
       "widgetName": "bankFilterDoc",
       "position": 1,
       "gridWidth": 2,
-      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/Filter.md"
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/Filter.md"
     }
   ]
 }

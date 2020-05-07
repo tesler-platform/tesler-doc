@@ -1,6 +1,7 @@
 import React from 'react'
 import {useViewTabs} from '@tesler-ui/core'
 import ExamplePreview from 'components/ui/ExamplePreview/ExamplePreview'
+import {resetContentScroll} from 'utils/scroll'
 
 export const ViewNavigation: React.FC = (props) => {
     // Get views of the active screen
@@ -8,7 +9,7 @@ export const ViewNavigation: React.FC = (props) => {
     const content =  <ul>
         { tabs.map(item =>
             <li key={item.url}>
-                <a href={`#${item.url}`}>
+                <a href={`#${item.url}`} onClick={resetContentScroll}>
                     {item.title}
                 </a>
             </li>

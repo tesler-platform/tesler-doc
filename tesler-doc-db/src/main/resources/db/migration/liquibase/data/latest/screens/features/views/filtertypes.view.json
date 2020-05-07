@@ -2,7 +2,7 @@
   "name": "filtertypes",
   "title": "Filter types",
   "template": "DashboardView",
-  "url": "/screen/doc/view/filtertypes",
+  "url": "/screen/features/view/filtertypes",
   "widgets": [
     {
       "widgetName": "SecondLevelMenu",
@@ -13,7 +13,7 @@
       "widgetName": "bankFilterTypesDoc",
       "position": 1,
       "gridWidth": 2,
-      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/FilterTypes.md"
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/FilterTypes.md"
     }
   ]
 }

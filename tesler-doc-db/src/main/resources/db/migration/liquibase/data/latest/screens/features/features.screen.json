@@ -8,7 +8,35 @@
   "navigation": {
     "menu": [
       {
-        "viewName": "features"
+        "title": "Filter and Sort",
+        "child": [
+          {
+            "viewName": "filter"
+          },
+          {
+            "viewName": "sort"
+          },
+          {
+            "viewName": "pfilter"
+          },
+          {
+            "viewName": "filtertypes"
+          }
+        ]
+      },
+      {
+        "title": "Operations",
+        "child": [
+          {
+            "viewName": "action"
+          },
+          {
+            "viewName": "actiongroup"
+          },
+          {
+            "viewName": "basicoperation"
+          }
+        ]
       }
     ]
   }

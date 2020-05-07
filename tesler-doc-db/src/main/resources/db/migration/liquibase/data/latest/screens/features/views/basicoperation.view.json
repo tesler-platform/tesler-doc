@@ -2,7 +2,7 @@
     "name": "basicoperation",
     "title": "Basic Operation",
     "template": "DashboardView",
-    "url": "/screen/doc/view/basicoperation",
+    "url": "/screen/features/view/basicoperation",
     "widgets": [
       {
         "widgetName": "SecondLevelMenu",
@@ -13,7 +13,7 @@
         "widgetName": "bankListDoc",
         "position": 1,
         "gridWidth": 2,
-        "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/BasicOperation.md"
+        "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/BasicOperation.md"
       }
     ]
   }

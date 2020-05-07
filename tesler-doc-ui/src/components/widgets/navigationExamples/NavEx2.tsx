@@ -2,6 +2,7 @@ import React from 'react'
 import {Tabs} from 'antd'
 import {historyObj, useViewTabs} from '@tesler-ui/core'
 import ExamplePreview from 'components/ui/ExamplePreview/ExamplePreview'
+import {resetContentScroll} from 'utils/scroll'
 
 export const ViewNavigation: React.FC = (props) => {
 
@@ -9,6 +10,7 @@ export const ViewNavigation: React.FC = (props) => {
 
     const handleChange = (key: string) => {
         historyObj.push(key)
+        resetContentScroll()
     }
     const activeKey = tabs?.find(item => item.selected)?.url
 

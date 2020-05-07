@@ -4,7 +4,8 @@ insert into responsibilities (id, resp_type, screens, dept_id, internal_role_cd)
       "name": "getting-started",
       "text": "Getting Started",
       "icon": "rocket",
-      "url": "/screen/getting-started"
+      "url": "/screen/getting-started",
+      "defaultScreen": true
     },
     {
       "name": "tutorial",
@@ -31,18 +32,10 @@ insert into responsibilities (id, resp_type, screens, dept_id, internal_role_cd)
       "url": "/screen/api-reference"
     },
     {
-      "id": "id2",
-      "name": "doc",
-      "text": "Documentation",
-      "url": "/screen/doc",
-      "defaultScreen": true
-    },
-    {
       "id": "id3",
       "name": "example",
       "text": "Example",
-      "url": "/screen/example",
-      "defaultScreen": true
+      "url": "/screen/example"
     }
     ]', 0 , 'ADMIN');
 insert into responsibilities (id, resp_type, dept_id, internal_role_cd, responsibilities) VALUES (nextval('RESPONSIBILITY_ID'), 'VIEW', 0, 'ADMIN', 'bankcard');

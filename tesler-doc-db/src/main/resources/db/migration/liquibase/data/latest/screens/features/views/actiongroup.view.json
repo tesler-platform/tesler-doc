@@ -2,7 +2,7 @@
     "name": "actiongroup",
     "title": "Action Group",
     "template": "DashboardView",
-    "url": "/screen/doc/view/actiongroup",
+    "url": "/screen/features/view/actiongroup",
     "widgets": [
       {
         "widgetName": "SecondLevelMenu",
@@ -13,7 +13,7 @@
         "widgetName": "employeeCard",
         "position": 1,
         "gridWidth": 2,
-        "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/ActionGroup.md"
+        "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/ActionGroup.md"
       }
     ]
   }

@@ -2,7 +2,7 @@
     "name": "action",
     "title": "Action",
     "template": "DashboardView",
-    "url": "/screen/doc/view/action",
+    "url": "/screen/features/view/action",
     "widgets": [
       {
         "widgetName": "SecondLevelMenu",
@@ -13,7 +13,7 @@
         "widgetName": "bankList",
         "position": 1,
         "gridWidth": 2,
-        "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/Action.md"
+        "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/Action.md"
       },
       {
         "widgetName": "linkBankDocEmployee",
