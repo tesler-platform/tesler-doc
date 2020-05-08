@@ -1,8 +1,12 @@
 # Overview
 
-Navigation is build around two major concepts: `views` and `screens` which form an url endpoints of the application.
+Navigation is build around two major concepts: *views* and *screens* which form an url endpoints of the application.
 
-`View` is a basic unit of navigation representing a dashboard with widgets, so when the user initiates a navigation action he will always end up on some view or another: either the view name was specified in url or some default view for that screen.
+[**View**](#/screen/getting-started/view/view/) is a basic unit of navigation representing a dashboard with [*widgets*](#/screen/getting-started/view/view/), so when the user initiates a navigation action he will always end up on some view or another. This page currently displays a view named [Navigation Overview](#/screen/components/view/navigation-overview/).
+
+[**Screen**](#/screen/getting-started/view/screen/) is a group of views that have some logic in common and share their business components. For example, this page currently displays a view from the screen named [Components Overview](#/screen/components), but aside of navigation this screen contains a lot of other views describing different components.  
+
+You may notice that the url does not always have a specified view name. Every screen has an option of specified the default view that will be opened when view name omitted from the url, and if no default view was provided than first available will be opened.
 
 ## User interactions for navigation
 
@@ -11,13 +15,13 @@ There are several ways how the user can navigate between the views in Tesler UI 
 1. By [navigating the screens](#/screen/components/view/navigation-screens/) via some `<ScreenNavigation />` component that will map the screens array from the store to their corresponding urls.
 2. By [navigating the views](#/screen/components/view/navigation-views/) of the currently active screen through some `<ViewNavigation />` component that will map the views array to their corresponding urls.
 3. By [navigating the tabs](#/screen/components/view/navigation-tabs/) on the currently active view through a special widget that supports multiple levels of nesting
-4. By a `drilldown` link or correspondig `postInvoke` action
+4. By a *drilldown link* or correspondig *postInvoke action*
 5. Directly through a browser address bar
 
 ## Menu layout
 
 There are no requirements on where in the page layout these navigation components should be placed.  
-This demo applications assumes that `screens` are selected from the side menu and `views` are selected in top application bar. Your application can switch them or use any other design approach.
+This demo applications assumes that *screens* are selected from the side menu and *views* are selected in top application bar. Your application can switch them or use any other design approach.  
 The layout specifics of each navigation component are explained in their corresponding sections.
 
 ## Navigation triggers

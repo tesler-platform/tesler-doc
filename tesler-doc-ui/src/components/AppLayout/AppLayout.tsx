@@ -32,6 +32,7 @@ import {ApplicationError} from '@tesler-ui/core/interfaces/view'
 import {setMenuVisible, setMobileMenu} from 'actions/actions'
 import NavEx1 from 'components/widgets/navigationExamples/NavEx1'
 import NavEx2 from 'components/widgets/navigationExamples/NavEx2'
+import {useScroll} from 'utils/useScroll'
 
 interface LayoutProps {
     screenName: string,
@@ -71,7 +72,7 @@ export function Layout(props: LayoutProps) {
         width: isInfoPanelLayout ? '802px' : '1152px',
         maxWidth: '100%'
     }
-
+    useScroll()
     React.useEffect(() => {
         if (props.savedSessionActive) {
             props.onLogin()

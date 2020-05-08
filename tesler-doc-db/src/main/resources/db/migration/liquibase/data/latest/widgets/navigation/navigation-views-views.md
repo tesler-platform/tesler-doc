@@ -31,10 +31,8 @@ import {View} from '@tesler-ui/core'
 
 export const AppLayout: React.FC = (props) => {
     return <div>
-        {/* Will render our view navigation menu */}
         <ViewNavigation />
         <hr />
-        {/* Will render currently active view */}
         <View /> 
     </div>
 }
