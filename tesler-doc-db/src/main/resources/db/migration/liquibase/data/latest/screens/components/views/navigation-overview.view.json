@@ -1,0 +1,17 @@
+{
+  "name": "navigation-overview",
+  "title": "Overview",
+  "template": "DashboardView",
+  "url": "/screen/components/view/navigation-overview",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu"
+    },
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/navigation/navigation-overview.md"
+    }
+  ]
+}

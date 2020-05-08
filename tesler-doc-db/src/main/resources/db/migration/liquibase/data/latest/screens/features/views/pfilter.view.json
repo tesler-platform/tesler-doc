@@ -1,0 +1,19 @@
+{
+  "name": "pfilter",
+  "title": "Predefined filters",
+  "template": "DashboardView",
+  "url": "/screen/features/view/pfilter",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "bankPfilterDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/Pfilter.md"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "navigation-views",
+  "title": "Views",
+  "template": "DashboardView",
+  "url": "/screen/components/view/navigation-views",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu"
+    },
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/navigation/navigation-views-views.md"
+    },
+    {
+      "widgetName": "navigation-example1",
+      "position": 2
+    },
+    {
+      "widgetName": "emptyDoc2",
+      "position": 3,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/navigation/navigation-views-customization.md"
+    },
+    {
+      "widgetName": "navigation-example2",
+      "position": 4
+    },
+    {
+      "widgetName": "emptyDoc3",
+      "position": 5,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/navigation/navigation-views-additional.md"
+    }
+  ]
+}

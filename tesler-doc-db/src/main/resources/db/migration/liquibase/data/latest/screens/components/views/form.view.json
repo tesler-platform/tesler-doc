@@ -1,0 +1,29 @@
+{
+  "name": "form",
+  "title": "Form",
+  "template": "DashboardView",
+  "url": "/screen/components/view/form",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "bankCardDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/Form.md"
+    },
+    {
+      "widgetName": "linkBankDocEmployee",
+      "position": 2,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "linkBankDocEmployeeAssoc",
+      "position": 3,
+      "gridWidth": 4
+    }
+  ]
+}

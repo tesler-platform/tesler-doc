@@ -1,0 +1,34 @@
+{
+  "name": "getting-started",
+  "title": "Getting Started",
+  "primaryViewName": "getting-started",
+  "navigation": {
+    "menu": [
+      {
+        "title": "Hello World in Tesler",
+        "child": [
+          {
+            "viewName": "teslerinfo"
+          },
+          {
+            "viewName": "hello"
+          }
+        ]
+      },
+      {
+        "title": "Major Concepts",
+        "child": [
+          {
+            "viewName": "screen"
+          },
+          {
+            "viewName": "view"
+          },
+          {
+            "viewName": "widget"
+          }
+        ]
+      }
+    ]
+  }
+}

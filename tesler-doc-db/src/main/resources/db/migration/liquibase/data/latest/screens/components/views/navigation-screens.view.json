@@ -1,0 +1,11 @@
+{
+  "name": "navigation-screens",
+  "title": "Screens",
+  "template": "DashboardView",
+  "url": "/screen/components/view/navigation-screens",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu"
+    }
+  ]
+}

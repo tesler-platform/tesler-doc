@@ -1,0 +1,29 @@
+{
+  "name": "picklist",
+  "title": "Picklist",
+  "template": "DashboardView",
+  "url": "/screen/components/view/picklist",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "bankListControls",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/fields/Picklist.md"
+    },
+    {
+      "widgetName": "bankCardControls",
+      "position": 2,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "bankDocPickList",
+      "position": 3,
+      "gridWidth": 2
+    }
+  ]
+}
