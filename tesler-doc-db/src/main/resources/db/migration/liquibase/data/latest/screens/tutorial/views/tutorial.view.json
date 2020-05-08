@@ -1,0 +1,8 @@
+{
+  "name": "tutorial",
+  "title": "Tutorial",
+  "template": "DashboardView",
+  "url": "/screen/tutorial/view/tutorial",
+  "widgets": [
+  ]
+}

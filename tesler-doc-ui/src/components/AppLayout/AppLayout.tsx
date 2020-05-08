@@ -30,6 +30,9 @@ import {WidgetMeta, WidgetTypes} from '@tesler-ui/core/interfaces/widget'
 import Login from 'components/Login/Login'
 import {ApplicationError} from '@tesler-ui/core/interfaces/view'
 import {setMenuVisible, setMobileMenu} from 'actions/actions'
+import NavEx1 from 'components/widgets/navigationExamples/NavEx1'
+import NavEx2 from 'components/widgets/navigationExamples/NavEx2'
+import {useScroll} from 'utils/useScroll'
 
 interface LayoutProps {
     screenName: string,
@@ -54,6 +57,11 @@ const skipWidgetTypes = [
     WidgetTypes.SecondLevelMenu,
 ]
 
+const customWidgets = {
+    'NavEx1': NavEx1,
+    'NavEx2': NavEx2
+}
+
 export function Layout(props: LayoutProps) {
     const isInfoPanelLayout = props.widgets.some(widget => widget.type !== WidgetTypes.List)
     const headerWidth = {
@@ -64,7 +72,7 @@ export function Layout(props: LayoutProps) {
         width: isInfoPanelLayout ? '802px' : '1152px',
         maxWidth: '100%'
     }
-
+    useScroll()
     React.useEffect(() => {
         if (props.savedSessionActive) {
             props.onLogin()
@@ -136,6 +144,7 @@ export function Layout(props: LayoutProps) {
                                 <div style={bodyWidth}>
                                     <View
                                         card={Card as any}
+                                        customWidgets={customWidgets}
                                         skipWidgetTypes={skipWidgetTypes}
                                     />
                                 </div>

@@ -1,0 +1,19 @@
+{
+  "name": "filter",
+  "title": "Filter",
+  "template": "DashboardView",
+  "url": "/screen/features/view/filter",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "bankFilterDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/Filter.md"
+    }
+  ]
+}

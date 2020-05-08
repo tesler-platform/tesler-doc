@@ -1,0 +1,19 @@
+{
+  "name": "sort",
+  "title": "Sort",
+  "template": "DashboardView",
+  "url": "/screen/features/view/sort",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "bankSortDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/Sort.md"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+    "name": "action",
+    "title": "Action",
+    "template": "DashboardView",
+    "url": "/screen/features/view/action",
+    "widgets": [
+      {
+        "widgetName": "SecondLevelMenu",
+        "position": 0,
+        "gridWidth": 2
+      },
+      {
+        "widgetName": "bankList",
+        "position": 1,
+        "gridWidth": 2,
+        "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/Action.md"
+      },
+      {
+        "widgetName": "linkBankDocEmployee",
+        "position": 3,
+        "gridWidth": 2
+      },
+      {
+        "widgetName": "linkBankDocEmployeeAssoc",
+        "position": 4,
+        "gridWidth": 4
+      }
+    ]
+  }

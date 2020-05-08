@@ -1,0 +1,8 @@
+{
+  "name": "api-reference",
+  "title": "API Reference",
+  "template": "DashboardView",
+  "url": "/screen/api-reference/view/api-reference",
+  "widgets": [
+  ]
+}

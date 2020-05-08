@@ -5,11 +5,6 @@
   "url": "/screen/example/view/bankcard",
   "widgets": [
     {
-      "widgetName": "SecondLevelMenu",
-      "position": 0,
-      "gridWidth": 2
-    },
-    {
       "widgetName": "bankCard",
       "position": 1,
       "gridWidth": 2

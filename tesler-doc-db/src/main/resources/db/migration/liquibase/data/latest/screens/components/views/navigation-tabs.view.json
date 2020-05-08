@@ -1,0 +1,11 @@
+{
+  "name": "navigation-tabs",
+  "title": "Tabs",
+  "template": "DashboardView",
+  "url": "/screen/components/view/navigation-tabs",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu"
+    }
+  ]
+}
