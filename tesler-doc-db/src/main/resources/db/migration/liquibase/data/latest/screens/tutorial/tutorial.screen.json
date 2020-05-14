@@ -1,14 +1,14 @@
 {
   "name": "tutorial",
   "title": "Tutorial",
-  "primaryViewName": "tutorial",
+  "primaryViewName": "example-project",
   "primaryViews": [
-    "tutorial"
+    "example-project"
   ],
   "navigation": {
     "menu": [
       {
-        "viewName": "tutorial"
+        "viewName": "example-project"
       }
     ]
   }
