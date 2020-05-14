@@ -1,0 +1,14 @@
+{
+  "name": "tutorial",
+  "title": "Tutorial",
+  "template": "DashboardView",
+  "url": "/screen/tutorial/view/tutorial",
+  "widgets": [
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/ExampleProject.md"
+    }
+  ]
+}
