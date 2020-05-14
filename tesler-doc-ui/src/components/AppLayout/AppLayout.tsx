@@ -58,8 +58,8 @@ const skipWidgetTypes = [
 ]
 
 const customWidgets = {
-    'NavEx1': NavEx1,
-    'NavEx2': NavEx2
+    NavEx1,
+    NavEx2
 }
 
 export function Layout(props: LayoutProps) {
