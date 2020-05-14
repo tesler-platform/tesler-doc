@@ -45,8 +45,6 @@
               <executable>npm</executable>
               <arguments>
                 <argument>install</argument>
-                <argument>--userconfig</argument>
-                <argument>${MAVEN_PROJECTBASEDIR}/.npmrc</argument>
               </arguments>
             </configuration>
             <goals>
