@@ -24,13 +24,7 @@ export const ViewNavigation: React.FC = (props) => {
         )}
     </ul>
     return <ExamplePreview>
-        <iframe
-            src="https://codesandbox.io/embed/silly-sun-orv04?fontsize=14&hidenavigation=1&theme=dark"
-            style={style}
-            title="silly-sun-orv04"
-            allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
-            sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-        ></iframe>
+        {content}
     </ExamplePreview>
 }
 
