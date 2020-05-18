@@ -1,0 +1,29 @@
+{
+  "name": "multivalue",
+  "title": "Multivalue",
+  "template": "DashboardView",
+  "url": "/screen/components/view/multivalue",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "multivalueExample",
+      "position": 1,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "emptyDoc",
+      "position": 2,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/fields/Picklist.md"
+    },
+    {
+      "widgetName": "bankDocPickList",
+      "position": 3,
+      "gridWidth": 2
+    }
+  ]
+}

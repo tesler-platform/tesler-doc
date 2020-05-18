@@ -22,7 +22,9 @@ package io.tesler.dto;
 
 import io.tesler.api.data.dto.DataResponseDTO;
 import io.tesler.core.dict.TDDictionaryType;
+import io.tesler.core.dto.multivalue.MultivalueField;
 import io.tesler.core.util.filter.SearchParameter;
+import io.tesler.dto.validators.MultifieldConstraint;
 import io.tesler.entity.Bank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -59,6 +61,10 @@ public class BankDTO extends DataResponseDTO {
 
 	@SearchParameter
 	private String testPickList;
+
+	@SearchParameter
+	@MultifieldConstraint(message = "Should not be empty")
+	private MultivalueField testMultivalue;
 
 	@SearchParameter(type = LOV)
 	@TDLov(TDDictionaryType.DOC_TEST)

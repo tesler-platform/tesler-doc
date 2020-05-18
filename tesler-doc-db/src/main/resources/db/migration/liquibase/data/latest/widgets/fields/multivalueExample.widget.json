@@ -1,0 +1,43 @@
+{
+  "name": "multivalueExample",
+  "title": "Multivalue Field",
+  "type": "Form",
+  "bc": "bankDoc",
+  "showCondition": [],
+  "fields": [
+    {
+      "label": "Multivalue Field",
+      "key": "testMultivalue",
+      "type": "multivalue",
+      "popupBcName": "bankDocPicklist",
+      "assocValueKey": "name"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {},
+    "layout": {
+      "actionGroups": {
+        "include": [
+          "save",
+          "cancel-create"
+        ],
+        "exclude": [
+          "create",
+          "delete"
+        ]
+      },
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "testMultivalue",
+              "span": 24
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

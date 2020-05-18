@@ -33,6 +33,7 @@ import static io.tesler.dto.BankDTO_.testInput;
 import static io.tesler.dto.BankDTO_.testPickList;
 import static io.tesler.dto.BankDTO_.testDictionary;
 import static io.tesler.dto.BankDTO_.testRadio;
+import static io.tesler.dto.BankDTO_.testMultivalue;
 
 import io.tesler.core.crudma.bc.impl.InnerBcDescription;
 import io.tesler.core.dict.TDDictionaryType;
@@ -63,7 +64,8 @@ public class BankFieldMetaBuilder extends FieldMetaBuilder<BankDTO> {
 				testInput,
 				testPickList,
 				testDictionary,
-				testRadio
+				testRadio,
+				testMultivalue
 		);
 		fields.setRequired(name);
 		fields.setDictionaryTypeWithAllValues(country, TDDictionaryType.COUNTRY);
