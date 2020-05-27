@@ -37,6 +37,9 @@
             "viewName": "basicoperation"
           }
         ]
+      },
+      {
+        "viewName": "force-active"
       }
     ]
   }

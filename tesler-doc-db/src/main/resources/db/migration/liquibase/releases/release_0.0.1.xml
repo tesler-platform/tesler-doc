@@ -141,6 +141,38 @@
       </column>
     </createTable>
   </changeSet>
-
+  <changeSet id="force-active-example-table" author="kdergachev">
+    <createTable tableName="FORCE_ACTIVE_EXAMPLE">
+      <column name="ID" remarks="Идентификатор" type="NUMBER(19, 0)">
+        <constraints primaryKey="true" referencedTableName="FORCE_ACTIVE_EXAMPLE" />
+      </column>
+      <column name="country" type="VARCHAR2(255)"/>
+      <column name="language" type="VARCHAR2(255)"/>
+      <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Дата создания"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueComputed="current_timestamp" name="UPDATED_DATE" remarks="Дата обновления"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueNumeric="1" name="CREATED_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_CREATED_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="1" name="LAST_UPD_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_LAST_UPD_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet id="force-active-example-data" author="kdergachev" runOnChange="true">
+    <insert tableName="FORCE_ACTIVE_EXAMPLE">
+      <column name="ID" value="1" />
+      <column name="country" value="GERMANY" />
+      <column name="language" value="GERMAN" />
+    </insert>
+  </changeSet>
 </databaseChangeLog>
 
