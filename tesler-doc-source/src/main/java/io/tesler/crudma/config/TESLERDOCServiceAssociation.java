@@ -26,6 +26,7 @@ import io.tesler.core.crudma.bc.impl.AbstractEnumBcSupplier;
 import io.tesler.core.crudma.bc.impl.BcDescription;
 import io.tesler.service.BankService;
 import io.tesler.service.EmployeeService;
+import io.tesler.service.ForceActiveExampleService;
 import io.tesler.service.LinkBankEmployeeService;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
@@ -45,7 +46,9 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 		linkBankDocEmployee(bankDoc,LinkBankEmployeeService.class),
 			linkBankDocEmployeeAssoc(bankDoc,EmployeeService.class),
 
-	employee(EmployeeService.class);
+	employee(EmployeeService.class),
+
+	forceActiveExample(ForceActiveExampleService.class);
 
 	// @formatter:on
 

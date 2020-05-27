@@ -1,0 +1,24 @@
+{
+    "name": "forceActiveList",
+    "title": "Example",
+    "type": "List",
+    "bc": "forceActiveExample",
+    "showCondition": [],
+    "fields": [
+      {
+        "title": "Country",
+        "key": "country",
+        "type": "dictionary"
+      },
+      {
+        "title": "Language",
+        "key": "language",
+        "type": "dictionary"
+      }
+    ],
+    "axisFields": [],
+    "chart": [],
+    "options": {
+      "editable": "true"
+    }
+  }

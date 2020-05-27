@@ -1,0 +1,25 @@
+{
+  "name": "force-active",
+  "title": "Force Active Fields",
+  "template": "DashboardView",
+  "url": "/screen/features/view/force-active",
+  "widgets": [
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/force-active-overview.md"
+    },
+    {
+      "widgetName": "forceActiveList",
+      "position": 2,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "emptyDoc2",
+      "position": 3,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/force-active-howto.md"
+    }
+  ]
+}
