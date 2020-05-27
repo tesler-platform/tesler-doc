@@ -37,7 +37,8 @@ public enum TDDictionaryType implements Serializable, IDictionaryType {
 	SIZE,
 	SYSTEM_PREF,
 	TYPE,
-	DOC_TEST;
+	DOC_TEST,
+	LANGUAGE;
 
 
 	@Override
