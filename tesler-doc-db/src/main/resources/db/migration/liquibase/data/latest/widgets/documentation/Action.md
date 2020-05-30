@@ -65,3 +65,16 @@ if you use the `associate` action, a modal window will be opened. In this window
     autoSaveBefore:true
 }
 ```
+
+In case of two Assocs on the same parent business component assoc's name should be passed from backend as follows: 
+
+```json 
+ Actions.<TestResponseDto>builder()
+				.associate(bcExample)
+				.withoutIcon()
+				.withoutAutoSaveBefore()
+				.add()
+				.build();
+
+```
+ Otherwise, Assoc is identified by parent business component and can not be distinguished. 
