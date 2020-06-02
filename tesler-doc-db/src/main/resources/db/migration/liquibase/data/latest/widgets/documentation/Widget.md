@@ -15,6 +15,7 @@ Widget is UI component that works with user information according to the widget 
 | **position**  |  widget position on view | `number`  |
 | **gridWidth**  |  widget width | `number`  |
 | **options** |  optional parameter containing additional options |  `object` |
+| **limit** |  Optional parameter containing limit number of records per page which could will be got by one request. Has higher priority then `limit` value from `BC` metadata. Available since `@tesler-ui/core: 1.14.0` |  `number` |
 
 ## Field API
 
