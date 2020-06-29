@@ -1,6 +1,8 @@
 ## Front-end implementation (TableWidget component)
 
-TableWidget is wrapper of `antd` `Table`. It provides specific Tesler logic. Overrides some `antd` `Table` methods (see table below for details). Provides ability to pass all `antd` `Table` properties directly to `Table` (Available since @tesler-ui/core 1.16.0).
+TableWidget is wrapper of `antd` `Table`.  
+It provides specific Tesler logic.  
+Overrides some `antd` `Table` methods (see table below for details). Provides ability to pass all `antd` `Table` properties directly to `Table` (Available since @tesler-ui/core 1.16.0).
 
 ## API
 
@@ -69,4 +71,5 @@ function TableWidget(props: TableWidgetProps) {
         />
 }
 ```
+Or check [live example](https://github.com/tesler-platform/tesler-doc/blob/develop/tesler-doc-ui/src/components/widgets/TableWidget/TableWidget.tsx) out.  
 **NB** Do not forget to pass your `TableWidget` implementation to `customWidgets` list of `View` properties.
