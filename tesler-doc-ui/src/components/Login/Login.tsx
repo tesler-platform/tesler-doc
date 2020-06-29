@@ -40,7 +40,7 @@ export const Login: FunctionComponent<LoginProps> = (props) => {
         setPassword(event.target.value)
     }
 
-    const handleClick = (event: React.FormEvent<HTMLFontElement>) => {
+    const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         props.onLogin(login, password)
     }

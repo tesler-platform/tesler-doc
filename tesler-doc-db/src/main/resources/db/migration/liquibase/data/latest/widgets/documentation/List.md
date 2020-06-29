@@ -1,25 +1,27 @@
 # List
 
+## Back-end implementation (meta data)
+
 List/Table displays rows of data.
 
 
 
-## When to use
+### When to use
 
 - To display a collection of structured data.
 - To sort, search, paginate, filter data.
 
 
 
-## How to use
+### How to use
 
 Specify *business components* of Table as an array of data.
 
 
 
-# API
+## API
 
-## List 
+### List 
 
 |  Property |  Description | Type  |
 |:---|:---|:---|
@@ -33,7 +35,7 @@ Specify *business components* of Table as an array of data.
 
 
 
-## WidgetListField
+### WidgetListField
 
 The `fields` array is used to determine which columns will appear on the list widget and how they will display the data in their cells.
 
@@ -48,7 +50,7 @@ The `fields` array is used to determine which columns will appear on the list wi
 | **bgColor** | color (#FFFFFF) that will be used as a cell background | `string`  |
 | **bgColorKey** | record field that will be used as a source for cell background color | `string`  |
 
-## Data fetching
+### Data fetching
 
 The `bc` property of the `List` widget is used to fetch the data entities of that specific business component.
 Generally, the Tesler API will respond to the corresponding data request with an array of `DataItem` objects, which will be displayed as table rows.
@@ -86,13 +88,13 @@ Generally, the Tesler API will respond to the corresponding data request with an
 ```
 
 
-## Custom operations
+### Custom operations
 
 To use different operations, use the parameter `operations.actionGroups*`. This parameter includes two arrays, `include` and `exclude`, which contain operation types.
 
 
 
-### Full data example for using
+#### Full data example for using
 
  
 ```ts 

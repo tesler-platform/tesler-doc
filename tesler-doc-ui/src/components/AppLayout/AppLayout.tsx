@@ -33,6 +33,7 @@ import {setMenuVisible, setMobileMenu} from 'actions/actions'
 import NavEx1 from 'components/widgets/navigationExamples/NavEx1'
 import NavEx2 from 'components/widgets/navigationExamples/NavEx2'
 import {useScroll} from 'utils/useScroll'
+import TableWidget from '../widgets/TableWidget/TableWidget'
 
 interface LayoutProps {
     screenName: string,
@@ -59,7 +60,8 @@ const skipWidgetTypes = [
 
 const customWidgets = {
     NavEx1,
-    NavEx2
+    NavEx2,
+    [WidgetTypes.List]: TableWidget,
 }
 
 export function Layout(props: LayoutProps) {

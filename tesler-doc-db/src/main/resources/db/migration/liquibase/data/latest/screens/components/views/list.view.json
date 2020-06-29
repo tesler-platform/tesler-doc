@@ -29,6 +29,12 @@
       "widgetName": "linkBankDocEmployeeAssoc",
       "position": 5,
       "gridWidth": 4
+    },
+    {
+      "widgetName": "tableWidgetDoc",
+      "position": 6,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/TableWidget.md"
     }
   ]
 }
