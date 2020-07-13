@@ -4,6 +4,9 @@ import {WidgetTableMeta, WidgetListField} from '@tesler-ui/core/interfaces/widge
 import {RowMetaField} from '@tesler-ui/core/interfaces/rowMeta'
 import {TableWidgetProps} from '@tesler-ui/core/components/widgets/TableWidget/TableWidget'
 import styles from './TableWidget.less'
+import {ColumnProps} from 'antd/es/table'
+import {DataItem} from '@tesler-ui/core/interfaces/data'
+import {Icon} from 'antd'
 
 export interface TableWidgetOwnProps extends TableWidgetProps {
     meta: WidgetTableMeta
@@ -23,11 +26,21 @@ export const TableWidget: React.FunctionComponent<DocTableWidgetProps> = props =
         },
         []
     )
+    const yourColumn: ColumnProps<DataItem> = {
+        title: '',
+        key: '_yourColumn',
+        width: '10px',
+        render: (text, dataItem): React.ReactNode => {
+            return <Icon type="menu" />
+        }
+    }
+
     if (props.meta.name === 'tableWidgetDoc') {
         return <div className={styles.columnWrapper}>
             <CoreTableWidget
                 {...props}
                 columnTitleComponent={renderDocColumnTitle}
+                controlColumns={[{column: yourColumn, position: 'left'}]}
             />
         </div>
     }
