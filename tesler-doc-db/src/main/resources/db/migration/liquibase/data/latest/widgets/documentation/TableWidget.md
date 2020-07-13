@@ -29,6 +29,14 @@ Available since @tesler-ui/core 1.16.0
 | **widgetMeta***  | Items of **meta.fields** array | `WidgetListField`  |
 | **rowMeta***  | Item of row meta for specific column | `RowMetaField` |
 
+### controlColumns properties
+Available since @tesler-ui/core 1.14.0
+
+|  Property |  Description | Type  |
+|:---|:---|:---|
+| **column***  | Additional customization column on the client application | `ColumnProps<DataItem>` |
+| **position***  | Position of customization column | `'left' or 'right'`  |
+
 ### Overriding of Tesler's TableWidget
 
 For purposes of extending TableWidget logic you can override it in your project.
@@ -63,11 +71,25 @@ function TableWidget(props: TableWidgetProps) {
                 />,
             []
         )
+    // Example of `controlColumns` prop usage
+    // You can define `YourColumn` component
+    const yourColumn: ColumnProps<DataItem> = {
+            title: '',
+            key: '_yourColumn',
+            width: '10px',
+            render: (text, dataItem): React.ReactNode => {
+                return <YourColumn
+                    yourProps={props.someProp}
+                    ...
+                />
+            }
+        }
     
     return <CoreTableWidget
             {...props}
             expandedRowRender={expandRender} // Example of antd Table props usage
             columnTitleComponent={renderColumnTitle} // Example of `columnTitleComponent` prop usage
+            controlColumns={[{column: yourColumn, position: 'left'}]} // Example of `controlColumns` prop usage
         />
 }
 ```
