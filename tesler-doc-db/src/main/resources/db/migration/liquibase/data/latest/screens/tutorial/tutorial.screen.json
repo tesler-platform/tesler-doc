@@ -9,6 +9,9 @@
     "menu": [
       {
         "viewName": "example-project"
+      },
+      {
+        "viewName": "epics-overview"
       }
     ]
   }
