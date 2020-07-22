@@ -24,8 +24,10 @@ import io.tesler.core.crudma.bc.BcIdentifier;
 import io.tesler.core.crudma.bc.EnumBcIdentifier;
 import io.tesler.core.crudma.bc.impl.AbstractEnumBcSupplier;
 import io.tesler.core.crudma.bc.impl.BcDescription;
+import io.tesler.service.AssocListPopupExService;
 import io.tesler.service.BankService;
 import io.tesler.service.EmployeeService;
+import io.tesler.service.ForAssocExService;
 import io.tesler.service.ForceActiveExampleService;
 import io.tesler.service.LinkBankEmployeeService;
 import lombok.Getter;
@@ -47,6 +49,11 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 			linkBankDocEmployeeAssoc(bankDoc,EmployeeService.class),
 
 	employee(EmployeeService.class),
+
+	// assocListPopup example
+	forAssocEx(ForAssocExService.class),
+		assocListPopupEx(forAssocEx, AssocListPopupExService.class),
+
 
 	forceActiveExample(ForceActiveExampleService.class);
 
