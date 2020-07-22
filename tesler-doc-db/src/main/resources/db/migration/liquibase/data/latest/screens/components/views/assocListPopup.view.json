@@ -1,0 +1,24 @@
+{
+  "name": "assocListPopup",
+  "title": "AssocListPopup",
+  "template": "DashboardView",
+  "url": "/screen/components/view/assocListPopup",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "assocListPopupDocGeneral",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/AssocListPopupDocGeneral.md"
+    },
+    {
+      "widgetName": "assocListPopupDocGeneralAssoc",
+      "position": 101,
+      "gridWidth": 2
+    }
+  ]
+}

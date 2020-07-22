@@ -24,6 +24,12 @@
           },
           {
             "viewName": "form"
+          },
+          {
+            "viewName": "assocListPopup"
+          },
+          {
+            "viewName": "pickListPopup"
           }
         ]
       },
