@@ -21,6 +21,7 @@
 package io.tesler.entity;
 
 import io.tesler.model.core.entity.BaseEntity;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -33,4 +34,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ForAssocEx extends BaseEntity {
+	@Column
+	private String pickedName;
+
 }

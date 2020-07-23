@@ -1,0 +1,16 @@
+{
+  "name": "pickListPopupDocGeneralAssoc",
+  "title": "List of names",
+  "type": "PickListPopup",
+  "bc": "pickListPopupEx",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": []
+}

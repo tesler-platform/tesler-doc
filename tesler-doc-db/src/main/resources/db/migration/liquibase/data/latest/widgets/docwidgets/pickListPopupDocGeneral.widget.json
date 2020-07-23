@@ -1,43 +1,36 @@
 {
   "name": "pickListPopupDocGeneral",
-  "title": "",
-  "type": "List",
-  "bc": "bankDoc",
+  "title": "General Example",
+  "type": "Form",
+  "bc": "forPickEx",
   "showCondition": [],
   "fields": [
     {
-      "title": "Name",
-      "key": "name",
-      "type": "input",
-      "drillDown": "true"
-    },
-    {
-      "title": "Active Projects Amount",
-      "key": "activeProjectsAmount",
-      "type": "number"
-    },
-    {
-      "title": "National",
-      "key": "isNational",
-      "type": "checkbox"
-    },
-    {
-      "title": "Size",
-      "key": "size",
-      "type": "dictionary"
-    },
-    {
-      "title": "Country",
-      "key": "country",
-      "type": "dictionary"
-    },
-    {
-      "title": "Notes",
-      "key": "notes",
-      "type": "text"
+      "label": "General Example: Select one Name",
+      "key": "pickedName",
+      "type": "pickList",
+      "popupBcName": "pickListPopupEx",
+      "pickMap": {
+        "pickedName": "id"
+      }
     }
   ],
   "axisFields": [],
   "chart": [],
-  "options": {}
+  "options": {
+    "actionGroups": {
+    },
+    "layout": {
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "pickedName",
+              "span": 16
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

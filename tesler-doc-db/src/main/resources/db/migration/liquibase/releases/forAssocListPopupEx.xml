@@ -10,6 +10,7 @@
       <column name="ID" remarks="Идентификатор" type="NUMBER(19, 0)">
         <constraints primaryKey="true"/>
       </column>
+      <column name="PICKED_NAME" type="VARCHAR2(255)"/>
       <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Дата создания"
         type="TIMESTAMP(6)">
         <constraints nullable="false"/>
