@@ -9,7 +9,7 @@
       "label": "Names",
       "key": "names",
       "type": "multivalue",
-      "popupBcName": "assocListPopupEx",
+      "popupBcName": "assocListPopupExAssoc",
       "assocValueKey": "name"
     }
   ],

@@ -2,7 +2,7 @@
   "name": "assocListPopupDocGeneralAssoc",
   "title": "List of names",
   "type": "AssocListPopup",
-  "bc": "assocListPopupEx",
+  "bc": "assocListPopupExAssoc",
   "showCondition": [],
   "fields": [
     {

@@ -17,7 +17,7 @@
     "/assets/"
   ],
   "dependencies": {
-    "@tesler-ui/core": "1.15.9-alpha.0",
+    "@tesler-ui/core": "1.17.4",
     "@types/classnames": "2.2.9",
     "@types/react-syntax-highlighter": "11.0.4",
     "antd": "3.26.13",
