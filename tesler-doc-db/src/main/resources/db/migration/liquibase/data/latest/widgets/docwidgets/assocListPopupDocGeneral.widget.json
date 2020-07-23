@@ -6,7 +6,7 @@
   "showCondition": [],
   "fields": [
     {
-      "label": "Names",
+      "label": "Select several items",
       "key": "names",
       "type": "multivalue",
       "popupBcName": "assocListPopupExAssoc",

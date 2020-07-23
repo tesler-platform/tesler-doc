@@ -35,6 +35,7 @@ public class ForAssocExFieldMetaBuilder extends FieldMetaBuilder<ForAssocExDTO> 
 	public void buildRowDependentMeta(RowDependentFieldsMeta<ForAssocExDTO> fields, InnerBcDescription bcDescription,
 		Long id, Long parentId) {
 		fields.setEnabled(ForAssocExDTO_.names);
+		fields.setEnabled(ForAssocExDTO_.pickedName);
 	}
 
 	@Override
