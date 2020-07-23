@@ -1,0 +1,16 @@
+{
+  "name": "assocListPopupDocCustomAssoc",
+  "title": "List of names",
+  "type": "AssocListPopup",
+  "bc": "assocListPopupCustomExAssoc",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": []
+}

@@ -53,6 +53,8 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 	// assocListPopup example
 	forAssocEx(ForAssocExService.class),
 	assocListPopupExAssoc(AssocListPopupExService.class),
+	forAssocCustomEx(ForAssocExService.class),
+	assocListPopupCustomExAssoc(AssocListPopupExService.class),
 
 
 	forceActiveExample(ForceActiveExampleService.class);
