@@ -19,6 +19,17 @@
       "widgetName": "assocListPopupDocGeneralAssoc",
       "position": 101,
       "gridWidth": 2
+    },
+    {
+      "widgetName": "assocListPopupDocCustom",
+      "position": 2,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/AssocListPopupDocCustom.md"
+    },
+    {
+      "widgetName": "assocListPopupDocCustomAssoc",
+      "position": 102,
+      "gridWidth": 2
     }
   ]
 }
