@@ -19,6 +19,17 @@
       "widgetName": "pickListPopupDocGeneralAssoc",
       "position": 101,
       "gridWidth": 2
+    },
+    {
+      "widgetName": "pickListPopupDocCustom",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/documentation/PickListPopupDocCustom.md"
+    },
+    {
+      "widgetName": "pickListPopupDocCustomPick",
+      "position": 101,
+      "gridWidth": 2
     }
   ]
 }

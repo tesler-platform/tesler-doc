@@ -35,6 +35,7 @@ import NavEx2 from 'components/widgets/navigationExamples/NavEx2'
 import {useScroll} from 'utils/useScroll'
 import TableWidget from '../widgets/TableWidget/TableWidget'
 import AssocListPopup from '../widgets/AssocListPopup/AssocListPopup'
+import PickListPopup from '../widgets/PickListPopup/PickListPopup'
 
 interface LayoutProps {
     screenName: string,
@@ -64,6 +65,7 @@ const customWidgets = {
     NavEx2,
     [WidgetTypes.List]: TableWidget,
     [WidgetTypes.AssocListPopup]: AssocListPopup,
+    [WidgetTypes.PickListPopup]: PickListPopup,
 }
 
 export function Layout(props: LayoutProps) {

@@ -1,15 +1,15 @@
 {
-  "name": "pickListPopupDocGeneral",
-  "title": "General Example",
+  "name": "pickListPopupDocCustom",
+  "title": "Custom Example",
   "type": "Form",
-  "bc": "forPickEx",
+  "bc": "forPickCustomEx",
   "showCondition": [],
   "fields": [
     {
-      "label": "General Example: Select one Name",
+      "label": "Custom Example: Select one Name",
       "key": "pickedName",
       "type": "pickList",
-      "popupBcName": "pickListPopupEx",
+      "popupBcName": "pickListPopupCustomEx",
       "pickMap": {
         "pickedName": "name"
       }
