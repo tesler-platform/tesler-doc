@@ -1,8 +1,8 @@
 {
-  "name": "pickListPopup",
-  "title": "PickListPopup",
+  "name": "pickListDrillDown",
+  "title": "pickListDrillDown",
   "template": "DashboardView",
-  "url": "/screen/components/view/pickListPopup",
+  "url": "/screen/components/view/pickListDrillDown",
   "widgets": [
     {
       "widgetName": "SecondLevelMenu",

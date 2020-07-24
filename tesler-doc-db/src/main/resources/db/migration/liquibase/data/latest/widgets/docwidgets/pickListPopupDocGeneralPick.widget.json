@@ -1,8 +1,8 @@
 {
-  "name": "pickListPopupDocGeneralAssoc",
+  "name": "pickListExPopup",
   "title": "List of names",
   "type": "PickListPopup",
-  "bc": "pickListPopupEx",
+  "bc": "pickListExPopup",
   "showCondition": [],
   "fields": [
     {

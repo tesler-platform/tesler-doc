@@ -25,6 +25,7 @@ import io.tesler.core.dto.rowmeta.FieldsMeta;
 import io.tesler.core.dto.rowmeta.RowDependentFieldsMeta;
 import io.tesler.core.service.rowmeta.FieldMetaBuilder;
 import io.tesler.dto.AssocListPopupExDTO;
+import io.tesler.dto.AssocListPopupExDTO_;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,6 +34,10 @@ public class AssocListPopupExFieldMetaBuilder extends FieldMetaBuilder<AssocList
 	@Override
 	public void buildRowDependentMeta(RowDependentFieldsMeta<AssocListPopupExDTO> fields,
 		InnerBcDescription bcDescription, Long id, Long parentId) {
+		fields.setEnabled(
+				AssocListPopupExDTO_.name,
+				AssocListPopupExDTO_.id
+				);
 
 	}
 

@@ -10,10 +10,18 @@
       {
         "title": "Navigation",
         "child": [
-            { "viewName": "navigation-overview" },
-            { "viewName": "navigation-screens" },
-            { "viewName": "navigation-views" },
-            { "viewName": "navigation-tabs" }
+          {
+            "viewName": "navigation-overview"
+          },
+          {
+            "viewName": "navigation-screens"
+          },
+          {
+            "viewName": "navigation-views"
+          },
+          {
+            "viewName": "navigation-tabs"
+          }
         ]
       },
       {
@@ -29,7 +37,15 @@
             "viewName": "assocListPopup"
           },
           {
-            "viewName": "pickListPopup"
+            "title": "Pick List",
+            "child": [
+              {
+                "viewName": "pickListPopup"
+              },
+              {
+                "viewName": "pickListDrillDown"
+              }
+            ]
           }
         ]
       },

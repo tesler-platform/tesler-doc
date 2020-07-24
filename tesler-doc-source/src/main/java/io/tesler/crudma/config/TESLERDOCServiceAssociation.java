@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,12 +24,7 @@ import io.tesler.core.crudma.bc.BcIdentifier;
 import io.tesler.core.crudma.bc.EnumBcIdentifier;
 import io.tesler.core.crudma.bc.impl.AbstractEnumBcSupplier;
 import io.tesler.core.crudma.bc.impl.BcDescription;
-import io.tesler.service.AssocListPopupExService;
-import io.tesler.service.BankService;
-import io.tesler.service.EmployeeService;
-import io.tesler.service.ForAssocExService;
-import io.tesler.service.ForceActiveExampleService;
-import io.tesler.service.LinkBankEmployeeService;
+import io.tesler.service.*;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
@@ -58,7 +53,7 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 
 	// assocListPopup example (uses services of assocListPopup example)
 	forPickEx(ForAssocExService.class),
-	pickListPopupEx(forPickEx, AssocListPopupExService.class),
+	pickListExPopup(forPickEx, AssocListPopupExService.class),
 
 
 	forceActiveExample(ForceActiveExampleService.class);

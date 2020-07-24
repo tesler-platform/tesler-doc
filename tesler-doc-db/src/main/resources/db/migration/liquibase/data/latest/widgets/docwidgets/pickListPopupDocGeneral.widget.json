@@ -9,9 +9,10 @@
       "label": "General Example: Select one Name",
       "key": "pickedName",
       "type": "pickList",
-      "popupBcName": "pickListPopupEx",
+      "popupBcName": "pickListExPopup",
       "pickMap": {
-        "pickedName": "id"
+        "pickedId": "id",
+        "pickedName": "name"
       }
     }
   ],

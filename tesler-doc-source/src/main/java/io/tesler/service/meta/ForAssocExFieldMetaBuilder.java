@@ -36,6 +36,7 @@ public class ForAssocExFieldMetaBuilder extends FieldMetaBuilder<ForAssocExDTO> 
 		Long id, Long parentId) {
 		fields.setEnabled(ForAssocExDTO_.names);
 		fields.setEnabled(ForAssocExDTO_.pickedName);
+		fields.setEnabled(ForAssocExDTO_.pickedId);
 	}
 
 	@Override

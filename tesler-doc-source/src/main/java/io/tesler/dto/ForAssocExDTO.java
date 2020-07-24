@@ -37,6 +37,8 @@ public class ForAssocExDTO extends DataResponseDTO {
 
 	private String pickedName;
 
+	private String pickedId;
+
 	public ForAssocExDTO(ForAssocEx forAssocEx) {
 		this.id = forAssocEx.getId().toString();
 		this.names = new MultivalueField(Collections.emptyList());

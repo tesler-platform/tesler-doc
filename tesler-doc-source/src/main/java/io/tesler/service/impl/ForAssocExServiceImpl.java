@@ -22,9 +22,12 @@ package io.tesler.service.impl;
 
 import io.tesler.core.crudma.bc.BusinessComponent;
 import io.tesler.core.crudma.impl.VersionAwareResponseService;
+import io.tesler.core.dto.DrillDownType;
 import io.tesler.core.dto.rowmeta.ActionResultDTO;
 import io.tesler.core.dto.rowmeta.CreateResult;
+import io.tesler.core.dto.rowmeta.PostAction;
 import io.tesler.core.service.action.Actions;
+import io.tesler.crudma.config.TESLERDOCServiceAssociation;
 import io.tesler.dto.ForAssocExDTO;
 import io.tesler.entity.ForAssocEx;
 import io.tesler.service.ForAssocExService;
@@ -33,7 +36,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ForAssocExServiceImpl extends VersionAwareResponseService<ForAssocExDTO, ForAssocEx> implements
-	ForAssocExService {
+		ForAssocExService {
 
 	public ForAssocExServiceImpl() {
 		super(ForAssocExDTO.class, ForAssocEx.class, null, ForAssocExFieldMetaBuilder.class);
@@ -42,13 +45,22 @@ public class ForAssocExServiceImpl extends VersionAwareResponseService<ForAssocE
 	@Override
 	protected CreateResult<ForAssocExDTO> doCreateEntity(ForAssocEx entity, BusinessComponent bc) {
 		baseDAO.save(entity);
-		return new CreateResult<ForAssocExDTO>(entityToDto(bc, entity));
+		return new CreateResult<>(entityToDto(bc, entity)).setAction(PostAction.drillDown(DrillDownType.INNER,
+				"/screen/components/view/pickListDrillDown/"
+						+ TESLERDOCServiceAssociation.forPickEx
+						+ "/" + entity.getId()));
 	}
 
 	@Override
 	protected ActionResultDTO<ForAssocExDTO> doUpdateEntity(ForAssocEx entity, ForAssocExDTO data,
-		BusinessComponent bc) {
-		return null;
+			BusinessComponent bc) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ActionResultDTO<ForAssocExDTO> onCancel(BusinessComponent bc) {
+		return new ActionResultDTO<ForAssocExDTO>().setAction(PostAction.drillDown(DrillDownType.INNER,
+				"/screen/components/view/pickListPopup"));
 	}
 
 	@Override
