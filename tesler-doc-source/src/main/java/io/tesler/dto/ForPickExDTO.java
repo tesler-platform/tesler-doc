@@ -1,6 +1,6 @@
 /*-
  * #%L
- * TESLERDOC - Source
+ * TESLERDOC - Model
  * %%
  * Copyright (C) 2020 Tesler Contributors
  * %%
@@ -21,9 +21,7 @@
 package io.tesler.dto;
 
 import io.tesler.api.data.dto.DataResponseDTO;
-import io.tesler.core.dto.multivalue.MultivalueField;
-import io.tesler.entity.ForAssocEx;
-import java.util.Collections;
+import io.tesler.entity.ForPickEx;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,14 +29,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ForAssocExDTO extends DataResponseDTO {
+public class ForPickExDTO extends DataResponseDTO {
 
-	private MultivalueField names;
 
-	public ForAssocExDTO(ForAssocEx forAssocEx) {
+	private String pickedName;
+
+	public ForPickExDTO(ForPickEx forAssocEx) {
 		this.id = forAssocEx.getId().toString();
-		this.names = new MultivalueField(Collections.emptyList());
+		this.pickedName = forAssocEx.getPickedName();
 	}
-
 }
-
