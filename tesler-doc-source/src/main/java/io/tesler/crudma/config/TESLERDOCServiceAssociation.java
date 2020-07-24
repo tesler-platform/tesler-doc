@@ -60,7 +60,7 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 
 	// assocListPopup example
 	forPickEx(ForPickExService.class),
-		pickListPopupEx(forPickEx, PickListPopupExService.class),
+		pickListPopupEx(PickListPopupExService.class), // fixme must has 'forPickEx' as parent
 
 
 	forceActiveExample(ForceActiveExampleService.class);

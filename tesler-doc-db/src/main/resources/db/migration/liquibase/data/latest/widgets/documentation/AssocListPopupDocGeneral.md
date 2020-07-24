@@ -5,7 +5,7 @@
 
 ### When to use
 
-- When you need to fill `multivalue` field of `Form` widget.
+- When you need to fill `multivalue` field.
 
 ## API
 
