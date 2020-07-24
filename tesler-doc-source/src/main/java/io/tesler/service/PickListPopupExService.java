@@ -18,27 +18,12 @@
  * #L%
  */
 
-package io.tesler.dto;
+package io.tesler.service;
 
-import io.tesler.api.data.dto.DataResponseDTO;
-import io.tesler.core.dto.multivalue.MultivalueField;
-import io.tesler.entity.ForAssocEx;
-import java.util.Collections;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.tesler.core.service.ResponseService;
+import io.tesler.dto.PickListPopupExDTO;
+import io.tesler.entity.PickListPopupEx;
 
-@Getter
-@Setter
-@NoArgsConstructor
-public class ForAssocExDTO extends DataResponseDTO {
-
-	private MultivalueField names;
-
-	public ForAssocExDTO(ForAssocEx forAssocEx) {
-		this.id = forAssocEx.getId().toString();
-		this.names = new MultivalueField(Collections.emptyList());
-	}
+public interface PickListPopupExService  extends ResponseService<PickListPopupExDTO, PickListPopupEx> {
 
 }
-

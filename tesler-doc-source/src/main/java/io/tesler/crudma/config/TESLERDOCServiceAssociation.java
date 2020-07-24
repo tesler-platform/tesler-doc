@@ -28,8 +28,10 @@ import io.tesler.service.AssocListPopupExService;
 import io.tesler.service.BankService;
 import io.tesler.service.EmployeeService;
 import io.tesler.service.ForAssocExService;
+import io.tesler.service.ForPickExService;
 import io.tesler.service.ForceActiveExampleService;
 import io.tesler.service.LinkBankEmployeeService;
+import io.tesler.service.PickListPopupExService;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
@@ -56,9 +58,9 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 	forAssocCustomEx(ForAssocExService.class),
 	assocListPopupCustomExAssoc(AssocListPopupExService.class),
 
-	// assocListPopup example (uses services of assocListPopup example)
-	forPickEx(ForAssocExService.class),
-	pickListPopupEx(forPickEx, AssocListPopupExService.class),
+	// assocListPopup example
+	forPickEx(ForPickExService.class),
+		pickListPopupEx(forPickEx, PickListPopupExService.class),
 
 
 	forceActiveExample(ForceActiveExampleService.class);

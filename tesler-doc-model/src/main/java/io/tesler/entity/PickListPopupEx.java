@@ -1,6 +1,6 @@
 /*-
  * #%L
- * TESLERDOC - Source
+ * TESLERDOC - Model
  * %%
  * Copyright (C) 2020 Tesler Contributors
  * %%
@@ -18,27 +18,23 @@
  * #L%
  */
 
-package io.tesler.dto;
+package io.tesler.entity;
 
-import io.tesler.api.data.dto.DataResponseDTO;
-import io.tesler.core.dto.multivalue.MultivalueField;
-import io.tesler.entity.ForAssocEx;
-import java.util.Collections;
+import io.tesler.model.core.entity.BaseEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
+@Table(name = "PICK_LIST_POPUP_EX")
 @Getter
 @Setter
 @NoArgsConstructor
-public class ForAssocExDTO extends DataResponseDTO {
+public class PickListPopupEx extends BaseEntity {
 
-	private MultivalueField names;
-
-	public ForAssocExDTO(ForAssocEx forAssocEx) {
-		this.id = forAssocEx.getId().toString();
-		this.names = new MultivalueField(Collections.emptyList());
-	}
-
+	@Column
+	private String name;
 }
-

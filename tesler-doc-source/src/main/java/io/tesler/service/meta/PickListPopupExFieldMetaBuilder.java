@@ -1,6 +1,6 @@
 /*-
  * #%L
- * TESLERDOC - Source
+ * TESLERDOC - Model
  * %%
  * Copyright (C) 2020 Tesler Contributors
  * %%
@@ -24,21 +24,20 @@ import io.tesler.core.crudma.bc.impl.InnerBcDescription;
 import io.tesler.core.dto.rowmeta.FieldsMeta;
 import io.tesler.core.dto.rowmeta.RowDependentFieldsMeta;
 import io.tesler.core.service.rowmeta.FieldMetaBuilder;
-import io.tesler.dto.ForAssocExDTO;
-import io.tesler.dto.ForAssocExDTO_;
+import io.tesler.dto.PickListPopupExDTO;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ForAssocExFieldMetaBuilder extends FieldMetaBuilder<ForAssocExDTO> {
+public class PickListPopupExFieldMetaBuilder extends FieldMetaBuilder<PickListPopupExDTO> {
 
 	@Override
-	public void buildRowDependentMeta(RowDependentFieldsMeta<ForAssocExDTO> fields, InnerBcDescription bcDescription,
-		Long id, Long parentId) {
-		fields.setEnabled(ForAssocExDTO_.names);
+	public void buildRowDependentMeta(RowDependentFieldsMeta<PickListPopupExDTO> fields,
+		InnerBcDescription bcDescription, Long id, Long parentId) {
+
 	}
 
 	@Override
-	public void buildIndependentMeta(FieldsMeta<ForAssocExDTO> fields, InnerBcDescription bcDescription,
+	public void buildIndependentMeta(FieldsMeta<PickListPopupExDTO> fields, InnerBcDescription bcDescription,
 		Long parentId) {
 
 	}

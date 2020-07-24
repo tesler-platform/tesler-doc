@@ -1,6 +1,6 @@
 /*-
  * #%L
- * TESLERDOC - Source
+ * TESLERDOC - Model
  * %%
  * Copyright (C) 2020 Tesler Contributors
  * %%
@@ -24,22 +24,21 @@ import io.tesler.core.crudma.bc.impl.InnerBcDescription;
 import io.tesler.core.dto.rowmeta.FieldsMeta;
 import io.tesler.core.dto.rowmeta.RowDependentFieldsMeta;
 import io.tesler.core.service.rowmeta.FieldMetaBuilder;
-import io.tesler.dto.ForAssocExDTO;
-import io.tesler.dto.ForAssocExDTO_;
+import io.tesler.dto.ForPickExDTO;
+import io.tesler.dto.ForPickExDTO_;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ForAssocExFieldMetaBuilder extends FieldMetaBuilder<ForAssocExDTO> {
+public class ForPickExFieldMetaBuilder extends FieldMetaBuilder<ForPickExDTO> {
 
 	@Override
-	public void buildRowDependentMeta(RowDependentFieldsMeta<ForAssocExDTO> fields, InnerBcDescription bcDescription,
+	public void buildRowDependentMeta(RowDependentFieldsMeta<ForPickExDTO> fields, InnerBcDescription bcDescription,
 		Long id, Long parentId) {
-		fields.setEnabled(ForAssocExDTO_.names);
+		fields.setEnabled(ForPickExDTO_.pickedName);
 	}
 
 	@Override
-	public void buildIndependentMeta(FieldsMeta<ForAssocExDTO> fields, InnerBcDescription bcDescription,
-		Long parentId) {
+	public void buildIndependentMeta(FieldsMeta<ForPickExDTO> fields, InnerBcDescription bcDescription, Long parentId) {
 
 	}
 

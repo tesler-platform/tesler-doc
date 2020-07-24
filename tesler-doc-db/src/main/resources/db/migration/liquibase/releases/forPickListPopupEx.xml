@@ -5,11 +5,12 @@
   logicalFilePath="db/migration/liquibase/releases/release_0.0.1.xml">
 
 
-  <changeSet id="for-assoc-list-popup-table" author="tesler">
-    <createTable tableName="FOR_ASSOC_EX">
+  <changeSet id="for-pick-list-popup-table" author="fgubarev">
+    <createTable tableName="FOR_PICK_EX">
       <column name="ID" remarks="Идентификатор" type="NUMBER(19, 0)">
         <constraints primaryKey="true"/>
       </column>
+      <column name="PICKED_NAME" type="VARCHAR2(255)"/>
       <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Дата создания"
         type="TIMESTAMP(6)">
         <constraints nullable="false"/>
@@ -29,7 +30,7 @@
       </column>
     </createTable>
 
-    <createTable tableName="ASSOC_LIST_POPUP_EX">
+    <createTable tableName="PICK_LIST_POPUP_EX">
       <column name="ID" remarks="Идентификатор" type="NUMBER(19, 0)">
         <constraints primaryKey="true"/>
       </column>
@@ -53,8 +54,8 @@
       </column>
     </createTable>
 
-    <loadData tableName="ASSOC_LIST_POPUP_EX" separator=";" quotchar="&quot;"
-      file="db/migration/liquibase/data/latest/csv/FOR_ASSOC_LIST_POPUP_EX.csv">
+    <loadData tableName="PICK_LIST_POPUP_EX" separator=";" quotchar="&quot;"
+      file="db/migration/liquibase/data/latest/csv/FOR_PICK_LIST_POPUP_EX.csv">
       <column header="ID" name="ID" type="NUMERIC"/>
       <column header="NAME" name="NAME" type="STRING"/>
     </loadData>
