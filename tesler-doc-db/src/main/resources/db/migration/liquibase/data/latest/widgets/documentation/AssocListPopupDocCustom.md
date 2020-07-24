@@ -9,7 +9,7 @@ Its body can render some `@tesler-ui/core`'s table widgets. It behavior controls
 
 |  Property |  Description | Type  |
 |:---|:---|:---|
-| **meta***  | Meta data of widget `LiAssocListPopupst`  | `WidgetTableMeta` |
+| **meta***  | Meta data of widget `AssocListPopup`  | `WidgetTableMeta` |
 | **components**  | Object which provides customisation `title`, `table` and `footer` of `Popup` | <code>{<br/>&nbsp;&nbsp;title?:&nbsp;ReactNode,<br/>&nbsp;&nbsp;table?:&nbsp;ReactNode,<br/>&nbsp;&nbsp;footer?:&nbsp;ReactNode<br/>}</code>  |
  
  Also `AssocListPopup` extends `Popup`'s own properties (`PopupProps`) except `bcName`, `children` and `showed`. 
