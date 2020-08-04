@@ -1,0 +1,43 @@
+{
+  "name": "multipleSelectLinkedValuesEx",
+  "title": "form",
+  "type": "Form",
+  "bc": "multipleSelectLinkedValuesEx",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Country",
+      "key": "countryList",
+      "type": "multipleSelect"
+    },
+    {
+      "title": "Language",
+      "key": "languageList",
+      "type": "multipleSelect"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "layout": {
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "countryList",
+              "span": 12
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "language",
+              "span": 12
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

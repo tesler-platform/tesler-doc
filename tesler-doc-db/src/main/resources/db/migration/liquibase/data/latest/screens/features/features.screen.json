@@ -40,6 +40,9 @@
       },
       {
         "viewName": "force-active"
+      },
+      {
+        "viewName": "multipleselectlinkedvalues"
       }
     ]
   }

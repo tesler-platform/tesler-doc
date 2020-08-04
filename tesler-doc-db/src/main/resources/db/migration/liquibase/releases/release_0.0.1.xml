@@ -174,5 +174,158 @@
       <column name="language" value="GERMAN" />
     </insert>
   </changeSet>
+
+    <changeSet id="multiple_select_linked_values_ex" author="ryalalov">
+        <createTable tableName="MULTIPLESELECT_LINKED_VALUES_EX">
+            <column name="ID" remarks="Идентификатор" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" referencedTableName="FORCE_ACTIVE_EXAMPLE" />
+            </column>
+            <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Дата создания"
+                    type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="current_timestamp" name="UPDATED_DATE" remarks="Дата обновления"
+                    type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="CREATED_BY_USER_ID" type="NUMBER(19, 0)">
+                <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_CREATED_BY" references="USERS"/>
+            </column>
+            <column defaultValueNumeric="1" name="LAST_UPD_BY_USER_ID" type="NUMBER(19, 0)">
+                <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_LAST_UPD_BY" references="USERS"/>
+            </column>
+            <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LANGUAGE" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="linked-values-holder-ex" author="ryalalov">
+        <createTable tableName="LINKED_VALUES_HOLDER_EX">
+            <column name="ID" remarks="Идентификатор" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" referencedTableName="FORCE_ACTIVE_EXAMPLE" />
+            </column>
+            <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Дата создания"
+                    type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="current_timestamp" name="UPDATED_DATE" remarks="Дата обновления"
+                    type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="CREATED_BY_USER_ID" type="NUMBER(19, 0)">
+                <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_CREATED_BY" references="USERS"/>
+            </column>
+            <column defaultValueNumeric="1" name="LAST_UPD_BY_USER_ID" type="NUMBER(19, 0)">
+                <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_LAST_UPD_BY" references="USERS"/>
+            </column>
+            <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COUNTRY" type="VARCHAR2(255)"/>
+            <column name="LANGUAGE" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="linked-values-data-ex" author="ryalalov" runOnChange="true">
+        <insert tableName="LINKED_VALUES_HOLDER_EX">
+            <column name="ID" value="1" />
+            <column name="COUNTRY" value="CANADA" />
+            <column name="LANGUAGE" value="ENGLISH" />
+        </insert>
+        <insert tableName="LINKED_VALUES_HOLDER_EX">
+            <column name="ID" value="2" />
+            <column name="COUNTRY" value="CANADA" />
+            <column name="LANGUAGE" value="FRENCH" />
+        </insert>
+        <insert tableName="LINKED_VALUES_HOLDER_EX">
+            <column name="ID" value="3" />
+            <column name="COUNTRY" value="LUXEMBOURG" />
+            <column name="LANGUAGE" value="ENGLISH" />
+        </insert>
+        <insert tableName="LINKED_VALUES_HOLDER_EX">
+            <column name="ID" value="4" />
+            <column name="COUNTRY" value="LUXEMBOURG" />
+            <column name="LANGUAGE" value="FRENCH" />
+        </insert>
+        <insert tableName="LINKED_VALUES_HOLDER_EX">
+            <column name="ID" value="5" />
+            <column name="COUNTRY" value="LUXEMBOURG" />
+            <column name="LANGUAGE" value="GERMAN" />
+        </insert>
+        <insert tableName="LINKED_VALUES_HOLDER_EX">
+            <column name="ID" value="6" />
+            <column name="COUNTRY" value="RUSSIA" />
+            <column name="LANGUAGE" value="RUSSIAN" />
+        </insert>
+        <insert tableName="LINKED_VALUES_HOLDER_EX">
+            <column name="ID" value="7" />
+            <column name="COUNTRY" value="RUSSIA" />
+            <column name="LANGUAGE" value="UDMURT" />
+        </insert>
+        <insert tableName="LINKED_VALUES_HOLDER_EX">
+            <column name="ID" value="8" />
+            <column name="COUNTRY" value="RUSSIA" />
+            <column name="LANGUAGE" value="BURYAT" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="country-storage" author="ryalalov">
+        <createTable tableName="LINKED_VALUES_COUNTRY_STORAGE">
+            <column name="ID" remarks="Идентификатор" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" referencedTableName="FORCE_ACTIVE_EXAMPLE" />
+            </column>
+            <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Дата создания"
+                    type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="current_timestamp" name="UPDATED_DATE" remarks="Дата обновления"
+                    type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="CREATED_BY_USER_ID" type="NUMBER(19, 0)">
+                <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_CREATED_BY" references="USERS"/>
+            </column>
+            <column defaultValueNumeric="1" name="LAST_UPD_BY_USER_ID" type="NUMBER(19, 0)">
+                <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_LAST_UPD_BY" references="USERS"/>
+            </column>
+            <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALUE" type="VARCHAR2(255)"/>
+            <column name="MULTIPLESELECT_LINKED_VALUES_EX_ID" type="NUMBER(19, 0)">
+                <constraints foreignKeyName="COUNTRY_VALUE" references="MULTIPLESELECT_LINKED_VALUES_EX"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="language-storage" author="ryalalov">
+        <createTable tableName="LINKED_VALUES_LANGUAGE_STORAGE">
+            <column name="ID" remarks="Идентификатор" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" referencedTableName="FORCE_ACTIVE_EXAMPLE" />
+            </column>
+            <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Дата создания"
+                    type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="current_timestamp" name="UPDATED_DATE" remarks="Дата обновления"
+                    type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="CREATED_BY_USER_ID" type="NUMBER(19, 0)">
+                <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_CREATED_BY" references="USERS"/>
+            </column>
+            <column defaultValueNumeric="1" name="LAST_UPD_BY_USER_ID" type="NUMBER(19, 0)">
+                <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_LAST_UPD_BY" references="USERS"/>
+            </column>
+            <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALUE" type="VARCHAR2(255)"/>
+            <column name="MULTIPLESELECT_LINKED_VALUES_EX_ID" type="NUMBER(19, 0)">
+                <constraints foreignKeyName="LANGUAGE_VALUE" references="MULTIPLESELECT_LINKED_VALUES_EX"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
 
