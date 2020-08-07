@@ -61,6 +61,13 @@
       }
     },
     {
+      "label": "Multivalue",
+      "key": "testMultivalue",
+      "type": "multivalue",
+      "popupBcName": "bankDocPicklist",
+      "assocValueKey": "name"
+    },
+    {
       "label" : "Dictionary",
       "key" : "testDictionary",
       "type" : "dictionary"
