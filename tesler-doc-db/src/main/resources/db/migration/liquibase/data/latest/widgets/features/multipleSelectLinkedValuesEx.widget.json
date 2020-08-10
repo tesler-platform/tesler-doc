@@ -6,12 +6,12 @@
   "showCondition": [],
   "fields": [
     {
-      "title": "Country",
+      "label": "Country",
       "key": "countryList",
       "type": "multipleSelect"
     },
     {
-      "title": "Language",
+      "label": "Language",
       "key": "languageList",
       "type": "multipleSelect"
     }
@@ -32,7 +32,7 @@
         {
           "cols": [
             {
-              "fieldKey": "language",
+              "fieldKey": "languageList",
               "span": 12
             }
           ]

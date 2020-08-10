@@ -76,6 +76,10 @@ public class MultipleSelectLinkedValuesExFieldMetaBuilder extends FieldMetaBuild
 			fieldsMeta.setDictionaryTypeWithConcreteValuesFromList(languageList, LANGUAGE, languageDictionaryValues);
 		}
 		fieldsMeta.setEnabled(languageList, countryList);
+		fieldsMeta.setDictionaryTypeWithAllValues(countryList, COUNTRY);
+		fieldsMeta.setPlaceholder(countryList, "Select countries");
+		fieldsMeta.setPlaceholder(languageList, "Select languages");
+
 	}
 
 	@Override

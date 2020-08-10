@@ -23,23 +23,22 @@ package io.tesler.dto;
 import io.tesler.api.data.dto.DataResponseDTO;
 import io.tesler.core.dict.TDDictionaryType;
 import io.tesler.core.util.filter.SearchParameter;
+import io.tesler.core.util.filter.provider.impl.LovValueProvider;
 import io.tesler.entity.ForceActiveExample;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import static io.tesler.core.util.filter.SearchParameterType.LOV;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class ForceActiveExampleDTO extends DataResponseDTO {
 
-	@SearchParameter(type = LOV)
+	@SearchParameter(provider = LovValueProvider.class)
 	@TDLov(TDDictionaryType.COUNTRY)
 	private String country;
 
-	@SearchParameter(type = LOV)
+	@SearchParameter(provider = LovValueProvider.class)
 	@TDLov(TDDictionaryType.LANGUAGE)
 	private String language;
 

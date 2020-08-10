@@ -23,13 +23,12 @@ package io.tesler.dto;
 import io.tesler.api.data.dto.DataResponseDTO;
 import io.tesler.core.dict.TDDictionaryType;
 import io.tesler.core.util.filter.SearchParameter;
+import io.tesler.core.util.filter.provider.impl.LovValueProvider;
 import io.tesler.entity.Bank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
-
-import static io.tesler.core.util.filter.SearchParameterType.LOV;
 
 @Getter
 @Setter
@@ -60,11 +59,11 @@ public class BankDTO extends DataResponseDTO {
 	@SearchParameter
 	private String testPickList;
 
-	@SearchParameter(type = LOV)
+	@SearchParameter(provider = LovValueProvider.class)
 	@TDLov(TDDictionaryType.DOC_TEST)
 	private String testDictionary;
 
-	@SearchParameter(type = LOV)
+	@SearchParameter(provider = LovValueProvider.class)
 	@TDLov(TDDictionaryType.DOC_TEST)
 	private String testRadio;
 
