@@ -1,0 +1,30 @@
+{
+  "name": "multipleSelectFieldEx",
+  "title": "form",
+  "type": "Form",
+  "bc": "multipleSelectLinkedValuesEx",
+  "showCondition": [],
+  "fields": [
+    {
+      "label": "Country",
+      "key": "countryList",
+      "type": "multipleSelect"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "layout": {
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "countryList",
+              "span": 12
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
