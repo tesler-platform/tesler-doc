@@ -46,6 +46,10 @@ public class Dictionaries {
 
 		public static final LOV RUSSIA = new LOV("RUSSIA");
 
+		public static final LOV CANADA = new LOV("CANADA");
+
+		public static final LOV BRAZIL = new LOV("BRAZIL");
+
 	}
 
 	@UtilityClass

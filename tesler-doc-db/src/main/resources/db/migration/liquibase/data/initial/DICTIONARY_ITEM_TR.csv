@@ -14,6 +14,7 @@
 "COUNTRY";"RUSSIA";"en";"Russia"
 "COUNTRY";CANADA;"en";Canada
 "COUNTRY";LUXEMBOURG;"en";Luxembourg
+"COUNTRY";BRAZIL;"en";Brazil
 "LANGUAGE";"GERMAN";"en";"German"
 "LANGUAGE";"DANISH";"en";"Danish"
 "LANGUAGE";"LOW_GERMAN";"en";"Low German"
@@ -28,3 +29,5 @@
 "LANGUAGE";"BURYAT";"en";"Buryat"
 "LANGUAGE";"UDMURT";"en";"Udmurt"
 "LANGUAGE";"FRENCH";en;"French"
+"LANGUAGE";PORTUGUESE;en;Portuguese
+"LANGUAGE";SPANISH;en;Spanish

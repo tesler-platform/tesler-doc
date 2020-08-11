@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static io.tesler.core.dict.Dictionaries.Country.*;
 import static io.tesler.core.dict.TDDictionaryType.COUNTRY;
 import static io.tesler.core.dict.TDDictionaryType.LANGUAGE;
 import static io.tesler.dto.MultipleSelectLinkedValuesExDTO_.countryList;
@@ -76,7 +77,7 @@ public class MultipleSelectLinkedValuesExFieldMetaBuilder extends FieldMetaBuild
 			fieldsMeta.setDictionaryTypeWithConcreteValuesFromList(languageList, LANGUAGE, languageDictionaryValues);
 		}
 		fieldsMeta.setEnabled(languageList, countryList);
-		fieldsMeta.setDictionaryTypeWithAllValues(countryList, COUNTRY);
+		fieldsMeta.setDictionaryTypeWithConcreteValues(countryList, COUNTRY, RUSSIA, BRAZIL, CANADA);
 		fieldsMeta.setPlaceholder(countryList, "Select countries");
 		fieldsMeta.setPlaceholder(languageList, "Select languages");
 

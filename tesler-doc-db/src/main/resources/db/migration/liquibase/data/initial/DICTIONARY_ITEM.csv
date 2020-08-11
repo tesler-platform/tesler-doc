@@ -9,6 +9,7 @@
 "APP_SEQ";3;"COUNTRY";"RUSSIA";"Russia";1;2;null
 "APP_SEQ";3;"COUNTRY";"CANADA";"Canada";1;3;null
 "APP_SEQ";3;"COUNTRY";"LUXEMBOURG";"Luxembourg";1;4;null
+"APP_SEQ";3;"COUNTRY";BRAZIL;Brazil;1;5;null
 "APP_SEQ";4;"LANGUAGE";"GERMAN";"German";1;0;null
 "APP_SEQ";4;"LANGUAGE";"DANISH";"Danish";1;1;null
 "APP_SEQ";4;"LANGUAGE";"LOW_GERMAN";"Low German";1;2;null
@@ -23,3 +24,5 @@
 "APP_SEQ";4;"LANGUAGE";"BURYAT";"Buryat";1;11;null
 "APP_SEQ";4;"LANGUAGE";"UDMURT";"Udmurt";1;12;null
 "APP_SEQ";4;"LANGUAGE";"FRENCH";"French";1;13;null
+"APP_SEQ";4;"LANGUAGE";PORTUGUESE;Portuguese;1;14;null
+"APP_SEQ";4;"LANGUAGE";SPANISH;Spanish;1;15;null

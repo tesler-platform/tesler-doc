@@ -241,31 +241,26 @@
         </insert>
         <insert tableName="LINKED_VALUES_HOLDER_EX">
             <column name="ID" value="3" />
-            <column name="COUNTRY" value="LUXEMBOURG" />
-            <column name="LANGUAGE" value="ENGLISH" />
+            <column name="COUNTRY" value="BRAZIL" />
+            <column name="LANGUAGE" value="PORTUGUESE" />
         </insert>
         <insert tableName="LINKED_VALUES_HOLDER_EX">
             <column name="ID" value="4" />
-            <column name="COUNTRY" value="LUXEMBOURG" />
-            <column name="LANGUAGE" value="FRENCH" />
+            <column name="COUNTRY" value="BRAZIL" />
+            <column name="LANGUAGE" value="SPANISH" />
         </insert>
         <insert tableName="LINKED_VALUES_HOLDER_EX">
             <column name="ID" value="5" />
-            <column name="COUNTRY" value="LUXEMBOURG" />
-            <column name="LANGUAGE" value="GERMAN" />
-        </insert>
-        <insert tableName="LINKED_VALUES_HOLDER_EX">
-            <column name="ID" value="6" />
             <column name="COUNTRY" value="RUSSIA" />
             <column name="LANGUAGE" value="RUSSIAN" />
         </insert>
         <insert tableName="LINKED_VALUES_HOLDER_EX">
-            <column name="ID" value="7" />
+            <column name="ID" value="6" />
             <column name="COUNTRY" value="RUSSIA" />
             <column name="LANGUAGE" value="UDMURT" />
         </insert>
         <insert tableName="LINKED_VALUES_HOLDER_EX">
-            <column name="ID" value="8" />
+            <column name="ID" value="7" />
             <column name="COUNTRY" value="RUSSIA" />
             <column name="LANGUAGE" value="BURYAT" />
         </insert>
