@@ -1,0 +1,25 @@
+{
+  "name": "multipleSelect",
+  "title": "Multiple Select",
+  "template": "DashboardView",
+  "url": "/screen/components/view/multipleSelect",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "multipleSelectFieldEx",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/fields/MultipleSelectTitle.md"
+    },
+    {
+      "widgetName": "emptyDoc",
+      "position": 2,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/fields/MultipleSelect.md"
+    }
+  ]
+}
