@@ -8,12 +8,14 @@
     {
       "label": "Country",
       "key": "countryList",
-      "type": "multipleSelect"
+      "type": "dictionary",
+      "multiple": true
     },
     {
       "label": "Language",
       "key": "languageList",
-      "type": "multipleSelect"
+      "type": "dictionary",
+      "multiple": true
     }
   ],
   "axisFields": [],

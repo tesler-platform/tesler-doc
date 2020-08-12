@@ -1,5 +1,5 @@
 {
-  "name": "multipleSelectFieldEx",
+  "name": "multipleModeEx",
   "title": "form",
   "type": "Form",
   "bc": "multipleSelectLinkedValuesEx",
@@ -8,7 +8,8 @@
     {
       "label": "Country",
       "key": "countryList",
-      "type": "multipleSelect"
+      "type": "dictionary",
+      "multiple": true
     }
   ],
   "axisFields": [],

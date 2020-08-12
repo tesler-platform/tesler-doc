@@ -17,6 +17,7 @@ Allows to select value from dropdown list of predefined values.
 | **readOnly** | whether the input is read only | `boolean` | undefined |
 | **value** | input value | `string` \| `null` | undefined |
 | **valueIcon** | space separated icon parameters: `antd icon code`, `css color code` | `string` | undefined |
+| **multiple** | enables `multiple` mode | `boolean` | undefined |
 | **values*** | list of dropdown values to select from | `DictionaryValuesItem[]` | undefined |
 
 #### DictionaryValuesItem

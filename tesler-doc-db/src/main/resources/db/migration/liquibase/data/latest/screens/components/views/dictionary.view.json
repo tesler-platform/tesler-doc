@@ -24,6 +24,12 @@
       "widgetName": "bankDocPickList",
       "position": 3,
       "gridWidth": 2
+    },
+    {
+      "widgetName": "multipleModeEx",
+      "position": 4,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/fields/DictionaryMultipleEx.md"
     }
   ]
 }
