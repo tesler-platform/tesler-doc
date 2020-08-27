@@ -29,6 +29,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
 
+import static io.tesler.core.util.filter.SearchParameterType.DATE;
 import static io.tesler.core.util.filter.SearchParameterType.LOV;
 
 @Getter
@@ -74,7 +75,7 @@ public class BankDTO extends DataResponseDTO {
 	@SearchParameter
 	private Double testMoney;
 
-	@SearchParameter
+	@SearchParameter(type = DATE)
 	private LocalDateTime testDate;
 
 	public BankDTO(Bank bank) {

@@ -1,8 +1,8 @@
 import {Store} from '@tesler-ui/core/interfaces/store'
 import {DataState} from '@tesler-ui/core/interfaces/data'
-import {ViewState} from '@tesler-ui/core/interfaces/view'
 import {TeslerSessionState} from 'reducers/session'
 import {TeslerScreenState} from './screen'
+import {TeslerViewState} from './view'
 
 /**
  * You can change typings or add new store slices here
@@ -10,7 +10,7 @@ import {TeslerScreenState} from './screen'
 export interface AppReducers extends Partial<Store> {
     screen: TeslerScreenState,
     data: DataState,
-    view: ViewState,
+    view: TeslerViewState,
     session: TeslerSessionState
 }
 

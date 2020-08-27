@@ -174,5 +174,79 @@
       <column name="language" value="GERMAN" />
     </insert>
   </changeSet>
+  <changeSet id="bulk-insert-example-table" author="kdergachev">
+    <createTable tableName="BULK_INSERT_EXAMPLE">
+      <column name="ID" remarks="Primary key" type="NUMBER(19, 0)">
+        <constraints primaryKey="true" referencedTableName="BULK_INSERT_EXAMPLE" />
+      </column>
+      <column name="NAME" type="VARCHAR2(255)"/>
+      <column name="FILE_ID" type="NUMBER(19, 0)"/>
+      <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Creation date"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueComputed="current_timestamp" name="UPDATED_DATE" remarks="Date of last update"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueNumeric="1" name="CREATED_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_CREATED_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="1" name="LAST_UPD_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_LAST_UPD_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet id="bulk-update-example-table" author="kdergachev">
+    <createTable tableName="BULK_UPDATE_EXAMPLE">
+      <column name="ID" remarks="Primary key" type="NUMBER(19, 0)">
+        <constraints primaryKey="true" referencedTableName="BULK_UPDATE_EXAMPLE" />
+      </column>
+      <column name="name" type="VARCHAR2(255)"/>
+      <column name="description" type="VARCHAR2(255)"/>
+      <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Creation date"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueComputed="current_timestamp" name="UPDATED_DATE" remarks="Date of last update"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueNumeric="1" name="CREATED_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_CREATED_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="1" name="LAST_UPD_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="LNK_BANK_EMPLOYEE_LAST_UPD_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+  </changeSet>
+
+  <changeSet id="bulk-update-example-data" author="kdergachev">
+    <loadData tableName="BULK_UPDATE_EXAMPLE" separator=";" quotchar="&quot;"
+              file="db/migration/liquibase/data/latest/csv/BULK_UPDATE_EXAMPLE.csv">
+      <column header="ID" name="ID" type="NUMERIC"/>
+      <column header="NAME" name="name" type="STRING"/>
+      <column header="DESC" name="description" type="STRING"/>
+    </loadData>
+  </changeSet>
+
+  <changeSet id="file-entity-postgres" author="kdergachev">
+    <sql>
+      ALTER TABLE FILE_ENTITY ALTER COLUMN IS_TEMPORARY DROP DEFAULT;
+      ALTER TABLE FILE_ENTITY ALTER IS_TEMPORARY TYPE bool USING CASE WHEN IS_TEMPORARY=0 THEN FALSE ELSE TRUE END;
+      ALTER TABLE FILE_ENTITY ALTER COLUMN IS_TEMPORARY SET DEFAULT FALSE;
+      ALTER TABLE FILE_ENTITY ALTER COLUMN RESTRICTED_FLG DROP DEFAULT;
+      ALTER TABLE FILE_ENTITY ALTER RESTRICTED_FLG TYPE bool USING CASE WHEN RESTRICTED_FLG=0 THEN FALSE ELSE TRUE END;
+      ALTER TABLE FILE_ENTITY ALTER COLUMN RESTRICTED_FLG SET DEFAULT FALSE;
+    </sql>
+  </changeSet>
+
 </databaseChangeLog>
 

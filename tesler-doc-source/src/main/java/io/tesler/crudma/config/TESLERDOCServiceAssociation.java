@@ -24,14 +24,8 @@ import io.tesler.core.crudma.bc.BcIdentifier;
 import io.tesler.core.crudma.bc.EnumBcIdentifier;
 import io.tesler.core.crudma.bc.impl.AbstractEnumBcSupplier;
 import io.tesler.core.crudma.bc.impl.BcDescription;
-import io.tesler.service.AssocListPopupExService;
-import io.tesler.service.BankService;
-import io.tesler.service.EmployeeService;
-import io.tesler.service.ForAssocExService;
-import io.tesler.service.ForPickExService;
-import io.tesler.service.ForceActiveExampleService;
-import io.tesler.service.LinkBankEmployeeService;
-import io.tesler.service.PickListPopupExService;
+import io.tesler.service.*;
+
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
@@ -51,6 +45,9 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 			linkBankDocEmployeeAssoc(bankDoc,EmployeeService.class),
 
 	employee(EmployeeService.class),
+
+	bulkInsertExample(BulkInsertExampleService.class),
+	bulkUpdateExample(BulkUpdateExampleService.class),
 
 	// assocListPopup example
 	forAssocEx(ForAssocExService.class),

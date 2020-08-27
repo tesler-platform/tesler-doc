@@ -8,10 +8,10 @@ insert into responsibilities (id, resp_type, screens, dept_id, internal_role_cd)
       "defaultScreen": true
     },
     {
-      "name": "tutorial",
-      "text": "Tutorial",
-      "icon": "book",
-      "url": "/screen/tutorial"
+      "name": "features",
+      "text": "Features",
+      "icon": "star",
+      "url": "/screen/features"
     },
     {
       "name": "components",
@@ -20,10 +20,10 @@ insert into responsibilities (id, resp_type, screens, dept_id, internal_role_cd)
       "url": "/screen/components"
     },
     {
-      "name": "features",
-      "text": "Features",
-      "icon": "star",
-      "url": "/screen/features"
+      "name": "tutorial",
+      "text": "Tutorial",
+      "icon": "book",
+      "url": "/screen/tutorial"
     },
     {
       "name": "api-reference",

@@ -1,0 +1,25 @@
+{
+  "name": "bulk-actions-customization",
+  "title": "Bulk Actions",
+  "template": "DashboardView",
+  "url": "/screen/tutorial/view/bulk-actions-customization",
+  "widgets": [
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/tutorial/bulk-actions-overview.md"
+    },
+    {
+      "widgetName": "bulk-actions-customization",
+      "position": 2,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "emptyDoc2",
+      "position": 3,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/tutorial/bulk-actions-details.md"
+    }
+  ]
+}

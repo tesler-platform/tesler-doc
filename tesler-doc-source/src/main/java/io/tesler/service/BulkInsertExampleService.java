@@ -1,7 +1,9 @@
-/*
- * TESLERDOC - UI
+/*-
+ * #%L
+ * TESLERDOC - Source
+ * %%
  * Copyright (C) 2020 Tesler Contributors
- *
+ * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,11 +15,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * #L%
  */
-import {sessionEpics} from 'epics/session'
-import {viewEpics} from 'epics/view'
 
-export const epics = {
-    sessionEpics,
-    viewEpics
+package io.tesler.service;
+
+import io.tesler.core.service.ResponseService;
+import io.tesler.dto.BulkInsertExampleDTO;
+import io.tesler.entity.BulkInsertExample;
+
+public interface BulkInsertExampleService extends ResponseService<BulkInsertExampleDTO, BulkInsertExample> {
 }

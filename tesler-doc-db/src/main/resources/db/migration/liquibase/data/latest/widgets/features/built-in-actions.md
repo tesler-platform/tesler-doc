@@ -1,6 +1,6 @@
-# Basic Operation
+# Built-in Actions
 
-Basic operations include creating, updating, and deleting records
+Basic actions include creating, updating, and deleting records
 
 ## When to use
 - When you need to create new entry
@@ -8,7 +8,7 @@ Basic operations include creating, updating, and deleting records
 - When you need to delete any entry
 
 
-# Basic Operation API
+# Built-in actions API
 
 |  Property |  Description | Type  |
 |:---|:---|:---|

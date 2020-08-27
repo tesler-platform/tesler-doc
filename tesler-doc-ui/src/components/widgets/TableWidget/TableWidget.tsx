@@ -7,6 +7,11 @@ import styles from './TableWidget.less'
 import {ColumnProps} from 'antd/es/table'
 import {DataItem} from '@tesler-ui/core/interfaces/data'
 import {Icon} from 'antd'
+import {WidgetOptions} from '@tesler-ui/core/interfaces/widget'
+import { BulkTableWidget } from './BulkTableWidget'
+
+// New `selectable` flag for widget meta description
+type CustomWidgetOptions = WidgetOptions & { selectable: true }
 
 export interface TableWidgetOwnProps extends TableWidgetProps {
     meta: WidgetTableMeta
@@ -45,7 +50,11 @@ export const TableWidget: React.FunctionComponent<DocTableWidgetProps> = props =
         </div>
     }
 
-    return <CoreTableWidget {...props}/>
+    if ((props.meta.options as CustomWidgetOptions).selectable) {
+        return <BulkTableWidget {...props} />
+    }
+
+    return <CoreTableWidget {...props} showRowActions />
 }
 
 export default React.memo(TableWidget)

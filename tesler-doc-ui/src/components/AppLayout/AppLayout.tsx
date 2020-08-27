@@ -32,11 +32,11 @@ import {$do} from 'actions/types'
 import NavEx1 from 'components/widgets/navigationExamples/NavEx1'
 import NavEx2 from 'components/widgets/navigationExamples/NavEx2'
 import {useScroll} from 'utils/useScroll'
-import TableWidget from '../widgets/TableWidget/TableWidget'
 import AssocListPopup from '../widgets/AssocListPopup/AssocListPopup'
 import PickListPopup from '../widgets/PickListPopup/PickListPopup'
 import {CustomWidget} from '@tesler-ui/core/interfaces/widget'
 import {AppState} from 'interfaces/storeSlices'
+import {TableWidget} from 'components/widgets/TableWidget/TableWidget'
 
 interface LayoutProps {
     screenName: string,

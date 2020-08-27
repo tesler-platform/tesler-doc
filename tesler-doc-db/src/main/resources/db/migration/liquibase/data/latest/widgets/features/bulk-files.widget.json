@@ -1,0 +1,25 @@
+{
+  "name": "bulk-files",
+  "title": "Bulk Upload",
+  "type": "List",
+  "showCondition": [],
+  "bc": "bulkInsertExample",
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input"
+    },
+    {
+      "title": "File",
+      "key": "fileName",
+      "fileIdKey": "fileId",
+      "type": "fileUpload"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+
+  }
+}
