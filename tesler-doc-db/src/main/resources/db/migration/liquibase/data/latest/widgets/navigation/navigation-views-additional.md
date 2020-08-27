@@ -6,7 +6,7 @@ You can check the [Major concepts](#/screen/getting-started/view/screen/) sectio
 ```tsx
 import React from 'react'
 import {connect} from '@tesler-ui/core'
-import {AppState} from 'reducers'
+import {AppState} from 'interfaces/storeSlices'
 import {ViewMetaResponse} from '@tesler-ui/core/interfaces/view'
 import {MenuItem} from '@tesler-ui/core/interfaces/navigation'
 

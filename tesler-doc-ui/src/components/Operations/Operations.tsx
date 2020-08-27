@@ -41,7 +41,8 @@ export interface OperationsProps extends OperationsOwnProps {
 }
 
 export function Operations(props: OperationsProps) {
-    const operations = useWidgetOperations(props.operations, props.widgetMeta).filter(item => item.type !== 'file-upload-save')
+    const operations = useWidgetOperations(props.operations, props.widgetMeta)
+    .filter(item => item.type !== 'file-upload-save')
     const removeRecordOperation = props.widgetMeta.type === WidgetTypes.List
         || props.widgetMeta.type === WidgetTypes.DataGrid
     return <div className={styles.container}>

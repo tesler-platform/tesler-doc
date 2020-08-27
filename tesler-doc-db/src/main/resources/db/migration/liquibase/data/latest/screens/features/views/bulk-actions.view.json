@@ -1,0 +1,36 @@
+{
+  "name": "bulk-actions",
+  "title": "Bulk Actions",
+  "template": "DashboardView",
+  "url": "/screen/features/view/bulk-actions",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/bulk-actions-overview.md"
+    },
+    {
+      "widgetName": "emptyDoc2",
+      "position": 2,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/bulk-upload-overview.md"
+    },
+    {
+      "widgetName": "bulk-files",
+      "position": 3,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "emptyDoc3",
+      "position": 4,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/bulk-upload-details.md"
+    }
+  ]
+}

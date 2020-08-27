@@ -3,7 +3,6 @@
  */
 import {ActionPayloadTypes as TeslerActionPayloadTypes, createActionCreators} from '@tesler-ui/core'
 import {TeslerLoginResponse} from 'interfaces/session'
-import { LoginResponse } from '@tesler-ui/core/interfaces/session'
 
 const z = null as any
 
@@ -32,7 +31,22 @@ export class CustomActionTypes extends TeslerActionPayloadTypes {
     setMenuVisible: boolean = z
     setMobileMenu: boolean = z
 
-    loginDone: TeslerLoginResponse & LoginResponse
+    loginDone: TeslerLoginResponse = z
+
+    /**
+     * Toggle selection for specified records
+     */
+    selectRecord: {
+        /**
+         * Ids of toggled records
+         */
+        ids: string[],
+        /**
+         * Selected or not
+         */
+        selected: boolean
+    } = z
+
 }
 
 /**

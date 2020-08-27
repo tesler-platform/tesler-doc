@@ -16,11 +16,10 @@
  */
 
 import {coreActions} from '@tesler-ui/core'
-import {AnyAction} from '@tesler-ui/core/actions/actions'
 import {BcMetaState} from '@tesler-ui/core/interfaces/bc'
 import {ObjectMap} from '@tesler-ui/core/interfaces/objectMap'
 import {TeslerScreenState} from 'interfaces/screen'
-import {actionTypes} from 'interfaces/actions'
+import {actionTypes, AnyAction} from 'interfaces/actions'
 import {AppState} from 'interfaces/storeSlices'
 
 export const initialState: TeslerScreenState = {
@@ -40,7 +39,7 @@ export const initialState: TeslerScreenState = {
 
 export default function screenReducer(
     state: TeslerScreenState = initialState,
-    action: AnyAction | any,
+    action: AnyAction,
     store: Readonly<AppState>
 ): TeslerScreenState {
     switch (action.type) {
@@ -57,6 +56,23 @@ export default function screenReducer(
                 ...state,
                 mobileMenu: action.payload
             }
+        }
+        case coreActions.sendOperation: {
+            return ['bulk-delete', 'bulk-update'].includes(action.payload.operationType)
+                ? {
+                    ...state,
+                    bo: {
+                        ...state.bo,
+                        bc: {
+                            ...state.bo.bc,
+                            [action.payload.bcName]: {
+                                ...state.bo.bc[action.payload.bcName],
+                                cursor: null
+                            }
+                        }
+                    }
+                }
+                : state
         }
         default:
             return state

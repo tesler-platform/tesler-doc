@@ -1,8 +1,8 @@
 {
-    "name": "basicoperation",
-    "title": "Basic Operation",
+    "name": "built-in-actions",
+    "title": "Built-in Actions",
     "template": "DashboardView",
-    "url": "/screen/features/view/basicoperation",
+    "url": "/screen/features/view/built-in-actions",
     "widgets": [
       {
         "widgetName": "SecondLevelMenu",
@@ -13,7 +13,7 @@
         "widgetName": "bankListDoc",
         "position": 1,
         "gridWidth": 2,
-        "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/BasicOperation.md"
+        "descriptionFile": "db/migration/liquibase/data/latest/widgets/features/built-in-actions.md"
       }
     ]
   }

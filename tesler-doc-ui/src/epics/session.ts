@@ -14,8 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {combineEpics} from 'redux-observable'
 import {$do, coreActions, historyObj} from '@tesler-ui/core'
 import {Observable} from 'rxjs/Observable'
 import {getBasicAuthRequest, logout} from 'api/session'
@@ -72,6 +70,6 @@ const logoutDoneEpic: CustomEpic = (action$, store) =>
             return Observable.empty()
         })
 
-export const sessionEpics = combineEpics(
+export const sessionEpics = {
     loginEpic, logoutEpic, logoutDoneEpic
-)
+}

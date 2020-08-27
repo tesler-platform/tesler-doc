@@ -1,0 +1,24 @@
+{
+  "name": "bulk-actions-customization",
+  "title": "Bulk Actions",
+  "type": "List",
+  "showCondition": [],
+  "bc": "bulkUpdateExample",
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input"
+    },
+    {
+      "title": "Description",
+      "key": "description",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "selectable": true
+  }
+}

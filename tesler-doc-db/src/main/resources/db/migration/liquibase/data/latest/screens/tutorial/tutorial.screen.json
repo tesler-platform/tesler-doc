@@ -12,6 +12,9 @@
       },
       {
         "viewName": "epics-overview"
+      },
+      {
+        "viewName": "bulk-actions-customization"
       }
     ]
   }
