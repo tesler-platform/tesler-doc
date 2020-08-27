@@ -20,7 +20,7 @@ import {connect} from '@tesler-ui/core'
 import {SessionScreen} from '@tesler-ui/core/interfaces/session'
 import ScreenNavigation from 'components/ui/ScreenNavigation/ScreenNavigation'
 import * as styles from './AppSideMenu.less'
-import {AppState} from 'reducers/index'
+import {AppState} from 'interfaces/storeSlices'
 
 export interface AppSideMenuProps {
     screenName: string,

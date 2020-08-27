@@ -20,9 +20,8 @@ import {AnyAction} from '@tesler-ui/core/actions/actions'
 import {BcMetaState} from '@tesler-ui/core/interfaces/bc'
 import {ObjectMap} from '@tesler-ui/core/interfaces/objectMap'
 import {TeslerScreenState} from 'interfaces/screen'
-import {AppState} from 'reducers'
-import {MENU_VISIBLE} from 'actions/actions'
-import {MOBILE_MENU} from 'actions/actions'
+import {actionTypes} from 'interfaces/actions'
+import {AppState} from 'interfaces/storeSlices'
 
 export const initialState: TeslerScreenState = {
     screenName: '',
@@ -47,13 +46,13 @@ export default function screenReducer(
     switch (action.type) {
         case coreActions.logoutDone:
             return initialState
-        case MENU_VISIBLE: {
+        case actionTypes.setMenuVisible: {
             return {
                 ...state,
                 menuVisible: action.payload
             }
         }
-        case MOBILE_MENU: {
+        case actionTypes.setMobileMenu: {
             return {
                 ...state,
                 mobileMenu: action.payload

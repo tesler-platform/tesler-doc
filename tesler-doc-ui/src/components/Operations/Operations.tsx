@@ -23,7 +23,7 @@ import {WidgetMeta, WidgetTypes} from '@tesler-ui/core/interfaces/widget'
 import {Button, Dropdown, Icon, Menu} from 'antd'
 import * as styles from './Operations.less'
 import cn from 'classnames'
-import {AppState} from '../../reducers'
+import {AppState} from 'interfaces/storeSlices'
 
 export interface OperationsOwnProps {
     bcName: string,
@@ -41,7 +41,7 @@ export interface OperationsProps extends OperationsOwnProps {
 }
 
 export function Operations(props: OperationsProps) {
-    const operations = useWidgetOperations(props.operations, props.widgetMeta)
+    const operations = useWidgetOperations(props.operations, props.widgetMeta).filter(item => item.type !== 'file-upload-save')
     const removeRecordOperation = props.widgetMeta.type === WidgetTypes.List
         || props.widgetMeta.type === WidgetTypes.DataGrid
     return <div className={styles.container}>

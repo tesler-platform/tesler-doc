@@ -1,12 +1,13 @@
 import React from 'react'
-import {PickListPopup as CorePickListPopup, buildBcUrl, $do} from '@tesler-ui/core'
+import {PickListPopup as CorePickListPopup, buildBcUrl} from '@tesler-ui/core'
 import {WidgetTableMeta} from '@tesler-ui/core/interfaces/widget'
-import {connect} from 'react-redux'
-import {AppState} from '../../../reducers'
+import {connect} from '@tesler-ui/core'
 import {DataItem, PickMap} from '@tesler-ui/core/interfaces/data'
 import {RowMetaField} from '@tesler-ui/core/interfaces/rowMeta'
 import {ChangeDataItemPayload} from '@tesler-ui/core/components/Field/Field'
 import {Dispatch} from 'redux'
+import {AppState} from 'interfaces/storeSlices'
+import {$do} from 'actions/types'
 
 interface PickListPopupOwnProps {
     meta: WidgetTableMeta

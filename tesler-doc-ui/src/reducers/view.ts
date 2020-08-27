@@ -15,10 +15,9 @@
  * limitations under the License.
  */
 
-import {AnyAction} from '@tesler-ui/core/actions/actions'
-import {AppState} from 'reducers'
 import {ViewState} from '@tesler-ui/core/interfaces/view'
-import {coreActions} from '@tesler-ui/core'
+import {coreActions, AnyAction} from '@tesler-ui/core'
+import {AppState} from 'interfaces/storeSlices'
 
 export const initialState: ViewState = {
     id: null,

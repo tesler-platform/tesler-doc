@@ -17,7 +17,7 @@
 
 import React, {FunctionComponent} from 'react'
 import {connect} from '@tesler-ui/core'
-import {AppState} from 'reducers'
+import {AppState} from 'interfaces/storeSlices'
 import {SecondLevelTabs} from 'components/ui/SecondLevelTabs/SecondLevelTabs'
 import {WidgetMeta} from '@tesler-ui/core/interfaces/widget'
 

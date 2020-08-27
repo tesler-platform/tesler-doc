@@ -18,7 +18,7 @@
 import React, {FunctionComponent} from 'react'
 import {connect, $do} from '@tesler-ui/core'
 import {Form, Input, Button, Icon} from 'antd'
-import {AppState} from 'reducers'
+import {AppState} from 'interfaces/storeSlices'
 import {Dispatch} from 'redux'
 import styles from './Login.less'
 
