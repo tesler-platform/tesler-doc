@@ -18,7 +18,7 @@
 import React from 'react'
 import {Row} from 'antd'
 import {connect} from '@tesler-ui/core'
-import {AppState} from 'reducers'
+import {AppState} from 'interfaces/storeSlices'
 import * as styles from './ViewHeader.less'
 import {SecondLevelTabs} from 'components/ui/SecondLevelTabs/SecondLevelTabs'
 import {WidgetMeta, WidgetTypes} from '@tesler-ui/core/interfaces/widget'

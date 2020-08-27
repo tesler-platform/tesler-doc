@@ -3,7 +3,7 @@ import {$do, AssocListPopup as CoreAssocListPopup, connect, Pagination} from '@t
 import {PaginationMode, WidgetTableMeta} from '@tesler-ui/core/interfaces/widget'
 import styles from './AssocListPopup.less'
 import {Button} from 'antd'
-import {AppState} from '../../../reducers'
+import {AppState} from 'interfaces/storeSlices'
 import {Dispatch} from 'redux'
 import {BcFilter, FilterType} from '@tesler-ui/core/interfaces/filters'
 import {PendingDataItem} from '@tesler-ui/core/interfaces/data'

@@ -22,7 +22,7 @@ import ViewNavigation from 'components/ui/ViewNavigation/ViewNavigation'
 import * as styles from './AppBar.less'
 import {$do} from '@tesler-ui/core'
 import {Dispatch} from 'redux'
-import {AppState} from '../../reducers'
+import {AppState} from 'interfaces/storeSlices'
 import cn from 'classnames'
 
 interface AppBarOwnProps {

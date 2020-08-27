@@ -21,7 +21,7 @@ import {SelectParam} from 'antd/es/menu'
 import {changeLocation, connect} from '@tesler-ui/core'
 import {SessionScreen} from '@tesler-ui/core/interfaces/session'
 import * as styles from './ScreenNavigation.less'
-import {AppState} from 'reducers/index'
+import {AppState} from 'interfaces/storeSlices'
 
 export interface ScreenNavigationProps {
     items: SessionScreen[],
