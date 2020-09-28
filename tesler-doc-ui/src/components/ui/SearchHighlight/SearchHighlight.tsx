@@ -41,7 +41,9 @@ export function splitIntoTokens(source: string, search: string | RegExp) {
  * @param str Source string
  */
 export function escapedSrc(str: string) {
-    return new RegExp(`(${str?.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')})`, 'gi')
+    return str?.length
+        ? new RegExp(`(${str?.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')})`, 'gi')
+        : ''
 }
 
 
