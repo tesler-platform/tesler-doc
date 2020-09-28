@@ -24,7 +24,6 @@ import AppBar from 'components/AppBar/AppBar'
 import ViewHeader from 'components/ViewHeader/ViewHeader'
 import * as styles from './AppLayout.less'
 import {SystemNotification} from '@tesler-ui/core/interfaces/objectMap'
-import Card from 'components/Card/Card'
 import {WidgetMeta, WidgetTypes} from '@tesler-ui/core/interfaces/widget'
 import Login from 'components/Login/Login'
 import {ApplicationError} from '@tesler-ui/core/interfaces/view'
@@ -37,6 +36,7 @@ import PickListPopup from '../widgets/PickListPopup/PickListPopup'
 import {CustomWidget} from '@tesler-ui/core/interfaces/widget'
 import {AppState} from 'interfaces/storeSlices'
 import {TableWidget} from 'components/widgets/TableWidget/TableWidget'
+import Test from 'components/widgets/test/test'
 
 interface LayoutProps {
     screenName: string,
@@ -62,6 +62,7 @@ const skipWidgetTypes = [
 ]
 
 const customWidgets: Record<string, CustomWidget> = {
+    'Form': Test,
     NavEx1,
     NavEx2,
     [WidgetTypes.List]: TableWidget,
@@ -150,7 +151,6 @@ export function Layout(props: LayoutProps) {
                             <Col style={headerWidth}>
                                 <div style={bodyWidth}>
                                     <View
-                                        card={Card}
                                         customWidgets={customWidgets}
                                         skipWidgetTypes={skipWidgetTypes}
                                     />

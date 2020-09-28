@@ -22,8 +22,6 @@ import {WidgetMeta, WidgetTypes} from '@tesler-ui/core/interfaces/widget'
 import {Operation, OperationGroup} from '@tesler-ui/core/interfaces/operation'
 import {AppState} from 'interfaces/storeSlices'
 import * as styles from './Card.less'
-import ReactMarkdown from 'react-markdown'
-import CodeBlock from './CodeBlock'
 
 export interface CardOwnProps {
     children: React.ReactNode,
@@ -38,19 +36,7 @@ export interface CardStateProps {
 const showOperations = [WidgetTypes.List, WidgetTypes.DataGrid, WidgetTypes.Form]
 
 export function Card(props: CardOwnProps & CardStateProps) {
-
-    const description = props.meta.description
-
     return <div className={styles.container}>
-        {description &&
-            <div className={styles.markdown}>
-                <ReactMarkdown
-                    source={description}
-                    escapeHtml={false}
-                    renderers={{code: CodeBlock}}
-                />
-            </div>
-        }
         <div>
             {props.meta.type === WidgetTypes.Form && props.children}
             { showOperations.includes(props.meta.type as WidgetTypes)
