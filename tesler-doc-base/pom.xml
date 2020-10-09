@@ -29,9 +29,10 @@
     <spring.version>5.1.9.RELEASE</spring.version>
     <spring-boot.version>2.1.7.RELEASE</spring-boot.version>
     <spring-session-jdbc.version>2.1.7.RELEASE</spring-session-jdbc.version>
+    <logbook.version>2.2.1</logbook.version>
     <liquibase.version>3.6.3</liquibase.version>
     <slf4j.version>1.7.25</slf4j.version>
-    <tesler.version>3.0.2-SNAPSHOT</tesler.version>
+    <tesler.version>3.0.0-SNAPSHOT</tesler.version>
 
     <junit.jupiter.version>5.1.0</junit.jupiter.version>
     <junit.platform.version>1.1.0</junit.platform.version>
@@ -138,6 +139,12 @@
         <groupId>org.springframework.session</groupId>
         <artifactId>spring-session-jdbc</artifactId>
         <version>${spring-session-jdbc.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.zalando</groupId>
+        <artifactId>logbook-spring-boot-starter</artifactId>
+        <version>${logbook.version}</version>
       </dependency>
 
       <dependency>

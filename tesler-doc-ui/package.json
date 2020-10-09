@@ -5,7 +5,7 @@
   "homepage": "http://idocs.tesler.io/",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "node --max_old_space_size=1024 node_modules/.bin/webpack --mode=production",
+    "build": "webpack --mode=production",
     "start": "webpack-dev-server",
     "start:sso": "webpack-dev-server",
     "lint": "tslint 'src/**/*.ts{,x}' 'src/**/*.js' '*webpack.config.js'",
