@@ -15,9 +15,9 @@ mvn clean install -PUI
 ```
 mvn clean install
 ```
-* start environment in one command and see http://localhost:8080 (or separately node 1 http://localhost:8081 and node 2 http://localhost:8081)
+* start environment in one command and see http://localhost (or separately node 1 http://localhost:8081 and node 2 http://localhost:8082)
 ```
-docker-compose up -d
+docker-compose up --build -d
 ```
 * (optional) for remote debug ([IntelliJ](https://www.jetbrains.com/help/idea/tutorial-remote-debug.html), [Eclipse](https://www.eclipse.org/jetty/documentation/current/enable-remote-debugging.html)) use 
 ##### node 1
@@ -38,7 +38,7 @@ docker-compose stop tesler-doc-node-1
 docker-compose stop tesler-doc-node-2
 docker-compose rm -sfv tesler-doc-node-1
 docker-compose rm -sfv tesler-doc-node-2
-mvn clean install && docker-compose up -d tesler-doc-node-1 && docker-compose up -d tesler-doc-node-2
+mvn clean install && docker-compose build && docker-compose up -d tesler-doc-node-1 && docker-compose up -d tesler-doc-node-2
 docker-compose ps
 ```
 
@@ -50,6 +50,6 @@ docker system prune
 Y
 docker volume prune
 Y
-mvn clean install -PUI && mvn clean install && docker-compose up -d
+mvn clean install -PUI && mvn clean install && docker-compose up --build -d
 docker-compose ps
 ```
