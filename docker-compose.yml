@@ -12,7 +12,7 @@ services:
       - tesler-doc-node-2
   tesler-doc-node-1:
     build: ./tesler-doc-app
-    image: tesler-doc-app:1.0-SNAPSHOT
+    image: tesler-doc-app:latest
     environment:
       DATABASE_DRIVER: 'org.postgresql.Driver'
       DATABASE_URL: 'jdbc:postgresql://pgs:5432/postgres'
@@ -28,7 +28,7 @@ services:
       - pgs
   tesler-doc-node-2:
     build: ./tesler-doc-app
-    image: tesler-doc-app:1.0-SNAPSHOT
+    image: tesler-doc-app:latest
     environment:
       DATABASE_DRIVER: 'org.postgresql.Driver'
       DATABASE_URL: 'jdbc:postgresql://pgs:5432/postgres'

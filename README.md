@@ -17,7 +17,7 @@ mvn clean install
 ```
 * start environment in one command and see http://localhost (or separately node 1 http://localhost:8081 and node 2 http://localhost:8082)
 ```
-docker-compose up --build -d
+docker-compose up --build --force-recreate -d
 ```
 * (optional) for remote debug ([IntelliJ](https://www.jetbrains.com/help/idea/tutorial-remote-debug.html), [Eclipse](https://www.eclipse.org/jetty/documentation/current/enable-remote-debugging.html)) use 
 ##### node 1
@@ -46,10 +46,8 @@ Full clean restart. For local development only!
 ```
 docker-compose stop
 docker-compose rm -sfv
-docker system prune
-Y
-docker volume prune
-Y
+docker system prune --force
+docker volume prune --force
 mvn clean install -PUI && mvn clean install && docker-compose up --build -d
 docker-compose ps
 ```
