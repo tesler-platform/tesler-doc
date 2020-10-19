@@ -38,7 +38,7 @@ docker-compose stop tesler-doc-node-1
 docker-compose stop tesler-doc-node-2
 docker-compose rm -sfv tesler-doc-node-1
 docker-compose rm -sfv tesler-doc-node-2
-mvn clean install && docker-compose build && docker-compose up -d tesler-doc-node-1 && docker-compose up -d tesler-doc-node-2
+mvn clean install -U && docker-compose build && docker-compose up -d tesler-doc-node-1 && docker-compose up -d tesler-doc-node-2
 docker-compose ps
 ```
 
@@ -48,6 +48,6 @@ docker-compose stop
 docker-compose rm -sfv
 docker system prune --force
 docker volume prune --force
-mvn clean install -PUI && mvn clean install && docker-compose up --build -d
+mvn clean install -PUI -U && mvn clean install -U && docker-compose up --build -d
 docker-compose ps
 ```
