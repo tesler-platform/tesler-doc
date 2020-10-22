@@ -1,0 +1,14 @@
+{
+  "name": "middlewares-overview",
+  "title": "Middlewares",
+  "template": "DashboardView",
+  "url": "/screen/tutorial/view/middlewares-overview",
+  "widgets": [
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/tutorial/middlewares-overview.md"
+    }
+  ]
+}
