@@ -1,0 +1,30 @@
+{
+  "name": "custom-fields",
+  "title": "Custom Fields",
+  "template": "DashboardView",
+  "url": "/screen/tutorial/view/custom-fields",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/tutorial/custom-fields.md"
+    },
+    {
+      "widgetName": "custom-fields",
+      "position": 2,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "emptyDoc2",
+      "position": 3,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/tutorial/custom-fields-api.md"
+    }
+  ]
+}

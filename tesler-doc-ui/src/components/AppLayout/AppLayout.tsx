@@ -37,6 +37,7 @@ import PickListPopup from '../widgets/PickListPopup/PickListPopup'
 import {CustomWidget} from '@tesler-ui/core/interfaces/widget'
 import {AppState} from 'interfaces/storeSlices'
 import {TableWidget} from 'components/widgets/TableWidget/TableWidget'
+import {PhoneInput} from 'components/ui/PhoneInput/PhoneInput'
 
 interface LayoutProps {
     screenName: string,
@@ -67,6 +68,10 @@ const customWidgets: Record<string, CustomWidget> = {
     [WidgetTypes.List]: TableWidget,
     [WidgetTypes.AssocListPopup]: AssocListPopup,
     [WidgetTypes.PickListPopup]: PickListPopup,
+}
+
+const customFields = {
+    phone: PhoneInput
 }
 
 export function Layout(props: LayoutProps) {
@@ -152,6 +157,7 @@ export function Layout(props: LayoutProps) {
                                     <View
                                         card={Card}
                                         customWidgets={customWidgets}
+                                        customFields={customFields}
                                         skipWidgetTypes={skipWidgetTypes}
                                     />
                                 </div>

@@ -18,6 +18,9 @@
       },
       {
         "viewName": "bulk-actions-customization"
+      },
+      {
+        "viewName": "custom-fields"
       }
     ]
   }

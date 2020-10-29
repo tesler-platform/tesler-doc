@@ -50,7 +50,7 @@ export const TableWidget: React.FunctionComponent<DocTableWidgetProps> = props =
         </div>
     }
 
-    if ((props.meta.options as CustomWidgetOptions).selectable) {
+    if ((props.meta.options as CustomWidgetOptions)?.selectable) {
         return <BulkTableWidget {...props} />
     }
 

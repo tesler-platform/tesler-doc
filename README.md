@@ -46,8 +46,8 @@ Full clean restart. For local development only!
 ```
 docker-compose stop
 docker-compose rm -sfv
-docker system prune --force
-docker volume prune --force
+docker system prune
+docker volume prune
 mvn clean install -PUI -U && mvn clean install -U && docker-compose up --build -d
 docker-compose ps
 ```
