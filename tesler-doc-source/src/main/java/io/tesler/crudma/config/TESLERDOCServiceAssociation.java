@@ -61,6 +61,7 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 	forPickCustomEx(ForPickExService.class),
 		pickListPopupCustomEx(PickListPopupExService.class),
 
+	customFieldsExample(CustomFieldsExampleService.class),
 
 	forceActiveExample(ForceActiveExampleService.class);
 

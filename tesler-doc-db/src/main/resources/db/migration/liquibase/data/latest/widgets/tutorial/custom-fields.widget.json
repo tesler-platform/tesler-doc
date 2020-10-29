@@ -1,0 +1,17 @@
+{
+  "name": "custom-fields",
+  "title": "Custom Fields Example",
+  "type": "List",
+  "showCondition": [],
+  "bc": "customFieldsExample",
+  "fields": [
+    {
+      "title": "Phone Number",
+      "key": "phoneNumber",
+      "type": "phone"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {}
+}

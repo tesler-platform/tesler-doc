@@ -248,5 +248,40 @@
     </sql>
   </changeSet>
 
+  <changeSet id="custom-fields-example-table" author="kdergachev">
+    <createTable tableName="CUSTOM_FIELDS_EXAMPLE">
+      <column name="ID" remarks="Primary key" type="NUMBER(19, 0)">
+        <constraints primaryKey="true" referencedTableName="CUSTOM_FIELDS_EXAMPLE" />
+      </column>
+      <column name="phone_number" type="VARCHAR2(255)"/>
+      <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Creation date"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueComputed="current_timestamp" name="UPDATED_DATE" remarks="Date of last update"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueNumeric="1" name="CREATED_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="LNK_CUSTOM_FIELDS_EXAMPLE_CREATED_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="1" name="LAST_UPD_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="LNK_CUSTOM_FIELDS_EXAMPLE_LAST_UPD_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+  </changeSet>
+
+  <changeSet id="custom-fields-example-data" author="kdergachev">
+    <loadData tableName="CUSTOM_FIELDS_EXAMPLE" separator=";" quotchar="&quot;"
+              file="db/migration/liquibase/data/latest/csv/CUSTOM_FIELDS_EXAMPLE.csv">
+      <column header="ID" name="ID" type="NUMERIC"/>
+      <column header="PHONE_NUMBER" name="phone_number" type="STRING"/>
+    </loadData>
+  </changeSet>
+
 </databaseChangeLog>
 
