@@ -38,6 +38,7 @@ import {CustomWidget} from '@tesler-ui/core/interfaces/widget'
 import {AppState} from 'interfaces/storeSlices'
 import {TableWidget} from 'components/widgets/TableWidget/TableWidget'
 import {PhoneInput} from 'components/ui/PhoneInput/PhoneInput'
+import FlatTree from 'components/widgets/FlatTree/FlatTree'
 
 interface LayoutProps {
     screenName: string,
@@ -68,6 +69,7 @@ const customWidgets: Record<string, CustomWidget> = {
     [WidgetTypes.List]: TableWidget,
     [WidgetTypes.AssocListPopup]: AssocListPopup,
     [WidgetTypes.PickListPopup]: PickListPopup,
+    [WidgetTypes.FlatTree]: FlatTree
 }
 
 const customFields = {

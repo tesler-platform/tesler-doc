@@ -63,7 +63,9 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
 
 	customFieldsExample(CustomFieldsExampleService.class),
 
-	forceActiveExample(ForceActiveExampleService.class);
+	forceActiveExample(ForceActiveExampleService.class),
+
+	flatTreeExample(FlatTreeExampleService.class);
 
 	// @formatter:on
 

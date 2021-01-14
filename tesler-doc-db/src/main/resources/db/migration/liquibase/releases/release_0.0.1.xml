@@ -283,5 +283,41 @@
     </loadData>
   </changeSet>
 
+  <changeSet id="flat-tree-example" author="kdergachev">
+    <createTable tableName="FLAT_TREE_EXAMPLE">
+      <column name="ID" remarks="Primary key" type="NUMBER(19, 0)">
+        <constraints primaryKey="true" referencedTableName="FLAT_TREE_EXAMPLE" />
+      </column>
+      <column name="NAME" type="VARCHAR2(255)"/>
+      <column name="PARENT_ID" type="NUMBER(19, 0)" />
+      <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Creation date"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueComputed="current_timestamp" name="UPDATED_DATE" remarks="Date of last update"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueNumeric="1" name="CREATED_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="LNK_FLAT_TREE_EXAMPLE_CREATED_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="1" name="LAST_UPD_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="LNK_FLAT_TREE_EXAMPLE_LAST_UPD_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="flat-tree-data" author="kdergachev">
+    <loadData tableName="FLAT_TREE_EXAMPLE" separator=";" quotchar="&quot;"
+              file="db/migration/liquibase/data/latest/csv/FLAT_TREE_EXAMPLE.csv">
+      <column header="ID" name="ID" type="NUMERIC"/>
+      <column header="PARENT_ID" name="PARENT_ID" type="NUMERIC"/>
+      <column header="NAME" name="name" type="STRING"/>
+    </loadData>
+  </changeSet>
+
 </databaseChangeLog>
 

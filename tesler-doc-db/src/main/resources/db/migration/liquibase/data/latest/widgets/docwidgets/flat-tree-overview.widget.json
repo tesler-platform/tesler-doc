@@ -1,0 +1,24 @@
+{
+  "title": "Flat Tree Overview",
+  "name": "flat-tree-overview",
+  "type": "FlatTree",
+  "bc": "flatTreeExample",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input"
+    },
+    {
+      "title": "parentId",
+      "key": "parentId",
+      "type": "input"
+    }
+  ],
+  "options": {
+    "hierarchyFull": true
+  },
+  "axisFields": [],
+  "chart": []
+}

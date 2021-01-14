@@ -31,6 +31,15 @@ export default function screenReducer(
     switch (action.type) {
         case coreActions.logoutDone:
             return initialState
+      /*  case coreActions.bcFetchDataSuccess: {
+            if (action.payload.bcName !== 'flatTreeExample') {
+                return state
+            }
+            return {
+                ...state,
+                [action.payload.bcName]: getTreeMock()
+            }
+        }*/
         default:
             return state
     }
