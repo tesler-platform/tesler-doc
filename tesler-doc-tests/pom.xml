@@ -19,6 +19,12 @@
       <groupId>io.tesler</groupId>
       <artifactId>tesler-doc-app</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.codeborne</groupId>
+      <artifactId>selenide</artifactId>
+      <version>5.17.4</version>
+      <scope>test</scope>
+    </dependency>
     <!-- Test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
