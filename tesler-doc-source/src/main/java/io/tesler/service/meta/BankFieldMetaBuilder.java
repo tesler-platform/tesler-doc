@@ -76,7 +76,7 @@ public class BankFieldMetaBuilder extends FieldMetaBuilder<BankDTO> {
 			fields.setDrilldown(
 					name,
 					DrillDownType.INNER,
-					"/screen/doc/view/form/" + TESLERDOCServiceAssociation.bankDoc + "/" + rowId
+					"/screen/components/view/form/" + TESLERDOCServiceAssociation.bankDoc + "/" + rowId
 			);
 		} else {
 			fields.setDrilldown(
