@@ -62,7 +62,7 @@ public class BankServiceImpl extends VersionAwareResponseService<BankDTO, Bank> 
 			return new CreateResult<>(entityToDto(businessComponent, bank))
 					.setAction(PostAction.drillDown(
 							DrillDownType.INNER,
-							"/screen/doc/view/form/" + businessComponent.getName() + "/" + bank.getId().toString()
+							"/screen/components/view/form/" + businessComponent.getName() + "/" + bank.getId().toString()
 					));
 		}
 		return new CreateResult<>(entityToDto(businessComponent, bank))

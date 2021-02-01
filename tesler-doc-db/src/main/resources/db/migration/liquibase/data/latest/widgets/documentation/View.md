@@ -22,7 +22,7 @@ View is UI component that binds to URL and displayed single application page.
   name : "exampleView",
   title : "Example View Title",
   template : "DashboardView",
-  url : "/screen/doc/view/exampleView",
+  url : "/screen/components/view/exampleView",
   widgets : [ {
     widgetName : "exampleWidget1",
     position : 0,

@@ -2,6 +2,6 @@
   "name": "hiddenview",
   "title": "hiddenview",
   "template": "DashboardView",
-  "url": "/screen/doc/view/hidden",
+  "url": "/screen/components/view/hidden",
   "widgets": []
 }

@@ -108,7 +108,7 @@ fields.setRequired(name);
 fields.setDrilldown(
     name, // name of field
     DrillDownType.INNER, // type of drilldown
-    "/screen/doc/view/form/" + TESLERDOCServiceAssociation.bankDoc + "/" + rowId //path of drilldown
+    "/screen/components/view/form/" + TESLERDOCServiceAssociation.bankDoc + "/" + rowId //path of drilldown
 );
 ```
 
