@@ -75,6 +75,7 @@ const customFields = {
 }
 
 export function Layout(props: LayoutProps) {
+    console.log('test of workflow')
     const isInfoPanelLayout = props.widgets.some(widget => widget.type !== WidgetTypes.List)
     const headerWidth = {
         width: isInfoPanelLayout ? '1138px' : '1152px',
