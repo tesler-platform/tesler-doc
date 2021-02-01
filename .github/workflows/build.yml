@@ -1,0 +1,15 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: clean install
+        run: mvn clean install -P Dev,UI
