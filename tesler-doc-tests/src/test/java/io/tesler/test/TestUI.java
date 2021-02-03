@@ -22,7 +22,6 @@ package io.tesler.test;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -40,9 +39,10 @@ public class TestUI {
 
 	private SelenideElement LoginButton = $(By.cssSelector(".ant-form-item-control button"));
 
-	private SelenideElement LeftMenu(String text) {
-		return $(By.cssSelector("div[class^='AppSideMenu__navigation'] ul")).$$(By.tagName("li")).findBy(
-				Condition.exactText(text));
+	private SelenideElement Menu(String text) {
+		return $(By.cssSelector("ul[class^='ant-menu ScreenNavigation__Container']"))
+				.$$(By.cssSelector("li[class^='ant-menu-item ScreenNavigation__Item']")).findBy(
+						Condition.exactText(text));
 	}
 
 	private SelenideElement FirstLevelMenu(String text) {
@@ -74,6 +74,7 @@ public class TestUI {
 	}
 
 	private Integer getIndexColumn(String columnName) {
+		$(By.cssSelector("div[class^=TableWidget]")).shouldBe(Condition.visible);
 		List<String> tableColumns = $(By.cssSelector("div[class^=TableWidget]")).$$(By.tagName("th")).texts();
 		return tableColumns.indexOf(columnName);
 	}
@@ -97,9 +98,7 @@ public class TestUI {
 		open("http://localhost:8080");
 
 		LoginInput(0).setValue("Test");
-		Selenide.sleep(1000);
 		LoginButton.click();
-		Selenide.sleep(1000);
 		$(By.cssSelector(".ant-form-item-control >span"), 2).$(By.cssSelector("span[class^='Login__error']"))
 				.shouldBe(Condition.visible);
 		$(By.cssSelector(".ant-form-item-control >span"), 2).$(By.cssSelector("span[class^='Login__error']"))
@@ -110,7 +109,7 @@ public class TestUI {
 
 	private void TestInput() {
 		//Navigate through the menu
-		LeftMenu("Components Overview").click();
+		Menu("Components Overview").click();
 		FirstLevelMenu("Fields").click();
 		SecondLevelMenu("Input").click();
 
@@ -151,8 +150,7 @@ public class TestUI {
 
 		//Input and List Checks
 		assertThat(getInput("Test Input").getAttribute("value")).isEqualTo(LargeText);
-		assertThat($(By.cssSelector("div[class^=TableWidget]")).$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
-				.first().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEqualTo(LargeText);
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEqualTo(LargeText);
 
 		//Entering text into a cell on a List
 		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).doubleClick();
@@ -275,4 +273,5 @@ public class TestUI {
 		assertThat($(By.cssSelector("div[class^=TableWidget]")).$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
 				.first().$$(By.tagName("td")).get(getIndexColumn("Dictionary")).getText()).isEmpty();*/
 	}
+
 }
