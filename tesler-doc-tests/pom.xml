@@ -20,6 +20,10 @@
       <artifactId>tesler-doc-app</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.tesler</groupId>
+      <artifactId>tesler-doc-source</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>selenide</artifactId>
       <version>5.17.4</version>
@@ -91,7 +95,7 @@
             <artifactId>maven-failsafe-plugin</artifactId>
             <executions>
               <execution>
-                <phase>test</phase>
+                <phase>integration-test</phase>
                 <goals>
                   <goal>integration-test</goal>
                   <goal>verify</goal>
@@ -103,6 +107,7 @@
               <reuseForks>true</reuseForks>
               <trimStackTrace>false</trimStackTrace>
               <argLine>-javaagent:${project.build.directory}/agents/spring-instrument-${spring.version}.jar</argLine>
+              <argLine>${failsafe.jacoco.args}</argLine>
               <systemPropertyVariables>
                 <test.dbDriver>${jdbc.driver}</test.dbDriver>
                 <test.dbUrl>${jdbc.url}</test.dbUrl>
@@ -110,6 +115,35 @@
                 <test.dbPassword>${jdbc.password}</test.dbPassword>
               </systemPropertyVariables>
             </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.6</version>
+            <executions>
+              <execution>
+                <id>dumpExec</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>dump</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/jacoco-it.exec</destFile>
+                  <address>localhost</address>
+                  <port>36320</port>
+                  <append>true</append>
+                </configuration>
+              </execution>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>report-aggregate</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/jacoco-integration-test-coverage-report</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>

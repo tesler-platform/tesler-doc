@@ -31,7 +31,7 @@ import org.openqa.selenium.Keys;
 import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestUI {
+public class UIIT {
 
 	private SelenideElement LoginInput(int index) {
 		return $(By.cssSelector(".ant-form-item-control input"), index);
@@ -90,8 +90,8 @@ public class TestUI {
 		Configuration.browserSize = "1440x768";
 
 		Login();
-		TestInput();
-		TestDictionary();
+		/*TestInput();
+		TestDictionary();*/
 	}
 
 	private void Login() {
