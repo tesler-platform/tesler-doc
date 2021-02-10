@@ -23,6 +23,9 @@ package io.tesler.test;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -73,15 +76,41 @@ public class TestUI {
 				.first();
 	}
 
+	private Integer getIndexColumnPickList(String columnName) {
+		$(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']")).shouldHave(Condition.visible);
+		List<String> tableColumns = $(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']"))
+				.$$(By.tagName("th")).texts();
+		return tableColumns.indexOf(columnName);
+	}
+
 	private Integer getIndexColumn(String columnName) {
 		$(By.cssSelector("div[class^=TableWidget]")).shouldBe(Condition.visible);
 		List<String> tableColumns = $(By.cssSelector("div[class^=TableWidget]")).$$(By.tagName("th")).texts();
 		return tableColumns.indexOf(columnName);
 	}
 
+	private SelenideElement FindColumnInRow(String columnName, SelenideElement row) {
+		$(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']")).shouldHave(Condition.visible);
+		return row.$$(By.tagName("td")).get(getIndexColumnPickList(columnName));
+	}
+
+	private SelenideElement FindRowPickListWithColumnValue(String columnName, String columnValue) {
+		$(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']")).shouldHave(Condition.visible);
+		return $(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']"))
+				.$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
+				.stream()
+				.filter(r -> FindColumnInRow(columnName, r).getText().equals(columnValue))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException("no row with columnValue found"));
+	}
+
 	private String LargeText = "Etiam nec eros nulla. Suspendisse viverra mollis dolor non iaculis. Duis imperdiet facilisis urna non ultrices. Mauris aliquet dui massa, sit amet iaculis enim blandit nec. Suspendisse tempus nunc imperdiet tellus faucibus feugiat.";
 
 	private String SmallText = "Aliquam quis enim.";
+
+	private DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+	private DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
 	@Test
 	public void TestUI() {
@@ -92,6 +121,9 @@ public class TestUI {
 		Login();
 		TestInput();
 		TestDictionary();
+		TestNumber();
+		TestDate();
+		TestPickList();
 	}
 
 	private void Login() {
@@ -272,6 +304,237 @@ public class TestUI {
 				.getAttribute("title")).isEmpty();
 		assertThat($(By.cssSelector("div[class^=TableWidget]")).$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
 				.first().$$(By.tagName("td")).get(getIndexColumn("Dictionary")).getText()).isEmpty();*/
+	}
+
+	private void TestNumber() {
+		SecondLevelMenu("Number").click();
+
+		//Entering text values in fields on Form
+		getInput("Number").setValue("Text");
+		getInput("Money").setValue("Text");
+		getInput("Percent").setValue("Text");
+		getInput("Percent").pressTab();
+
+		//Field checks
+		assertThat(getInput("Number").getAttribute("value")).isEqualTo("0");
+		assertThat(getInput("Money").getAttribute("value")).isEqualTo("0,00");
+		assertThat(getInput("Percent").getAttribute("value")).isEqualTo("0 %");
+
+		//Entering numeric values in fields on Form
+		getInput("Number").setValue("-10g000");
+		getInput("Money").setValue("01222333.489");
+		getInput("Percent").setValue("-998,500");
+
+		//Click "Сохранить" on the Form
+		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+
+		//Navigating tabs
+		SecondLevelMenu("Fields").click();
+		SecondLevelMenu("Number").click();
+
+		//Numbers and List checks
+		assertThat(getInput("Number").getAttribute("value")).isEqualTo("-10" + "\u00A0" + "000");
+		assertThat(getInput("Money").getAttribute("value")).isEqualTo("1" + "\u00A0" + "222" + "\u00A0" + "333,49");
+		//TODO с активным фокусом на поле не происходит округления
+		assertThat(getInput("Percent").getAttribute("value")).isEqualTo("-998 %");
+
+		//TODO неверное отображение в List виджете (в режиме просмотра нет сотых долей, знака %)
+		/*assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).getText()).isEqualTo("-10"+"\u00A0"+"000");
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).getText()).isEqualTo("1"+"\u00A0"+"222"+"\u00A0"+"333,49");
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).getText()).isEqualTo("-998 %");*/
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).getText()).isEqualTo("-10 000");
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).getText()).isEqualTo("1 222 333");
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).getText()).isEqualTo("-998");
+
+		//Entering values on List
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).doubleClick();
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).$(By.tagName("input")).clear();
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).$(By.tagName("input")).setValue("g");
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).$(By.tagName("input")).setValue("-20000,1");
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).doubleClick();
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).$(By.tagName("input")).clear();
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).$(By.tagName("input")).setValue("g");
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).$(By.tagName("input")).setValue("-7000,126");
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).doubleClick();
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).$(By.tagName("input")).clear();
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).$(By.tagName("input")).setValue("g");
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).$(By.tagName("input")).setValue("0800,512");
+
+		//Saving with three dots
+		actions().moveToElement(FirstRowTable()).perform();
+		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
+		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
+		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Сохранить")).click();
+
+		//Navigating tabs
+		SecondLevelMenu("Fields").click();
+		SecondLevelMenu("Number").click();
+
+		//Numbers and List checks
+		assertThat(getInput("Number").getAttribute("value")).isEqualTo("-20" + "\u00A0" + "000");
+		assertThat(getInput("Money").getAttribute("value")).isEqualTo("-7" + "\u00A0" + "000,13");
+		//TODO с активным фокусом на поле не происходит округления
+		assertThat(getInput("Percent").getAttribute("value")).isEqualTo("800 %");
+
+		//TODO неверное отображение в List виджете
+		/*assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).getText()).isEqualTo("-20"+"\u00A0"+"000");
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).getText()).isEqualTo("-7"+"\u00A0"+"000,13");
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).getText()).isEqualTo("801"+"\u00A0"+"%");*/
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).getText()).isEqualTo("-20 000");
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).getText()).isEqualTo("-7 000");
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).getText()).isEqualTo("800");
+	}
+
+	private void TestDate() {
+		//SecondLevelMenu("Date").click();
+		Menu("Components Overview").click();
+		FirstLevelMenu("Fields").click();
+		SecondLevelMenu("Date").click();
+
+		//Checking that the date is not filled in
+		if (FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).getText().isEmpty()) {
+			return;
+		} else {
+			FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).doubleClick();
+			actions().moveToElement(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date"))
+					.$(By.className("ant-calendar-picker-clear"))).perform();
+			FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).$(By.className("ant-calendar-picker-clear"))
+					.shouldBe(Condition.visible).click();
+		}
+
+		//Selecting the current day on Form
+		getInput("Date").click();
+		$(By.cssSelector(".ant-calendar-table")).shouldBe(Condition.visible);
+		$(By.cssSelector(".ant-calendar-tbody"))
+				.$$(By.tagName("tr")).findBy(Condition.cssClass("ant-calendar-current-week"))
+				.$$(By.tagName("td"))
+				.findBy(Condition.cssClass("ant-calendar-today"))
+				.click();
+		LocalDateTime date = LocalDateTime.now();
+
+		//Click "Сохранить" on the Form
+		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+
+		//Navigating tabs
+		SecondLevelMenu("Fields").click();
+		SecondLevelMenu("Date").click();
+
+		//Checking the date completion
+		assertThat(getInput("Date").getAttribute("value")).isEqualTo(LocalDate.now().format(DATE_FORMATTER));
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).getText())
+				.isEqualTo(date.format(DATE_FORMATTER));
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date and Time")).getText())
+				.isEqualTo(date.format(DATE_TIME_FORMATTER));
+
+		//Selecting the current day on List
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).doubleClick();
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).click();
+		$(By.cssSelector(".ant-calendar-table")).shouldBe(Condition.visible);
+		$(By.cssSelector(".ant-calendar-footer a")).click();
+
+		//Checking the date completion
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).$(By.cssSelector("input")).getValue())
+				.isEqualTo(date.format(DATE_FORMATTER));
+
+		//Clear Date picker on List
+		actions().moveToElement(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date"))
+				.$(By.className("ant-calendar-picker-clear"))).perform();
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).$(By.className("ant-calendar-picker-clear"))
+				.shouldBe(Condition.visible).click();
+
+		//Saving with three dots
+		actions().moveToElement(FirstRowTable()).perform();
+		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
+		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
+		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Сохранить")).click();
+
+		//Navigating tabs
+		SecondLevelMenu("Fields").click();
+		SecondLevelMenu("Date").click();
+
+		//Check Date is empty
+		assertThat(getInput("Date").getAttribute("value")).isEmpty();
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).getText()).isEmpty();
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date and Time")).getText()).isEmpty();
+	}
+
+	private void TestPickList() {
+		SecondLevelMenu("Picklist").click();
+
+		//Clearing the input field
+		getInput("Test Input").clear();
+		assertThat(getInput("Test Input").getValue()).isEmpty();
+
+		//Calling Popup on Form
+		$$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText("Pick List"))
+				.$(By.cssSelector("i[class='anticon anticon-paper-clip']")).click();
+
+		//Click on a column in Popup
+		FindColumnInRow("Name", FindRowPickListWithColumnValue("Name", "This field is mandatory")).click();
+
+		//Click "Сохранить" on the Form
+		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+
+		//Navigating tabs
+		SecondLevelMenu("Fields").click();
+		SecondLevelMenu("Picklist").click();
+
+		//Checking the selected values
+		assertThat(getInput("Test input").getValue()).isEqualTo("-20000");
+		assertThat(getInput("Pick List").getValue()).isEqualTo("This field is mandatory");
+		getInput("Pick List").shouldBe(Condition.readonly);
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEqualTo("-20000");
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List")).getText())
+				.isEqualTo("This field is mandatory");
+
+		//Clearing the input field
+		getInput("Test Input").clear();
+		assertThat(getInput("Test Input").getValue()).isEmpty();
+
+		//Calling Popup and selecting values on List
+		FirstRowTable().$$(By.tagName("td")).last().scrollIntoView(true);
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List")).doubleClick();
+		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List"))
+				.$(By.cssSelector("i[class='anticon anticon-paper-clip']")).click();
+		FindColumnInRow("Name", FindRowPickListWithColumnValue("Name", "This field is mandatory")).click();
+
+		//Saving with three dots
+		FirstRowTable().$$(By.tagName("td")).last().scrollIntoView(true);
+		actions().moveToElement(FirstRowTable()).perform();
+		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
+		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
+		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Сохранить")).click();
+
+		//Navigating tabs
+		SecondLevelMenu("Fields").click();
+		SecondLevelMenu("Picklist").click();
+
+		//Checking the selected values
+		assertThat(getInput("Test input").getValue()).isEqualTo("-20000");
+		assertThat(getInput("Pick List").getValue()).isEqualTo("This field is mandatory");
+		getInput("Pick List").shouldBe(Condition.readonly);
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEqualTo("-20000");
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List")).getText())
+				.isEqualTo("This field is mandatory");
+
+		//Clearing the PickList value on Form
+		$$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText("Pick List")).$(By.className("ant-input-suffix"))
+				.shouldHave(Condition.visible);
+		$$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText("Pick List")).$(By.className("ant-input-suffix"))
+				.click();
+
+		//Click "Сохранить" on the Form
+		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+
+		//Navigating tabs
+		SecondLevelMenu("Fields").click();
+		SecondLevelMenu("Picklist").click();
+
+		//Check PickList value is empty
+		assertThat(getInput("Test input").getValue()).isEmpty();
+		assertThat(getInput("Pick List").getValue()).isEmpty();
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEmpty();
+		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List")).getText()).isEmpty();
 	}
 
 }
