@@ -180,8 +180,140 @@ public enum TESLERDOCServiceAssociation implements EnumBcIdentifier {
  ```
 # Step 8: Creating Screen, View and Widgets
 
-- How create *[Screen (guide)](#/screen/getting-started/view/screen/)*
+### **Screen**
+- ***Screen*** is a navigation container that contains view elements. 
 
-- How create *[View (guide)](#/screen/getting-started/view/view/)*
+*example.screen.json*:
+```ts
+{
+  "name": "example",
+  "title": "Example",
+  "primaryViewName": "banklist",
+  "primaryViews": [
+    "banklist"
+  ],
+  "navigation": {
+    "menu": [
+      {
+        "title": "Banks",
+        "child": [
+          {
+            "viewName": "banklist"
+          },
+          {
+            "viewName": "bankcard"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 
-- How create *[Widget (guide)](#/screen/getting-started/view/widget/)*
+- More information about menu and navigation you can find at *[Screen (Major concepts)](#/screen/getting-started/view/screen/)*
+-------------------------------------------
+### **View**
+- ***View*** is UI component that binds to URL and displayed single application page
+- View elements contain widgets
+
+*[banklist.view.json](https://github.com/tesler-platform/tesler-doc/blob/master/tesler-doc-db/src/main/resources/db/migration/liquibase/data/latest/screens/bank/views/banklist.view.json)* from example.screen:
+```ts
+{
+  "name": "banklist",
+  "title": "Banks",
+  "template": "DashboardView",
+  "url": "/screen/example/view/banklist",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "bankList",
+      "position": 1,
+      "gridWidth": 2
+    }
+  ]
+}
+```
+
+- For more examples, you can also check *[bankcard.view.json](https://github.com/tesler-platform/tesler-doc/blob/master/tesler-doc-db/src/main/resources/db/migration/liquibase/data/latest/screens/bank/views/bankcard.view.json)*
+- More information about view API: *[View (Major concepts)](#/screen/getting-started/view/view/)*
+
+-------------------------------------------
+
+### **Widget**
+- ***Widget*** is is UI component that works with user information according to the widget type
+- Widget elements get information from DTO-objects
+- Basic widgets types: *[List](#/screen/components/view/list/)*, *[Form](#/screen/components/view/form/)*
+- Basic pop-up widgets types: *[AssocListPopup](#/screen/components/view/assocListPopup/)* and *[PicklistPopup](#/screen/components/view/pickListPopup/)*
+
+*[linkBankEmployee.widget.json](https://github.com/tesler-platform/tesler-doc/blob/develop/tesler-doc-db/src/main/resources/db/migration/liquibase/data/latest/widgets/example/linkBankEmployee.widget.json)* from banklist.view:
+```ts
+{
+  "name": "linkBankEmployee",
+  "title": "",
+  "type": "List",
+  "bc": "linkBankEmployee",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "employee",
+      "type": "input"
+    },
+    {
+      "title": "Success Rate",
+      "key": "successRate",
+      "type": "input"
+    },
+    {
+      "title": "Position",
+      "key": "position",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {
+      "include": [
+        "associate"
+      ]
+    },
+    "layout": {}
+  }
+}
+```
+This widget has an associated pop-up child-widget *[linkBankEmployeeAssoc.widget.json](https://github.com/tesler-platform/tesler-doc/blob/develop/tesler-doc-db/src/main/resources/db/migration/liquibase/data/latest/widgets/example/linkBankEmployeeAssoc.widget.json)*:
+```ts
+{
+  "name": "linkBankEmployeeAssoc",
+  "title": "Employees related to bank",
+  "type": "AssocListPopup",
+  "bc": "linkBankEmployeeAssoc",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input"
+    },
+    {
+      "title": "Success Rate",
+      "key": "successRate",
+      "type": "input"
+    },
+    {
+      "title": "Position",
+      "key": "position",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": []
+}
+``` 
+- Also check *[bankCard.widget.json](https://github.com/tesler-platform/tesler-doc/blob/master/tesler-doc-db/src/main/resources/db/migration/liquibase/data/latest/widgets/example/bankCard.widget.json)* for wide options and actions example
+- Additional information about widgets API: *[Widget (Major concepts)](#/screen/getting-started/view/widget/)*
