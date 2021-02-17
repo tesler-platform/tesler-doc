@@ -1,0 +1,54 @@
+{
+  "name": "wareCreation",
+  "title": "",
+  "type": "Form",
+  "bc": "ware",
+  "showCondition": [],
+  "fields": [
+    {
+      "label": "Enter Name",
+      "key": "name",
+      "type": "input"
+    },
+    {
+      "label": "Enter Component 1",
+      "key": "component1",
+      "type": "input"
+    },
+    {
+      "label": "Enter Component 2",
+      "key": "component2",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {},
+    "layout": {
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "name",
+              "span": 12
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "component1",
+              "span": 12
+            },
+            {
+              "fieldKey": "component2",
+              "span": 12
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
