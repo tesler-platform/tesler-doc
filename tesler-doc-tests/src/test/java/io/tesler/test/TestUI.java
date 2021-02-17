@@ -20,9 +20,14 @@
 
 package io.tesler.test;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.tesler.test.widgets.FormWidget;
+import io.tesler.test.widgets.ListWidget;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -55,7 +60,7 @@ public class TestUI {
 
 	private SelenideElement SecondLevelMenu(String text) {
 		return $(By.cssSelector("nav[class^='SecondLevelTabs__container']"))
-				.$$(By.cssSelector("div[class^=' ant-tabs-tab']")).findBy(Condition.exactText(text));
+				.$$(By.cssSelector("div[class$='ant-tabs-tab']")).findBy(Condition.exactText(text));
 	}
 
 	private SelenideElement getInput(String fieldName, int index) {
@@ -71,21 +76,23 @@ public class TestUI {
 		return $$(By.cssSelector(".ant-form-item")).findBy(Condition.text(fieldName));
 	}
 
+	//List
 	private SelenideElement FirstRowTable() {
 		return $(By.cssSelector("div[class^=TableWidget]")).$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
 				.first();
 	}
 
+	private Integer getIndexColumn(String columnName) {
+		$(By.cssSelector("div[class^=TableWidget]")).shouldBe(Condition.visible);
+		List<String> tableColumns = $(By.cssSelector("div[class^=TableWidget]")).$$(By.tagName("th")).texts();
+		return tableColumns.indexOf(columnName);
+	}
+
+	//PickList
 	private Integer getIndexColumnPickList(String columnName) {
 		$(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']")).shouldHave(Condition.visible);
 		List<String> tableColumns = $(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']"))
 				.$$(By.tagName("th")).texts();
-		return tableColumns.indexOf(columnName);
-	}
-
-	private Integer getIndexColumn(String columnName) {
-		$(By.cssSelector("div[class^=TableWidget]")).shouldBe(Condition.visible);
-		List<String> tableColumns = $(By.cssSelector("div[class^=TableWidget]")).$$(By.tagName("th")).texts();
 		return tableColumns.indexOf(columnName);
 	}
 
@@ -124,6 +131,7 @@ public class TestUI {
 		TestNumber();
 		TestDate();
 		TestPickList();
+		TestFilter();
 	}
 
 	private void Login() {
@@ -137,6 +145,8 @@ public class TestUI {
 				.shouldHave(Condition.exactText("Unauthorized"));
 		LoginInput(0).setValue("vanilla");
 		LoginButton.click();
+		LoginButton.$(By.cssSelector("i")).shouldBe(Condition.visible.negate(), Duration.ofSeconds(50));
+
 	}
 
 	private void TestInput() {
@@ -145,69 +155,74 @@ public class TestUI {
 		FirstLevelMenu("Fields").click();
 		SecondLevelMenu("Input").click();
 
+		//Find Form widget and List widget
+		FormWidget fw = new FormWidget();
+		ListWidget lw = new ListWidget();
+
 		//Checking the status of the Input field
-		getInput("Test Input").shouldBe(Condition.readonly.negate());
-		getInput("Test Input").shouldHave(Condition.attribute("placeholder", "PlaceholderInput test"));
+		fw.getInput("Test Input").shouldBe(Condition.readonly.negate());
+		fw.getInput("Test Input").shouldHave(Condition.attribute("placeholder", "PlaceholderInput test"));
 
 		//Entering text in Input
-		getInput("Test Input").setValue(LargeText);
-		assertThat(getInput("Test Input").getAttribute("value")).isEqualTo(LargeText);
+		fw.getInput("Test Input").setValue(LargeText);
+		assertThat(fw.getInput("Test Input").getAttribute("value")).isEqualTo(LargeText);
 
 		//Moving the focus to another required field
-		getInput("Name").setValue("Q");
-		getInput("Name").sendKeys(Keys.BACK_SPACE);
+		fw.getInput("Name").setValue("Q");
+		fw.getInput("Name").sendKeys(Keys.BACK_SPACE);
 
 		//Click "Сохранить"
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+		fw.clickButtonForm("Сохранить");
 
 		//Checking the required field
 		assertThat($(By.cssSelector(".ant-form-explain")).shouldBe(Condition.visible).getText())
 				.isEqualTo("This field is mandatory");
 
 		//Filling in the required field
-		$(By.cssSelector(".ant-form-item-with-help input"))
+		fw.getInputwithErrors("Name", "This field is mandatory")
 				.setValue("This field is mandatory").pressTab();
 
 		//Input and List Checks
-		assertThat(getInput("Name").getAttribute("value")).isEqualTo("This field is mandatory");
-		assertThat(getInput("Test Input").getAttribute("value")).isEqualTo(LargeText);
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEqualTo(LargeText);
+		assertThat(fw.getInput("Name").getAttribute("value")).isEqualTo("This field is mandatory");
+		assertThat(fw.getInput("Test Input").getAttribute("value")).isEqualTo(LargeText);
+		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).getText())
+				.isEqualTo(LargeText);
 
 		//Click "Сохранить"
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+		fw.clickButtonForm("Сохранить");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Input").click();
 
 		//Input and List Checks
-		assertThat(getInput("Test Input").getAttribute("value")).isEqualTo(LargeText);
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEqualTo(LargeText);
+		assertThat(fw.getInput("Test Input").getAttribute("value")).isEqualTo(LargeText);
+		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).getText())
+				.isEqualTo(LargeText);
 
 		//Entering text into a cell on a List
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).doubleClick();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).$(By.tagName("input")).setValue(SmallText);
+		lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).doubleClick();
+		lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).$(By.cssSelector("input"))
+				.setValue(SmallText);
 
 		//Saving with three dots
-		actions().moveToElement(FirstRowTable()).perform();
-		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
-		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
-		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Сохранить")).click();
+		lw.ClickActionThreeDots(lw.FindRow("Name", "This field is mandatory"), "Сохранить");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Input").click();
 
 		//Input and List Checks
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEqualTo(SmallText);
-		assertThat(getInput("Test Input").getAttribute("value")).isEqualTo(SmallText);
+		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).getText())
+				.isEqualTo(SmallText);
+		assertThat(fw.getInput("Test Input").getAttribute("value")).isEqualTo(SmallText);
 
 		//Clearing values on the List widget
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).doubleClick();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).$(By.tagName("input")).clear();
+		lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).doubleClick();
+		lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).$(By.cssSelector("input")).clear();
 
 		//Moving the focus to another column in the table
-		FirstRowTable().$$(By.tagName("td")).last().doubleClick();
+		lw.ListColumnsInRow(lw.FindRow("Name", "This field is mandatory")).last().doubleClick();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -222,77 +237,70 @@ public class TestUI {
 	private void TestDictionary() {
 		SecondLevelMenu("Dictionary").click();
 
+		//Find Form widget and List widget
+		FormWidget fw = new FormWidget();
+		ListWidget lw = new ListWidget();
+
 		//Selecting First value in the dropdown list on Form
-		getComboBox("Dictionary").$(By.cssSelector(".ant-select-selection__rendered")).click();
-		getComboBox("Dictionary").$(By.cssSelector("div[class^=ant-select-dropdown] ul")).shouldBe(Condition.visible);
-		assertThat(getComboBox("Dictionary").$(By.cssSelector("div[class^=ant-select-dropdown] ul"))
-				.$$(By.tagName("li")).size()).isEqualTo(4);
-		getComboBox("Dictionary").$(By.cssSelector("div[class^=ant-select-dropdown] ul")).$$(By.tagName("li"))
-				.first().click();
+		assertThat(fw.getComboBoxList("Dictionary").size()).isEqualTo(4);
+		fw.getComboBoxList("Dictionary").first().click();
 
 		//Click "Сохранить" on the Form
-		getInput("Name").setValue("This field is mandatory");
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+		fw.getInput("Name").setValue("This field is mandatory");
+		fw.clickButtonForm("Сохранить");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Dictionary").click();
 
 		//Dictionary and List checks
-		assertThat(getComboBox("Dictionary").$(By.cssSelector(".ant-select-selection-selected-value"))
+		assertThat(fw.getComboBox("Dictionary").$(By.cssSelector(".ant-select-selection-selected-value"))
 				.getAttribute("title")).isEqualTo("First value");
-		assertThat($(By.cssSelector("div[class^=TableWidget]")).$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
-				.first().$$(By.tagName("td")).get(getIndexColumn("Dictionary")).getText()).isEqualTo("First value");
+		assertThat(lw.FindColumnInRow("Dictionary", lw.FindRow("Name", "This field is mandatory")).getText())
+				.isEqualTo("First value");
 
 		//Removing a selection from a dropdown list on Form
-		actions().moveToElement(getComboBox("Dictionary").$(By.className("ant-select-selection__clear"))).perform();
-		getComboBox("Dictionary").$(By.className("ant-select-selection__clear")).shouldBe(Condition.visible).click();
+		fw.clearComboBox();
 
 		//Click "Сохранить" on the Form
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+		fw.clickButtonForm("Сохранить");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Dictionary").click();
 
 		//Dictionary and List checks
-		assertThat(getComboBox("Dictionary").$(By.cssSelector(".ant-select-selection-selected-value"))
+		assertThat(fw.getComboBox("Dictionary").$(By.cssSelector(".ant-select-selection-selected-value"))
 				.getAttribute("title")).isEmpty();
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Dictionary")).getText()).isEmpty();
+		assertThat(lw.FindColumnInRow("Dictionary", lw.FindRow("Name", "This field is mandatory")).getText()).isEmpty();
 
 		//Selecting the Fourth value in the dropdown list on List
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Dictionary")).doubleClick();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Dictionary"))
-				.$(By.cssSelector(".ant-select-selection--single")).click();
-		assertThat($(By.cssSelector("div[class^=ant-select-dropdown] ul")).$$(By.tagName("li")).size()).isEqualTo(4);
-		$(By.cssSelector("div[class^=ant-select-dropdown] ul")).$$(By.tagName("li")).last().click();
+		lw.FindRow("Name", "This field is mandatory").$$(By.tagName("td")).last().scrollIntoView(true);
+		ElementsCollection comboBoxList = lw
+				.getComboBoxList(lw.FindColumnInRow("Dictionary", lw.FindRow("Name", "This field is mandatory")));
+		assertThat(comboBoxList.size()).isEqualTo(4);
+		comboBoxList.last().click();
 
 		//Saving with three dots
-		actions().moveToElement(FirstRowTable()).perform();
-		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
-		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
-		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Сохранить")).click();
+		lw.ClickActionThreeDots(lw.FindRow("Name", "This field is mandatory"), "Сохранить");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Dictionary").click();
 
 		//Dictionary and List checks
-		assertThat(getComboBox("Dictionary").$(By.cssSelector(".ant-select-selection-selected-value"))
+		assertThat(lw.FindColumnInRow("Dictionary", lw.FindRow("Name", "This field is mandatory")).getText())
+				.isEqualTo("Fourth value");
+		assertThat(fw.getComboBox("Dictionary").$(By.cssSelector(".ant-select-selection-selected-value"))
 				.getAttribute("title")).isEqualTo("Fourth value");
-		assertThat($(By.cssSelector("div[class^=TableWidget]")).$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
-				.first().$$(By.tagName("td")).get(getIndexColumn("Dictionary")).getText()).isEqualTo("Fourth value");
 
 		//Clear a Dictionary on a List
-		FirstRowTable().$$(By.tagName("td")).last().scrollIntoView(true);
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Dictionary")).doubleClick();
-		actions().moveToElement(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Dictionary"))
-				.$(By.className("ant-select-selection__clear"))).perform();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Dictionary"))
-				.$(By.className("ant-select-selection__clear")).shouldBe(Condition.visible).click();
+		lw.FindRow("Name", "This field is mandatory").$$(By.tagName("td")).last().scrollIntoView(true);
+
+		lw.clearComboBoxList(lw.FindColumnInRow("Dictionary", lw.FindRow("Name", "This field is mandatory")));
 
 		//Moving the focus to another column in the table
-		FirstRowTable().$$(By.tagName("td")).last().doubleClick();
+		lw.ListColumnsInRow(lw.FindRow("Name", "This field is mandatory")).last().doubleClick();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -535,6 +543,56 @@ public class TestUI {
 		assertThat(getInput("Pick List").getValue()).isEmpty();
 		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEmpty();
 		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List")).getText()).isEmpty();
+	}
+
+	private void TestFilter() {
+		//Navigate through the menu
+		SecondLevelMenu("Fields").click();
+
+		ListWidget lw = new ListWidget();
+
+		//Open Filter on column
+		$(By.cssSelector("div[class^='TableWidget'] thead")).$$(By.tagName("tr")).findBy(Condition.text("Name"))
+				.$(By.cssSelector("div[class^='ColumnFilter']")).click();
+
+		//Set a value and apply a filter
+		$(By.cssSelector(".ant-popover-inner-content input")).setValue("This field is mandatory");
+		$(By.cssSelector(".ant-popover-inner-content")).$$(By.tagName("button")).findBy(Condition.text("Apply")).click();
+
+		//Checking strings for compliance
+		lw.ListRows().last().scrollIntoView(true);
+		assertThat($(By.cssSelector("div[class^=TableWidget]"))
+				.$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
+				.stream()
+				.allMatch(r -> r.$$(By.tagName("td")).get(getIndexColumn("Name")).getText()
+						.equals("This field is mandatory"))).isTrue();
+
+		//Open Filter on column
+		$(By.cssSelector("div[class^='TableWidget'] thead")).$$(By.tagName("tr")).findBy(Condition.text("Name"))
+				.$(By.cssSelector("div[class^='ColumnFilter']")).click();
+
+		//Set a random value and apply a filter
+		$(By.cssSelector(".ant-popover-inner-content input")).clear();
+		$(By.cssSelector(".ant-popover-inner-content input")).setValue("Random_text_3_P5LbW");
+		$(By.cssSelector(".ant-popover-inner-content")).$$(By.tagName("button")).findBy(Condition.text("Apply")).click();
+
+		//Checking strings for compliance (The waiting is empty)
+		assertThat($(By.cssSelector("div[class^=TableWidget]"))
+				.$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
+				.stream()
+				.allMatch(r -> r.$$(By.tagName("td")).get(getIndexColumn("Name")).getText().isEmpty()
+				)).isTrue();
+
+		//Click "Clear all filters"
+		$(By.cssSelector("div[class^='TableWidget__filtersContainer'] a")).click();
+
+		//Checking strings for compliance (The waiting is not null)
+		$(By.cssSelector(".ant-table-tbody")).$$(By.cssSelector("tr")).shouldBe(CollectionCondition.sizeGreaterThan(0));
+		assertThat($(By.cssSelector("div[class^=TableWidget]"))
+				.$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
+				.stream()
+				.allMatch(r -> r.$$(By.tagName("td")).get(getIndexColumn("Name")).getText().isEmpty()
+				)).isFalse();
 	}
 
 }
