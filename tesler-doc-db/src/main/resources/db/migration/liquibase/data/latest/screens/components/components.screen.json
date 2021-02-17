@@ -59,6 +59,9 @@
           },
           {
             "viewName": "radio"
+          },
+          {
+            "viewName": "mvg"
           }
         ]
       }

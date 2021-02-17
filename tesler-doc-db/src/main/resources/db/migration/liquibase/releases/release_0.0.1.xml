@@ -283,5 +283,39 @@
     </loadData>
   </changeSet>
 
-</databaseChangeLog>
+  <changeSet id="wares-table" author="ifedorov">
+    <createTable tableName="WARE">
+      <column name="ID" remarks="Primary key" type="NUMBER(19, 0)">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="name" type="VARCHAR2(1000)"/>
+      <column name="component1" type="VARCHAR2(255)"/>
+      <column name="component2" type="VARCHAR2(255)"/>
+      <column defaultValueComputed="current_timestamp" name="CREATED_DATE" remarks="Дата создания"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueComputed="current_timestamp" name="UPDATED_DATE" remarks="Дата обновления"
+              type="TIMESTAMP(6)">
+        <constraints nullable="false"/>
+      </column>
+      <column defaultValueNumeric="1" name="CREATED_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="WARE_CREATED_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="1" name="LAST_UPD_BY_USER_ID" type="NUMBER(19, 0)">
+        <constraints nullable="false" foreignKeyName="WARE_LAST_UPD_BY" references="USERS"/>
+      </column>
+      <column defaultValueNumeric="0" name="VSTAMP" type="NUMBER(19, 0)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
 
+  <changeSet id="wares-example" author="ifedorov">
+    <sql>
+      INSERT INTO WARE VALUES (1000000,'Ware Example 1','Component1_1','Component1_2'),(1000001,'Ware Example 2','Component2_1','Component2_2');
+      INSERT INTO WARE VALUES (1000002,'Ware Example 3 (with empty component2)','Component3_1');
+    </sql>
+  </changeSet>
+
+</databaseChangeLog>
