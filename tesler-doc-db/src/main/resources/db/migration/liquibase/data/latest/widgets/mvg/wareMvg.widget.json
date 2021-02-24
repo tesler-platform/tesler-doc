@@ -1,0 +1,41 @@
+{
+  "name": "wareMvg",
+  "title": "MVG Example",
+  "type": "List",
+  "bc": "ware",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input",
+      "drillDown": "true"
+    },
+    {
+      "title": "Component 1",
+      "key": "component1",
+      "type": "input"
+    },
+    {
+      "title": "Component 2",
+      "key": "component2",
+      "type": "input"
+    },
+    {
+      "title": "Components",
+      "key": "components",
+      "type": "multivalue",
+      "displayedKey": "component1"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {
+      "include": [
+        "create",
+        "save"
+      ]
+    }
+  }
+}

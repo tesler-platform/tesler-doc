@@ -1,0 +1,13 @@
+{
+  "name": "warecreation",
+  "title": "Ware Creation",
+  "template": "DashboardView",
+  "url": "/screen/example/view/warecreation/",
+  "widgets": [
+    {
+      "widgetName": "wareCreation",
+      "position": 0,
+      "gridWidth": 2
+    }
+  ]
+}

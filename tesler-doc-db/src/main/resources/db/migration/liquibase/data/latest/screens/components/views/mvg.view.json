@@ -1,0 +1,29 @@
+{
+  "name": "mvg",
+  "title": "Multivalue Group",
+  "template": "DashboardView",
+  "url": "/screen/components/view/mvg",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "db/migration/liquibase/data/latest/widgets/fields/Mvg.md"
+    },
+    {
+      "widgetName": "wareMvgHeader",
+      "position": 2,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "wareMvg",
+      "position": 3,
+      "gridWidth": 2
+    }
+  ]
+}

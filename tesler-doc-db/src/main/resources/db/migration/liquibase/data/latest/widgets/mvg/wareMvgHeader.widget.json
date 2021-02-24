@@ -1,0 +1,10 @@
+{
+  "name": "wareMvgHeader",
+  "type": "Header",
+  "title": "Wares list (MVG example)",
+  "showCondition": [],
+  "fields": [],
+  "axisFields": [],
+  "chart": [],
+  "options": {}
+}

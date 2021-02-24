@@ -1,0 +1,15 @@
+{
+  "name": "warecreationscr",
+  "title": "Ware Creation",
+  "primaryViewName": "warecreation",
+  "primaryViews": [
+    "warecreation"
+  ],
+  "navigation": {
+    "menu": [
+      {
+        "viewName": "warecreation"
+      }
+    ]
+  }
+}
