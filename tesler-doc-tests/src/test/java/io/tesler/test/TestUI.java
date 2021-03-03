@@ -122,7 +122,7 @@ public class TestUI {
 	@Test
 	public void TestUI() {
 
-		Configuration.headless = true;
+//		Configuration.headless = true;
 		Configuration.browserSize = "1440x768";
 
 		Login();
@@ -135,7 +135,8 @@ public class TestUI {
 	}
 
 	private void Login() {
-		open("http://localhost:8080");
+		open("http://tesler-doc-node-1:8080");
+//		open("http://localhost:8080");
 
 		LoginInput(0).setValue("Test");
 		LoginButton.click();

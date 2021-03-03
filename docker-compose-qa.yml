@@ -1,0 +1,36 @@
+version: '3.6'
+
+services:
+  tests:
+    build: ./tesler-doc-tests
+    image: tesler-doc-tests:latest
+    environment:
+      TESLER_URL: 'http://tesler-doc-node-1:8080'
+    depends_on:
+      - tesler-doc-node-1
+  tesler-doc-node-1:
+    build: ./tesler-doc-app
+    image: tesler-doc-app:latest
+    environment:
+      DATABASE_DRIVER: 'org.postgresql.Driver'
+      DATABASE_URL: 'jdbc:postgresql://pgs:5432/postgres'
+      DATABASE_USER: 'postgres'
+      DATABASE_PASSWORD: 'khKJPOsfiwae'
+      JAVA_TOOL_OPTIONS: '-agentlib:jdwp=transport=dt_socket,server=y,address=8989,suspend=n'
+    expose:
+      - 8080
+    ports:
+      - 0.0.0.0:8081:8080
+      - 127.0.0.1:8981:8989
+    depends_on:
+      - pgs
+
+  pgs:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=khKJPOsfiwae
+    expose:
+      - 5432
+    ports:
+      - 127.0.0.1:6431:5432
