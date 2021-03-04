@@ -121,8 +121,9 @@ public class TestUI {
 
 	@Test
 	public void TestUI() {
-
-//		Configuration.headless = true;
+		String ee = System.getProperty("test.dbDriver");
+		Configuration.driverManagerEnabled = false;
+		Configuration.remote = "http://localhost:4444/wd/hub";
 		Configuration.browserSize = "1440x768";
 
 		Login();
@@ -135,8 +136,8 @@ public class TestUI {
 	}
 
 	private void Login() {
-		open("http://tesler-doc-node-1:8080");
-//		open("http://localhost:8080");
+		open("http://tesler-doc-node-qa:8080");
+		//open("http://localhost:8080");
 
 		LoginInput(0).setValue("Test");
 		LoginButton.click();

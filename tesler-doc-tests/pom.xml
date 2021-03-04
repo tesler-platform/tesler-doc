@@ -99,7 +99,8 @@
               </execution>
             </executions>
             <configuration>
-              <forkCount>1</forkCount>
+              <forkMode>never</forkMode>
+              <forkCount>0</forkCount>
               <reuseForks>true</reuseForks>
               <trimStackTrace>false</trimStackTrace>
               <argLine>-javaagent:${project.build.directory}/agents/spring-instrument-${spring.version}.jar</argLine>

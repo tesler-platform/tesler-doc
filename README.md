@@ -51,3 +51,20 @@ docker volume prune
 mvn clean install -PUI -U && mvn clean install -U && docker-compose up --build -d
 docker-compose ps
 ```
+
+## Run ui tests
+
+
+Full clean restart tests. For local development only! After app build perform:
+``
+docker-compose -f C:\projects\daimler\tesler-doc\docker-compose-qa.yml stop
+docker-compose -f C:\projects\daimler\tesler-doc\docker-compose-qa.yml rm -sfv
+docker system prune --force
+docker volume prune  --force
+docker-compose -f C:\projects\daimler\tesler-doc\docker-compose-qa.yml  up --build --force-recreate -d
+``
+wait until containers are start and ready (i.e. you can login to localhost:8080)
+````
+cd tesler-doc-tests
+mvn clean verify -P Tests
+````

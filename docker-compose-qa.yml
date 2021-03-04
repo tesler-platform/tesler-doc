@@ -1,31 +1,46 @@
+# To execute this docker-compose yml file use `docker-compose -f docker-compose-qa.yml up`
+# Add the `-d` flag at the end for detached execution
+# To stop the execution, hit Ctrl+C, and then `docker-compose -f docker-compose-qa.yml down`
+
 version: '3.6'
 
 services:
-  tests:
-    build: ./tesler-doc-tests
-    image: tesler-doc-tests:latest
-    environment:
-      TESLER_URL: 'http://tesler-doc-node-1:8080'
+  selenium-hub:
+    image: selenium/hub:4.0.0-beta-1-20210215
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+  chrome:
+    image: selenium/node-chrome:4.0.0-beta-1-20210215
+    volumes:
+      - ./tesler-doc-tests/build/shm:/dev/shm
     depends_on:
-      - tesler-doc-node-1
-  tesler-doc-node-1:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "6900:5900"
+  tesler-doc-node-qa:
     build: ./tesler-doc-app
     image: tesler-doc-app:latest
     environment:
       DATABASE_DRIVER: 'org.postgresql.Driver'
-      DATABASE_URL: 'jdbc:postgresql://pgs:5432/postgres'
+      DATABASE_URL: 'jdbc:postgresql://pgs-qa:5432/postgres'
       DATABASE_USER: 'postgres'
       DATABASE_PASSWORD: 'khKJPOsfiwae'
       JAVA_TOOL_OPTIONS: '-agentlib:jdwp=transport=dt_socket,server=y,address=8989,suspend=n'
     expose:
       - 8080
     ports:
-      - 0.0.0.0:8081:8080
+      - 0.0.0.0:8080:8080
       - 127.0.0.1:8981:8989
     depends_on:
-      - pgs
-
-  pgs:
+      - pgs-qa
+  pgs-qa:
     image: postgres:alpine
     environment:
       - POSTGRES_DB=postgres
