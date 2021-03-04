@@ -21,6 +21,7 @@
 package io.tesler.test.widgets;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.actions;
 
 import com.codeborne.selenide.CollectionCondition;
@@ -49,6 +50,7 @@ public class ListWidget {
 	}
 
 	public ElementsCollection ListRows() {
+		$(By.cssSelector(".ant-table-tbody")).shouldBe(Condition.exist);
 		return $(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"));
 	}
 
@@ -73,6 +75,16 @@ public class ListWidget {
 		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
 		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
 		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text(buttonName)).click();
+	}
+
+	public void ClickButtonList(String buttonName) {
+		$$(By.cssSelector("div[class^='Card__container']"))
+				.stream()
+				.filter(r -> r.$(By.cssSelector("div[class^='TableWidget__tableContainer']")).is(Condition.exist))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException("no elements found"))
+				.$(By.cssSelector("div[class^='Operations__container']")).$$(By.cssSelector("button"))
+				.findBy(Condition.text(buttonName)).click();
 	}
 
 	public ElementsCollection getComboBoxList(SelenideElement column) {

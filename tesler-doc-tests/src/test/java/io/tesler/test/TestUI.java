@@ -155,9 +155,24 @@ public class TestUI {
 		FirstLevelMenu("Fields").click();
 		SecondLevelMenu("Input").click();
 
-		//Find Form widget and List widget
-		FormWidget fw = new FormWidget();
+		//Find List widget
 		ListWidget lw = new ListWidget();
+
+		//Check records on List widget
+		if (lw.ListRows().isEmpty()) {
+			lw.ClickButtonList("Создать");
+			FormWidget fw = new FormWidget();
+			fw.getInput("Name").setValue("Test record");
+			fw.clickButtonForm("Сохранить");
+			FirstLevelMenu("Fields").click();
+			SecondLevelMenu("Input").click();
+		} else {
+			return;
+		}
+
+		//Find Form and List widget
+		FormWidget fw = new FormWidget();
+		lw = new ListWidget();
 
 		//Checking the status of the Input field
 		fw.getInput("Test Input").shouldBe(Condition.readonly.negate());
