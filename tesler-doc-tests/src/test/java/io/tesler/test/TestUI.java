@@ -160,10 +160,10 @@ public class TestUI {
 
 		//Check records on List widget
 		if (lw.ListRows().isEmpty()) {
-			lw.ClickButtonList("Создать");
+			lw.ClickButtonList("Create");
 			FormWidget fw = new FormWidget();
 			fw.getInput("Name").setValue("Test record");
-			fw.clickButtonForm("Сохранить");
+			fw.clickButtonForm("Save");
 			FirstLevelMenu("Fields").click();
 			SecondLevelMenu("Input").click();
 		} else {
@@ -186,8 +186,8 @@ public class TestUI {
 		fw.getInput("Name").setValue("Q");
 		fw.getInput("Name").sendKeys(Keys.BACK_SPACE);
 
-		//Click "Сохранить"
-		fw.clickButtonForm("Сохранить");
+		//Click "Save"
+		fw.clickButtonForm("Save");
 
 		//Checking the required field
 		assertThat($(By.cssSelector(".ant-form-explain")).shouldBe(Condition.visible).getText())
@@ -203,8 +203,8 @@ public class TestUI {
 		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).getText())
 				.isEqualTo(LargeText);
 
-		//Click "Сохранить"
-		fw.clickButtonForm("Сохранить");
+		//Click "Save"
+		fw.clickButtonForm("Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -221,7 +221,7 @@ public class TestUI {
 				.setValue(SmallText);
 
 		//Saving with three dots
-		lw.ClickActionThreeDots(lw.FindRow("Name", "This field is mandatory"), "Сохранить");
+		lw.ClickActionThreeDots(lw.FindRow("Name", "This field is mandatory"), "Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -260,9 +260,9 @@ public class TestUI {
 		assertThat(fw.getComboBoxList("Dictionary").size()).isEqualTo(4);
 		fw.getComboBoxList("Dictionary").first().click();
 
-		//Click "Сохранить" on the Form
+		//Click "Save" on the Form
 		fw.getInput("Name").setValue("This field is mandatory");
-		fw.clickButtonForm("Сохранить");
+		fw.clickButtonForm("Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -277,8 +277,8 @@ public class TestUI {
 		//Removing a selection from a dropdown list on Form
 		fw.clearComboBox();
 
-		//Click "Сохранить" on the Form
-		fw.clickButtonForm("Сохранить");
+		//Click "Save" on the Form
+		fw.clickButtonForm("Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -297,7 +297,7 @@ public class TestUI {
 		comboBoxList.last().click();
 
 		//Saving with three dots
-		lw.ClickActionThreeDots(lw.FindRow("Name", "This field is mandatory"), "Сохранить");
+		lw.ClickActionThreeDots(lw.FindRow("Name", "This field is mandatory"), "Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -348,14 +348,15 @@ public class TestUI {
 		getInput("Money").setValue("01222333.489");
 		getInput("Percent").setValue("-998,500");
 
-		//Click "Сохранить" on the Form
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+		//Click "Save" on the Form
+		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Save")).click();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Number").click();
 
 		//Numbers and List checks
+		getInput("Number").shouldHave(Condition.attribute("value", "-10" + "\u00A0" + "000"));
 		assertThat(getInput("Number").getAttribute("value")).isEqualTo("-10" + "\u00A0" + "000");
 		assertThat(getInput("Money").getAttribute("value")).isEqualTo("1" + "\u00A0" + "222" + "\u00A0" + "333,49");
 		//TODO с активным фокусом на поле не происходит округления
@@ -387,13 +388,14 @@ public class TestUI {
 		actions().moveToElement(FirstRowTable()).perform();
 		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
 		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
-		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Сохранить")).click();
+		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Save")).click();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Number").click();
 
 		//Numbers and List checks
+		getInput("Number").shouldHave(Condition.attribute("value", "-20" + "\u00A0" + "000"));
 		assertThat(getInput("Number").getAttribute("value")).isEqualTo("-20" + "\u00A0" + "000");
 		assertThat(getInput("Money").getAttribute("value")).isEqualTo("-7" + "\u00A0" + "000,13");
 		//TODO с активным фокусом на поле не происходит округления
@@ -435,8 +437,8 @@ public class TestUI {
 				.click();
 		LocalDateTime date = LocalDateTime.now();
 
-		//Click "Сохранить" on the Form
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+		//Click "Save" on the Form
+		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Save")).click();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -469,7 +471,7 @@ public class TestUI {
 		actions().moveToElement(FirstRowTable()).perform();
 		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
 		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
-		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Сохранить")).click();
+		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Save")).click();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -495,8 +497,8 @@ public class TestUI {
 		//Click on a column in Popup
 		FindColumnInRow("Name", FindRowPickListWithColumnValue("Name", "This field is mandatory")).click();
 
-		//Click "Сохранить" on the Form
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+		//Click "Save" on the Form
+		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Save")).click();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -526,7 +528,7 @@ public class TestUI {
 		actions().moveToElement(FirstRowTable()).perform();
 		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
 		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
-		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Сохранить")).click();
+		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Save")).click();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -546,8 +548,8 @@ public class TestUI {
 		$$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText("Pick List")).$(By.className("ant-input-suffix"))
 				.click();
 
-		//Click "Сохранить" on the Form
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Сохранить")).click();
+		//Click "Save" on the Form
+		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Save")).click();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -592,6 +594,7 @@ public class TestUI {
 		$(By.cssSelector(".ant-popover-inner-content")).$$(By.tagName("button")).findBy(Condition.text("Apply")).click();
 
 		//Checking strings for compliance (The waiting is empty)
+		$(By.cssSelector(".ant-table-tbody")).shouldBe(Condition.exist);
 		assertThat($(By.cssSelector("div[class^=TableWidget]"))
 				.$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
 				.stream()
