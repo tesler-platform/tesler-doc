@@ -51,3 +51,39 @@ services:
       - 5432
     ports:
       - 127.0.0.1:6431:5432
+
+  tesler-doc-node-jacoco:
+    build: ./tesler-doc-app
+    image: tesler-doc-app:latest
+    environment:
+      DATABASE_DRIVER: 'org.postgresql.Driver'
+      DATABASE_URL: 'jdbc:postgresql://pgs-qa:5432/postgres'
+      DATABASE_USER: 'postgres'
+      DATABASE_PASSWORD: 'khKJPOsfiwae'
+      JAVA_TOOL_OPTIONS: '-agentlib:jdwp=transport=dt_socket,server=y,address=8989,suspend=n -javaagent:/jacoco/lib/jacocoagent.jar=address=127.0.0.7,port=36320,destfile=jacoco-it.exec,output=tcpserver'
+    volumes:
+      - jacoco:/jacoco:ro
+    expose:
+      - 8080
+    ports:
+      - 0.0.0.0:8080:8080
+      - 127.0.0.1:8981:8989
+      - 127.0.0.7:36320:36320
+    depends_on:
+      - pgs-qa
+      - jacoco
+  pgs-qa:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=khKJPOsfiwae
+    expose:
+      - 5432
+    ports:
+      - 127.0.0.1:6431:5432
+  jacoco:
+    image: ictu/jacoco-agent-docker:0.8.6
+    volumes:
+      - jacoco:/jacoco:ro
+volumes:
+  jacoco:

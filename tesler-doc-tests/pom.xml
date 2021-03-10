@@ -129,7 +129,7 @@
                 </goals>
                 <configuration>
                   <destFile>${project.build.directory}/jacoco-it.exec</destFile>
-                  <address>localhost</address>
+                  <address>127.0.0.7</address>
                   <port>36320</port>
                   <append>true</append>
                 </configuration>
