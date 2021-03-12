@@ -38,15 +38,14 @@ public class FormWidget {
 	}
 
 	public SelenideElement getInput(String fieldName) {
+		$$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText(fieldName)).$(By.tagName("input"))
+				.shouldBe(Condition.exist);
 		return $$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText(fieldName)).$(By.tagName("input"));
 	}
 
 	public SelenideElement getInputwithErrors(String fieldName, String errorText) {
 		return $$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText(fieldName + "\n" + errorText))
 				.$(By.tagName("input"));
-		//Name
-		//This field is mandatory
-		//.exactText(fieldName)).$(By.tagName("input"));
 	}
 
 	public void clickButtonForm(String buttonName) {
@@ -60,19 +59,44 @@ public class FormWidget {
 	}
 
 	public SelenideElement getComboBox(String fieldName) {
+		$$(By.cssSelector(".ant-form-item")).findBy(Condition.text(fieldName)).shouldBe(Condition.exist);
 		return $$(By.cssSelector(".ant-form-item")).findBy(Condition.text(fieldName));
 	}
 
 	public ElementsCollection getComboBoxList(String fieldName) {
-		getComboBox(fieldName).$(By.cssSelector(".ant-select-selection__rendered")).shouldBe(Condition.visible).click();
 		return getComboBox(fieldName).$(By.cssSelector("div[class^=ant-select-dropdown] ul")).shouldBe(Condition.visible)
 				.$$(By.tagName("li"));
 	}
 
-	public void clearComboBox() {
-		actions().moveToElement(getComboBox("Dictionary").$(By.className("ant-select-selection__clear"))).perform();
-		getComboBox("Dictionary").$(By.className("ant-select-selection__clear")).shouldBe(Condition.visible).click();
+	public SelenideElement callPickList(String fieldName) {
+		$$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText(fieldName))
+				.$(By.cssSelector("i[class='anticon anticon-paper-clip']")).shouldBe(Condition.exist);
+		return $$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText(fieldName))
+				.$(By.cssSelector("i[class='anticon anticon-paper-clip']"));
 	}
 
+	public SelenideElement getPickList(String fieldName) {
+		$$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText(fieldName)).shouldBe(Condition.exist);
+		return $$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText(fieldName));
+	}
 
+	public void clearComboBox(String fieldName) {
+		actions().moveToElement(getComboBox(fieldName).$(By.className("ant-select-selection__clear"))).perform();
+		getComboBox(fieldName).$(By.className("ant-select-selection__clear")).shouldBe(Condition.visible).click();
+	}
+
+	public void clearPickList(String fieldName) {
+		getPickList(fieldName).$(By.className("ant-input-suffix"))
+				.click();
+	}
+
+	public void setDateCurrentDay(SelenideElement itemControlDate) {
+		itemControlDate.click();
+		$(By.cssSelector(".ant-calendar-table")).shouldBe(Condition.visible);
+		$(By.cssSelector(".ant-calendar-tbody"))
+				.$$(By.tagName("tr")).findBy(Condition.cssClass("ant-calendar-current-week"))
+				.$$(By.tagName("td"))
+				.findBy(Condition.cssClass("ant-calendar-today"))
+				.click();
+	}
 }

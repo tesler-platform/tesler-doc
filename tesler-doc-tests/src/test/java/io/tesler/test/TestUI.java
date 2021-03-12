@@ -27,11 +27,11 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.tesler.test.widgets.FormWidget;
 import io.tesler.test.widgets.ListWidget;
+import io.tesler.test.widgets.PickListWidget;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -61,54 +61,6 @@ public class TestUI {
 	private SelenideElement SecondLevelMenu(String text) {
 		return $(By.cssSelector("nav[class^='SecondLevelTabs__container']"))
 				.$$(By.cssSelector("div[class$='ant-tabs-tab']")).findBy(Condition.exactText(text));
-	}
-
-	private SelenideElement getInput(String fieldName, int index) {
-		return $$(By.cssSelector(".ant-form-item")).filterBy(Condition.exactText(fieldName)).get(index)
-				.$(By.tagName("input"));
-	}
-
-	private SelenideElement getInput(String fieldName) {
-		return $$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText(fieldName)).$(By.tagName("input"));
-	}
-
-	private SelenideElement getComboBox(String fieldName) {
-		return $$(By.cssSelector(".ant-form-item")).findBy(Condition.text(fieldName));
-	}
-
-	//List
-	private SelenideElement FirstRowTable() {
-		return $(By.cssSelector("div[class^=TableWidget]")).$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
-				.first();
-	}
-
-	private Integer getIndexColumn(String columnName) {
-		$(By.cssSelector("div[class^=TableWidget]")).shouldBe(Condition.visible);
-		List<String> tableColumns = $(By.cssSelector("div[class^=TableWidget]")).$$(By.tagName("th")).texts();
-		return tableColumns.indexOf(columnName);
-	}
-
-	//PickList
-	private Integer getIndexColumnPickList(String columnName) {
-		$(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']")).shouldHave(Condition.visible);
-		List<String> tableColumns = $(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']"))
-				.$$(By.tagName("th")).texts();
-		return tableColumns.indexOf(columnName);
-	}
-
-	private SelenideElement FindColumnInRow(String columnName, SelenideElement row) {
-		$(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']")).shouldHave(Condition.visible);
-		return row.$$(By.tagName("td")).get(getIndexColumnPickList(columnName));
-	}
-
-	private SelenideElement FindRowPickListWithColumnValue(String columnName, String columnValue) {
-		$(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']")).shouldHave(Condition.visible);
-		return $(By.cssSelector("div[class^='ant-table-wrapper PickListPopup__table']"))
-				.$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
-				.stream()
-				.filter(r -> FindColumnInRow(columnName, r).getText().equals(columnValue))
-				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("no row with columnValue found"));
 	}
 
 	private String LargeText = "Etiam nec eros nulla. Suspendisse viverra mollis dolor non iaculis. Duis imperdiet facilisis urna non ultrices. Mauris aliquet dui massa, sit amet iaculis enim blandit nec. Suspendisse tempus nunc imperdiet tellus faucibus feugiat.";
@@ -166,8 +118,6 @@ public class TestUI {
 			fw.clickButtonForm("Save");
 			FirstLevelMenu("Fields").click();
 			SecondLevelMenu("Input").click();
-		} else {
-			return;
 		}
 
 		//Find Form and List widget
@@ -197,10 +147,13 @@ public class TestUI {
 		fw.getInputwithErrors("Name", "This field is mandatory")
 				.setValue("This field is mandatory").pressTab();
 
+		//Find Row in List
+		Long rowId = lw.FindRowId("Name", "This field is mandatory");
+
 		//Input and List Checks
 		assertThat(fw.getInput("Name").getAttribute("value")).isEqualTo("This field is mandatory");
 		assertThat(fw.getInput("Test Input").getAttribute("value")).isEqualTo(LargeText);
-		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).getText())
+		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow(rowId)).getText())
 				.isEqualTo(LargeText);
 
 		//Click "Save"
@@ -212,32 +165,32 @@ public class TestUI {
 
 		//Input and List Checks
 		assertThat(fw.getInput("Test Input").getAttribute("value")).isEqualTo(LargeText);
-		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).getText())
+		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow(rowId)).getText())
 				.isEqualTo(LargeText);
 
 		//Entering text into a cell on a List
-		lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).doubleClick();
-		lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).$(By.cssSelector("input"))
+		lw.FindColumnInRow("Test Input", lw.FindRow(rowId)).doubleClick();
+		lw.FindColumnInRow("Test Input", lw.FindRow(rowId)).$(By.cssSelector("input"))
 				.setValue(SmallText);
 
 		//Saving with three dots
-		lw.ClickActionThreeDots(lw.FindRow("Name", "This field is mandatory"), "Save");
+		lw.ClickActionThreeDots(lw.FindRow(rowId), "Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Input").click();
 
 		//Input and List Checks
-		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).getText())
+		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow(rowId)).getText())
 				.isEqualTo(SmallText);
 		assertThat(fw.getInput("Test Input").getAttribute("value")).isEqualTo(SmallText);
 
 		//Clearing values on the List widget
-		lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).doubleClick();
-		lw.FindColumnInRow("Test Input", lw.FindRow("Name", "This field is mandatory")).$(By.cssSelector("input")).clear();
+		lw.FindColumnInRow("Test Input", lw.FindRow(rowId)).doubleClick();
+		lw.FindColumnInRow("Test Input", lw.FindRow(rowId)).$(By.cssSelector("input")).clear();
 
 		//Moving the focus to another column in the table
-		lw.ListColumnsInRow(lw.FindRow("Name", "This field is mandatory")).last().doubleClick();
+		lw.ListColumnsInRow(lw.FindRow(rowId)).last().doubleClick();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -255,8 +208,10 @@ public class TestUI {
 		//Find Form widget and List widget
 		FormWidget fw = new FormWidget();
 		ListWidget lw = new ListWidget();
+		Long rowId = lw.FindRowId("Name", "This field is mandatory");
 
 		//Selecting First value in the dropdown list on Form
+		fw.getComboBox("Dictionary").click();
 		assertThat(fw.getComboBoxList("Dictionary").size()).isEqualTo(4);
 		fw.getComboBoxList("Dictionary").first().click();
 
@@ -271,11 +226,11 @@ public class TestUI {
 		//Dictionary and List checks
 		assertThat(fw.getComboBox("Dictionary").$(By.cssSelector(".ant-select-selection-selected-value"))
 				.getAttribute("title")).isEqualTo("First value");
-		assertThat(lw.FindColumnInRow("Dictionary", lw.FindRow("Name", "This field is mandatory")).getText())
+		assertThat(lw.FindColumnInRow("Dictionary", lw.FindRow(rowId)).getText())
 				.isEqualTo("First value");
 
 		//Removing a selection from a dropdown list on Form
-		fw.clearComboBox();
+		fw.clearComboBox("Dictionary");
 
 		//Click "Save" on the Form
 		fw.clickButtonForm("Save");
@@ -287,35 +242,36 @@ public class TestUI {
 		//Dictionary and List checks
 		assertThat(fw.getComboBox("Dictionary").$(By.cssSelector(".ant-select-selection-selected-value"))
 				.getAttribute("title")).isEmpty();
-		assertThat(lw.FindColumnInRow("Dictionary", lw.FindRow("Name", "This field is mandatory")).getText()).isEmpty();
+		assertThat(lw.FindColumnInRow("Dictionary", lw.FindRow(rowId)).getText()).isEmpty();
 
 		//Selecting the Fourth value in the dropdown list on List
-		lw.FindRow("Name", "This field is mandatory").$$(By.tagName("td")).last().scrollIntoView(true);
+		lw.FindRow(rowId).$$(By.tagName("td")).last().scrollIntoView(true);
+
 		ElementsCollection comboBoxList = lw
-				.getComboBoxList(lw.FindColumnInRow("Dictionary", lw.FindRow("Name", "This field is mandatory")));
+				.getComboBoxList(lw.FindColumnInRow("Dictionary", lw.FindRow(rowId)));
 		assertThat(comboBoxList.size()).isEqualTo(4);
 		comboBoxList.last().click();
 
 		//Saving with three dots
-		lw.ClickActionThreeDots(lw.FindRow("Name", "This field is mandatory"), "Save");
+		lw.ClickActionThreeDots(lw.FindRow(rowId), "Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Dictionary").click();
 
 		//Dictionary and List checks
-		assertThat(lw.FindColumnInRow("Dictionary", lw.FindRow("Name", "This field is mandatory")).getText())
+		assertThat(lw.FindColumnInRow("Dictionary", lw.FindRow(rowId)).getText())
 				.isEqualTo("Fourth value");
 		assertThat(fw.getComboBox("Dictionary").$(By.cssSelector(".ant-select-selection-selected-value"))
 				.getAttribute("title")).isEqualTo("Fourth value");
 
 		//Clear a Dictionary on a List
-		lw.FindRow("Name", "This field is mandatory").$$(By.tagName("td")).last().scrollIntoView(true);
+		lw.FindRow(rowId).$$(By.tagName("td")).last().scrollIntoView(true);
 
-		lw.clearComboBoxList(lw.FindColumnInRow("Dictionary", lw.FindRow("Name", "This field is mandatory")));
+		lw.clearComboBoxList(lw.FindColumnInRow("Dictionary", lw.FindRow(rowId)));
 
 		//Moving the focus to another column in the table
-		lw.ListColumnsInRow(lw.FindRow("Name", "This field is mandatory")).last().doubleClick();
+		lw.ListColumnsInRow(lw.FindRow(rowId)).last().doubleClick();
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
@@ -332,284 +288,255 @@ public class TestUI {
 	private void TestNumber() {
 		SecondLevelMenu("Number").click();
 
+		//Find Form widget and List widget
+		FormWidget fw = new FormWidget();
+		ListWidget lw = new ListWidget();
+		Long rowId = lw.FindRowId("Name", "This field is mandatory");
+
 		//Entering text values in fields on Form
-		getInput("Number").setValue("Text");
-		getInput("Money").setValue("Text");
-		getInput("Percent").setValue("Text");
-		getInput("Percent").pressTab();
+		fw.getInput("Number").setValue("Text");
+		fw.getInput("Money").setValue("Text");
+		fw.getInput("Percent").setValue("Text");
+		fw.getInput("Percent").pressTab();
 
 		//Field checks
-		assertThat(getInput("Number").getAttribute("value")).isEqualTo("0");
-		assertThat(getInput("Money").getAttribute("value")).isEqualTo("0,00");
-		assertThat(getInput("Percent").getAttribute("value")).isEqualTo("0 %");
+		assertThat(fw.getInput("Number").getAttribute("value")).isEqualTo("0");
+		assertThat(fw.getInput("Money").getAttribute("value")).isEqualTo("0,00");
+		assertThat(fw.getInput("Percent").getAttribute("value")).isEqualTo("0 %");
 
 		//Entering numeric values in fields on Form
-		getInput("Number").setValue("-10g000");
-		getInput("Money").setValue("01222333.489");
-		getInput("Percent").setValue("-998,500");
+		fw.getInput("Number").setValue("-10g000");
+		fw.getInput("Money").setValue("01222333.489");
+		fw.getInput("Percent").setValue("-998,500");
 
 		//Click "Save" on the Form
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Save")).click();
+		fw.clickButtonForm("Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Number").click();
 
 		//Numbers and List checks
-		getInput("Number").shouldHave(Condition.attribute("value", "-10" + "\u00A0" + "000"));
-		assertThat(getInput("Number").getAttribute("value")).isEqualTo("-10" + "\u00A0" + "000");
-		assertThat(getInput("Money").getAttribute("value")).isEqualTo("1" + "\u00A0" + "222" + "\u00A0" + "333,49");
+		fw.getInput("Number").shouldHave(Condition.attribute("value", "-10" + "\u00A0" + "000"));
+		fw.getInput("Money").shouldHave(Condition.attribute("value", "1" + "\u00A0" + "222" + "\u00A0" + "333,49"));
 		//TODO с активным фокусом на поле не происходит округления
-		assertThat(getInput("Percent").getAttribute("value")).isEqualTo("-998 %");
+		fw.getInput("Percent").shouldHave(Condition.attribute("value", "-998 %"));
 
 		//TODO неверное отображение в List виджете (в режиме просмотра нет сотых долей, знака %)
 		/*assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).getText()).isEqualTo("-10"+"\u00A0"+"000");
 		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).getText()).isEqualTo("1"+"\u00A0"+"222"+"\u00A0"+"333,49");
 		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).getText()).isEqualTo("-998 %");*/
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).getText()).isEqualTo("-10 000");
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).getText()).isEqualTo("1 222 333");
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).getText()).isEqualTo("-998");
+		lw.FindColumnInRow("Number", lw.FindRow(rowId)).shouldHave(Condition.exactText("-10 000"));
+		lw.FindColumnInRow("Money", lw.FindRow(rowId)).shouldHave(Condition.exactText("1 222 333"));
+		lw.FindColumnInRow("Percent", lw.FindRow(rowId)).shouldHave(Condition.exactText("-998"));
 
 		//Entering values on List
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).doubleClick();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).$(By.tagName("input")).clear();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).$(By.tagName("input")).setValue("g");
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).$(By.tagName("input")).setValue("-20000,1");
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).doubleClick();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).$(By.tagName("input")).clear();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).$(By.tagName("input")).setValue("g");
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).$(By.tagName("input")).setValue("-7000,126");
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).doubleClick();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).$(By.tagName("input")).clear();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).$(By.tagName("input")).setValue("g");
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).$(By.tagName("input")).setValue("0800,512");
+		lw.FindColumnInRow("Number", lw.FindRow(rowId)).doubleClick();
+		lw.FindColumnInRow("Number", lw.FindRow(rowId)).$(By.tagName("input")).clear();
+		lw.FindColumnInRow("Number", lw.FindRow(rowId)).$(By.tagName("input")).setValue("g");
+		lw.FindColumnInRow("Number", lw.FindRow(rowId)).$(By.tagName("input")).setValue("-20000,1");
+		lw.FindColumnInRow("Money", lw.FindRow(rowId)).doubleClick();
+		lw.FindColumnInRow("Money", lw.FindRow(rowId)).$(By.tagName("input")).clear();
+		lw.FindColumnInRow("Money", lw.FindRow(rowId)).$(By.tagName("input")).setValue("g");
+		lw.FindColumnInRow("Money", lw.FindRow(rowId)).$(By.tagName("input")).setValue("-7000,126");
+		lw.FindColumnInRow("Percent", lw.FindRow(rowId)).doubleClick();
+		lw.FindColumnInRow("Percent", lw.FindRow(rowId)).$(By.tagName("input")).clear();
+		lw.FindColumnInRow("Percent", lw.FindRow(rowId)).$(By.tagName("input")).setValue("g");
+		lw.FindColumnInRow("Percent", lw.FindRow(rowId)).$(By.tagName("input")).setValue("0800,512");
 
 		//Saving with three dots
-		actions().moveToElement(FirstRowTable()).perform();
-		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
-		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
-		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Save")).click();
+		lw.ClickActionThreeDots(lw.FindRow(rowId), "Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Number").click();
 
 		//Numbers and List checks
-		getInput("Number").shouldHave(Condition.attribute("value", "-20" + "\u00A0" + "000"));
-		assertThat(getInput("Number").getAttribute("value")).isEqualTo("-20" + "\u00A0" + "000");
-		assertThat(getInput("Money").getAttribute("value")).isEqualTo("-7" + "\u00A0" + "000,13");
+		fw.getInput("Number").shouldHave(Condition.attribute("value", "-20" + "\u00A0" + "000"));
+		fw.getInput("Money").shouldHave(Condition.attribute("value", "-7" + "\u00A0" + "000,13"));
 		//TODO с активным фокусом на поле не происходит округления
-		assertThat(getInput("Percent").getAttribute("value")).isEqualTo("800 %");
+		fw.getInput("Percent").shouldHave(Condition.attribute("value", "800 %"));
 
 		//TODO неверное отображение в List виджете
 		/*assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).getText()).isEqualTo("-20"+"\u00A0"+"000");
 		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).getText()).isEqualTo("-7"+"\u00A0"+"000,13");
 		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).getText()).isEqualTo("801"+"\u00A0"+"%");*/
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Number")).getText()).isEqualTo("-20 000");
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Money")).getText()).isEqualTo("-7 000");
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Percent")).getText()).isEqualTo("800");
+		assertThat(lw.FindColumnInRow("Number", lw.FindRow(rowId)).getText()).isEqualTo("-20 000");
+		assertThat(lw.FindColumnInRow("Money", lw.FindRow(rowId)).getText()).isEqualTo("-7 000");
+		assertThat(lw.FindColumnInRow("Percent", lw.FindRow(rowId)).getText()).isEqualTo("800");
 	}
 
 	private void TestDate() {
-		//SecondLevelMenu("Date").click();
-		Menu("Components Overview").click();
-		FirstLevelMenu("Fields").click();
 		SecondLevelMenu("Date").click();
 
+		//Find Form widget and List widget
+		FormWidget fw = new FormWidget();
+		ListWidget lw = new ListWidget();
+		Long rowId = lw.FindRowId("Name", "This field is mandatory");
+
 		//Checking that the date is not filled in
-		if (FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).getText().isEmpty()) {
-			return;
-		} else {
-			FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).doubleClick();
-			actions().moveToElement(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date"))
-					.$(By.className("ant-calendar-picker-clear"))).perform();
-			FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).$(By.className("ant-calendar-picker-clear"))
-					.shouldBe(Condition.visible).click();
+		if (!(lw.FindColumnInRow("Date", lw.FindRow(rowId)).getText().isEmpty())) {
+			lw.clearDatePicker(lw.FindColumnInRow("Date", lw.FindRow(rowId)));
 		}
 
 		//Selecting the current day on Form
-		getInput("Date").click();
-		$(By.cssSelector(".ant-calendar-table")).shouldBe(Condition.visible);
-		$(By.cssSelector(".ant-calendar-tbody"))
-				.$$(By.tagName("tr")).findBy(Condition.cssClass("ant-calendar-current-week"))
-				.$$(By.tagName("td"))
-				.findBy(Condition.cssClass("ant-calendar-today"))
-				.click();
+		fw.setDateCurrentDay(fw.getInput("Date"));
 		LocalDateTime date = LocalDateTime.now();
 
 		//Click "Save" on the Form
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Save")).click();
+		fw.clickButtonForm("Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Date").click();
 
 		//Checking the date completion
-		assertThat(getInput("Date").getAttribute("value")).isEqualTo(LocalDate.now().format(DATE_FORMATTER));
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).getText())
+		assertThat(fw.getInput("Date").getAttribute("value")).isEqualTo(LocalDate.now().format(DATE_FORMATTER));
+		assertThat(lw.FindColumnInRow("Date", lw.FindRow(rowId)).getText())
 				.isEqualTo(date.format(DATE_FORMATTER));
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date and Time")).getText())
+		assertThat(lw.FindColumnInRow("Date and Time", lw.FindRow(rowId)).getText())
 				.isEqualTo(date.format(DATE_TIME_FORMATTER));
 
 		//Selecting the current day on List
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).doubleClick();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).click();
-		$(By.cssSelector(".ant-calendar-table")).shouldBe(Condition.visible);
-		$(By.cssSelector(".ant-calendar-footer a")).click();
+		lw.setDateCurrentDay(lw.FindColumnInRow("Date", lw.FindRow(rowId)));
 
 		//Checking the date completion
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).$(By.cssSelector("input")).getValue())
+		assertThat(lw.FindColumnInRow("Date", lw.FindRow(rowId)).$(By.cssSelector("input")).getValue())
 				.isEqualTo(date.format(DATE_FORMATTER));
 
 		//Clear Date picker on List
-		actions().moveToElement(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date"))
-				.$(By.className("ant-calendar-picker-clear"))).perform();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).$(By.className("ant-calendar-picker-clear"))
-				.shouldBe(Condition.visible).click();
+		lw.clearDatePicker(lw.FindColumnInRow("Date", lw.FindRow(rowId)));
 
 		//Saving with three dots
-		actions().moveToElement(FirstRowTable()).perform();
-		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
-		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
-		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Save")).click();
+		lw.ClickActionThreeDots(lw.FindRow(rowId), "Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Date").click();
 
 		//Check Date is empty
-		assertThat(getInput("Date").getAttribute("value")).isEmpty();
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date")).getText()).isEmpty();
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Date and Time")).getText()).isEmpty();
+		assertThat(fw.getInput("Date").getAttribute("value")).isEmpty();
+		assertThat(lw.FindColumnInRow("Date", lw.FindRow(rowId)).getText()).isEmpty();
+		assertThat(lw.FindColumnInRow("Date and Time", lw.FindRow(rowId)).getText()).isEmpty();
 	}
 
 	private void TestPickList() {
 		SecondLevelMenu("Picklist").click();
 
+		//Find Form widget and List widget
+		FormWidget fw = new FormWidget();
+		ListWidget lw = new ListWidget();
+		Long rowId = lw.FindRowId("Name", "This field is mandatory");
+
 		//Clearing the input field
-		getInput("Test Input").clear();
-		assertThat(getInput("Test Input").getValue()).isEmpty();
+		fw.getInput("Test Input").clear();
+		assertThat(fw.getInput("Test Input").getValue()).isEmpty();
 
 		//Calling Popup on Form
-		$$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText("Pick List"))
-				.$(By.cssSelector("i[class='anticon anticon-paper-clip']")).click();
+		fw.callPickList("Pick List").click();
 
 		//Click on a column in Popup
-		FindColumnInRow("Name", FindRowPickListWithColumnValue("Name", "This field is mandatory")).click();
+		PickListWidget pl = new PickListWidget();
+		Long plRowId = pl.FindRowId("Name", "This field is mandatory");
+		pl.FindColumnInRow("Name", pl.FindRow(plRowId)).click();
 
 		//Click "Save" on the Form
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Save")).click();
+		fw.clickButtonForm("Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Picklist").click();
 
 		//Checking the selected values
-		assertThat(getInput("Test input").getValue()).isEqualTo("-20000");
-		assertThat(getInput("Pick List").getValue()).isEqualTo("This field is mandatory");
-		getInput("Pick List").shouldBe(Condition.readonly);
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEqualTo("-20000");
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List")).getText())
+		assertThat(fw.getInput("Test input").getValue()).isEqualTo("-20000");
+		assertThat(fw.getInput("Pick List").getValue()).isEqualTo("This field is mandatory");
+		fw.getInput("Pick List").shouldBe(Condition.readonly);
+		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow(rowId)).getText()).isEqualTo("-20000");
+		assertThat(lw.FindColumnInRow("Pick List", lw.FindRow(rowId)).getText())
 				.isEqualTo("This field is mandatory");
 
 		//Clearing the input field
-		getInput("Test Input").clear();
-		assertThat(getInput("Test Input").getValue()).isEmpty();
+		fw.getInput("Test Input").clear();
+		assertThat(fw.getInput("Test Input").getValue()).isEmpty();
 
 		//Calling Popup and selecting values on List
-		FirstRowTable().$$(By.tagName("td")).last().scrollIntoView(true);
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List")).doubleClick();
-		FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List"))
-				.$(By.cssSelector("i[class='anticon anticon-paper-clip']")).click();
-		FindColumnInRow("Name", FindRowPickListWithColumnValue("Name", "This field is mandatory")).click();
+		lw.ListColumnsInRow(lw.FindRow(rowId)).last().scrollIntoView(true);
+		lw.FindColumnInRow("Pick List", lw.FindRow(rowId)).doubleClick();
+		lw.getPickList(lw.FindColumnInRow("Pick List", lw.FindRow(rowId)));
+		pl.FindColumnInRow("Name", pl.FindRow(plRowId)).click();
 
 		//Saving with three dots
-		FirstRowTable().$$(By.tagName("td")).last().scrollIntoView(true);
-		actions().moveToElement(FirstRowTable()).perform();
-		actions().moveToElement($(By.cssSelector("div[class^=TableWidget__dots]"))).perform();
-		$(By.cssSelector("div[class^=TableWidget__dots]")).click();
-		$(By.cssSelector("div[class^=ant-dropdown] ul")).$$(By.tagName("li")).find(Condition.text("Save")).click();
+		lw.ClickActionThreeDots(lw.FindRow(rowId), "Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Picklist").click();
 
 		//Checking the selected values
-		assertThat(getInput("Test input").getValue()).isEqualTo("-20000");
-		assertThat(getInput("Pick List").getValue()).isEqualTo("This field is mandatory");
-		getInput("Pick List").shouldBe(Condition.readonly);
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEqualTo("-20000");
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List")).getText())
+		assertThat(fw.getInput("Test input").getValue()).isEqualTo("-20000");
+		assertThat(fw.getInput("Pick List").getValue()).isEqualTo("This field is mandatory");
+		fw.getInput("Pick List").shouldBe(Condition.readonly);
+		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow(rowId)).getText()).isEqualTo("-20000");
+		assertThat(lw.FindColumnInRow("Pick List", lw.FindRow(rowId)).getText())
 				.isEqualTo("This field is mandatory");
 
 		//Clearing the PickList value on Form
-		$$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText("Pick List")).$(By.className("ant-input-suffix"))
-				.shouldHave(Condition.visible);
-		$$(By.cssSelector(".ant-form-item")).findBy(Condition.exactText("Pick List")).$(By.className("ant-input-suffix"))
-				.click();
+		fw.clearPickList("Pick List");
 
 		//Click "Save" on the Form
-		$$(By.cssSelector("div[class^='Operations__container'] button")).findBy(Condition.exactText("Save")).click();
+		fw.clickButtonForm("Save");
 
 		//Navigating tabs
 		SecondLevelMenu("Fields").click();
 		SecondLevelMenu("Picklist").click();
 
 		//Check PickList value is empty
-		assertThat(getInput("Test input").getValue()).isEmpty();
-		assertThat(getInput("Pick List").getValue()).isEmpty();
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Test Input")).getText()).isEmpty();
-		assertThat(FirstRowTable().$$(By.tagName("td")).get(getIndexColumn("Pick List")).getText()).isEmpty();
+		assertThat(fw.getInput("Test input").getValue()).isEmpty();
+		assertThat(fw.getInput("Pick List").getValue()).isEmpty();
+		assertThat(lw.FindColumnInRow("Test Input", lw.FindRow(rowId)).getText()).isEmpty();
+		assertThat(lw.FindColumnInRow("Pick List", lw.FindRow(rowId)).getText()).isEmpty();
 	}
 
 	private void TestFilter() {
 		//Navigate through the menu
 		SecondLevelMenu("Fields").click();
 
+		//Find List widget
 		ListWidget lw = new ListWidget();
 
 		//Open Filter on column
-		$(By.cssSelector("div[class^='TableWidget'] thead")).$$(By.tagName("tr")).findBy(Condition.text("Name"))
-				.$(By.cssSelector("div[class^='ColumnFilter']")).click();
-
 		//Set a value and apply a filter
-		$(By.cssSelector(".ant-popover-inner-content input")).setValue("This field is mandatory");
-		$(By.cssSelector(".ant-popover-inner-content")).$$(By.tagName("button")).findBy(Condition.text("Apply")).click();
+		lw.setFilterInput("Name", "This field is mandatory");
 
 		//Checking strings for compliance
 		lw.ListRows().last().scrollIntoView(true);
-		assertThat($(By.cssSelector("div[class^=TableWidget]"))
-				.$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
+		assertThat(lw.ListRows()
 				.stream()
-				.allMatch(r -> r.$$(By.tagName("td")).get(getIndexColumn("Name")).getText()
+				.allMatch(r -> r.$$(By.tagName("td")).get(lw.getIndexColumn("Name")).getText()
 						.equals("This field is mandatory"))).isTrue();
 
-		//Open Filter on column
-		$(By.cssSelector("div[class^='TableWidget'] thead")).$$(By.tagName("tr")).findBy(Condition.text("Name"))
-				.$(By.cssSelector("div[class^='ColumnFilter']")).click();
+		//Clear Filter on column
+		lw.clearFilterInput("Name");
 
+		//Open Filter on column
 		//Set a random value and apply a filter
-		$(By.cssSelector(".ant-popover-inner-content input")).clear();
-		$(By.cssSelector(".ant-popover-inner-content input")).setValue("Random_text_3_P5LbW");
-		$(By.cssSelector(".ant-popover-inner-content")).$$(By.tagName("button")).findBy(Condition.text("Apply")).click();
+		lw.setFilterInput("Name", "Random_text_3_P5LbW");
 
 		//Checking strings for compliance (The waiting is empty)
 		$(By.cssSelector(".ant-table-tbody")).shouldBe(Condition.exist);
-		assertThat($(By.cssSelector("div[class^=TableWidget]"))
-				.$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
+		assertThat(lw.ListRows()
 				.stream()
-				.allMatch(r -> r.$$(By.tagName("td")).get(getIndexColumn("Name")).getText().isEmpty()
+				.allMatch(r -> r.$$(By.tagName("td")).get(lw.getIndexColumn("Name")).getText().isEmpty()
 				)).isTrue();
 
 		//Click "Clear all filters"
-		$(By.cssSelector("div[class^='TableWidget__filtersContainer'] a")).click();
+		lw.clearAllFilters();
 
 		//Checking strings for compliance (The waiting is not null)
-		$(By.cssSelector(".ant-table-tbody")).$$(By.cssSelector("tr")).shouldBe(CollectionCondition.sizeGreaterThan(0));
-		assertThat($(By.cssSelector("div[class^=TableWidget]"))
-				.$(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
+		lw.ListRows().shouldBe(CollectionCondition.sizeGreaterThan(0));
+		assertThat(lw.ListRows()
 				.stream()
-				.allMatch(r -> r.$$(By.tagName("td")).get(getIndexColumn("Name")).getText().isEmpty()
+				.allMatch(r -> r.$$(By.tagName("td")).get(lw.getIndexColumn("Name")).getText().isEmpty()
 				)).isFalse();
 	}
 

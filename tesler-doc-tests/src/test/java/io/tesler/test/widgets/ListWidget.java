@@ -24,50 +24,65 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.actions;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import java.util.List;
 import org.openqa.selenium.By;
 
 public class ListWidget {
 
 	private final SelenideElement widget;
 
+	private ListHelper helper;
+
 	public ListWidget() {
 		widget = $(By.cssSelector("div[class^='TableWidget__tableContainer']"));
+		this.helper = new ListHelper(widget);
 	}
 
 	public SelenideElement FindRow(String columnName, String columnValue) {
-		$(By.cssSelector("div[class^='TableWidget__tableContainer']")).shouldBe(Condition.visible);
-		$(By.cssSelector(".ant-table-tbody")).$$(By.cssSelector("tr")).shouldBe(CollectionCondition.sizeGreaterThan(0));
-		return $(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"))
-				.stream()
-				.filter(r -> FindColumnInRow(columnName, r).getText().equals(columnValue))
-				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("no row with columnValue found"));
+		return helper.FindRow(columnName, columnValue);
+	}
+
+	public SelenideElement FindRow(Long rowId) {
+		return helper.FindRow(rowId);
+	}
+
+	public Long FindRowId(String columnName, String columnValue) {
+		return helper.FindRowId(columnName, columnValue);
 	}
 
 	public ElementsCollection ListRows() {
-		$(By.cssSelector(".ant-table-tbody")).shouldBe(Condition.exist);
-		return $(By.cssSelector(".ant-table-tbody")).$$(By.tagName("tr"));
+		return helper.ListRows();
 	}
 
 	public SelenideElement FindColumnInRow(String columnName, SelenideElement row) {
-		$(By.cssSelector("div[class^='TableWidget__tableContainer']")).shouldBe(Condition.visible);
-		return row.$$(By.tagName("td")).get(getIndexColumn(columnName));
+		return helper.FindColumnInRow(columnName, row);
 	}
 
 	public ElementsCollection ListColumnsInRow(SelenideElement row) {
-		return row.$$(By.tagName("td"));
+		return helper.ListColumnsInRow(row);
 	}
 
 	public Integer getIndexColumn(String columnName) {
-		$(By.cssSelector("div[class^='TableWidget__tableContainer']")).shouldBe(Condition.visible);
-		List<String> tableColumns = $(By.cssSelector("div[class^='TableWidget__tableContainer'] thead"))
-				.$$(By.tagName("th")).texts();
-		return tableColumns.indexOf(columnName);
+		return helper.getIndexColumn(columnName);
+	}
+
+	public ElementsCollection getComboBoxList(SelenideElement column) {
+		column.doubleClick();
+		column.$(By.cssSelector(".ant-select-selection--single")).click();
+		return $(By.cssSelector("div[class^=ant-select-dropdown] ul")).shouldBe(Condition.visible).$$(By.tagName("li"));
+	}
+
+	public void getPickList(SelenideElement column) {
+		column.$(By.cssSelector("i[class='anticon anticon-paper-clip']")).click();
+	}
+
+	public void setDateCurrentDay(SelenideElement column) {
+		column.doubleClick();
+		column.click();
+		$(By.cssSelector(".ant-calendar-table")).shouldBe(Condition.visible);
+		$(By.cssSelector(".ant-calendar-footer a")).click();
 	}
 
 	public void ClickActionThreeDots(SelenideElement row, String buttonName) {
@@ -87,12 +102,6 @@ public class ListWidget {
 				.findBy(Condition.text(buttonName)).click();
 	}
 
-	public ElementsCollection getComboBoxList(SelenideElement column) {
-		column.doubleClick();
-		column.$(By.cssSelector(".ant-select-selection--single")).click();
-		return $(By.cssSelector("div[class^=ant-select-dropdown] ul")).shouldBe(Condition.visible).$$(By.tagName("li"));
-	}
-
 	public void clearComboBoxList(SelenideElement column) {
 		column.doubleClick();
 		actions().moveToElement(column
@@ -101,5 +110,29 @@ public class ListWidget {
 				.$(By.className("ant-select-selection__clear")).shouldBe(Condition.visible).click();
 	}
 
+	public void clearDatePicker(SelenideElement column) {
+		column.doubleClick();
+		actions().moveToElement(column
+				.$(By.className("ant-calendar-picker-clear"))).perform();
+		column
+				.$(By.className("ant-calendar-picker-clear")).shouldBe(Condition.visible).click();
+	}
+
+	public void setFilterInput(String columnName, String value) {
+		helper.ListColumns().findBy(Condition.exactText(columnName)).$(By.cssSelector("div[class^='ColumnFilter']"))
+				.click();
+		$(By.cssSelector(".ant-popover-inner-content input")).setValue(value);
+		$(By.cssSelector(".ant-popover-inner-content")).$$(By.tagName("button")).findBy(Condition.text("Apply")).click();
+	}
+
+	public void clearFilterInput(String columnName) {
+		helper.ListColumns().findBy(Condition.exactText(columnName)).$(By.cssSelector("div[class^='ColumnFilter']"))
+				.click();
+		$(By.cssSelector(".ant-popover-inner-content")).$$(By.tagName("button")).findBy(Condition.text("Clear")).click();
+	}
+
+	public void clearAllFilters() {
+		$(By.cssSelector("div[class^='TableWidget__filtersContainer'] a")).click();
+	}
 
 }
