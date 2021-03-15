@@ -1,0 +1,150 @@
+name: Run autotests on message
+
+on:
+  repository_dispatch:
+    types: [ test_doc ]
+
+jobs:
+
+  build-front:
+    name: Build @tesler-ui/core
+    runs-on: ubuntu-latest
+    if: github.event.client_payload.front.repository != ''
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{ github.event.client_payload.front.repository }}
+          ref: ${{ github.event.client_payload.front.branch }}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+          always-auth: true
+      - name: install
+        run: yarn install
+      - name: pack
+        id: pack
+        run: |
+          front_tgz_name=`yarn pack | sed -n 2p | sed 's/.*tarball to \(.*\)\./\1/' | cut -d'"' -f 2 | sed 's/.*\///'`;
+          echo "front package path is: $front_tgz_name";
+          echo "##[set-output name=front_package_path;]$front_tgz_name"
+      - name: Make front artifact dir
+        run: |
+          mkdir -p artifacts/front
+          mv ${{ steps.pack.outputs.front_package_path }} artifacts/front
+      - uses: actions/upload-artifact@v2
+        with:
+          name: front-artifact
+          path: artifacts/front/${{ steps.pack.outputs.front_package_path }}
+    outputs:
+      front_package_path: ${{ steps.pack.outputs.front_package_path }}
+
+  build-doc:
+    name: Build tesler-doc
+    runs-on: ubuntu-latest
+    environment: autotest
+    env:
+      TOKEN: ${{ secrets.DOCKER_TOKEN }}
+      USERNAME: ${{ secrets.DOCKER_USERNAME }}
+    if: always()
+    needs: build-front
+    steps:
+      - uses: actions/checkout@v2
+        if: github.event.client_payload.back.repository != ''
+        with:
+          repository: ${{ github.event.client_payload.back.repository }}
+          ref: ${{ github.event.client_payload.back.branch }}
+      - name: Build tesler
+        if: github.event.client_payload.back.repository != ''
+        run: |
+          mvn versions:set -DnewVersion=test-test
+          mvn --batch-mode clean install -DskipTests=true
+      #          mvn --batch-mode clean install
+      - uses: actions/checkout@v2
+        with:
+          ref: develop
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+          always-auth: true
+      - uses: actions/download-artifact@master
+        if: needs.build-front.outputs.front_package_path != ''
+        with:
+          name: front-artifact
+          path: artifacts/front/
+      - name: Set front dependency
+        if: needs.build-front.outputs.front_package_path != ''
+        run: |
+          ls -la ./artifacts/front/
+          yarn add file:../artifacts/front/${{ needs.build-front.outputs.front_package_path }} --cwd tesler-doc-ui/
+      - name: Maven Verify with local tesler
+        if: github.event.client_payload.back.repository != ''
+        run: mvn clean verify -P Dev,UI -D tesler.version=test-test
+      - name: Maven Verify
+        if: github.event.client_payload.back.repository == ''
+        run: mvn clean verify -P Dev,UI
+      - name: Login to docker
+        run: docker login -u $USERNAME -p $TOKEN
+      - run: docker build -t tesler-platform/tesler-doc:latest -t tesler-platform/tesler-doc:${{ github.run_id }} ./tesler-doc-app/
+      - run: docker push tesler-platform/tesler-doc -a
+
+  run-tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    environment: autotest
+    if: always()
+    needs: build-doc
+    services:
+      postgres:
+        image: postgres:alpine
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_PASSWORD: khKJPOsfiwae
+        ports:
+          - 127.0.0.1:6431:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      selenium-hub:
+        image: selenium/hub:4.0.0-beta-1-20210215
+        ports:
+          - 4442:4442
+          - 4443:4443
+          - 4444:4444
+      chrome:
+        image: selenium/node-chrome:4.0.0-beta-1-20210215
+        env:
+          SE_EVENT_BUS_HOST: selenium-hub
+          SE_EVENT_BUS_PUBLISH_PORT: 4442
+          SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+        ports:
+          - 6900:5900
+      tesler-doc-node-qa:
+        image: tesler-platform/tesler-doc:${{ github.run_id }}
+        env:
+          DATABASE_DRIVER: org.postgresql.Driver
+          DATABASE_URL: jdbc:postgresql://postgres:5432/postgres
+          DATABASE_USER: postgres
+          DATABASE_PASSWORD: khKJPOsfiwae
+          JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,address=8989,suspend=n
+        ports:
+          - 0.0.0.0:8080:8080
+          - 127.0.0.1:8981:8989
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ secrets.TEST_BRANCH }}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+          always-auth: true
+      - run: mvn -X clean install -P UI,Dev -DskipTests=true
+      - run: mvn -X clean verify -P Tests -f tesler-doc-tests
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: reports
+          path: tesler-doc-tests/build/reports/
+
