@@ -1,57 +1,6 @@
 version: '3.6'
 
 services:
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - 0.0.0.0:80:80
-    depends_on:
-      - tesler-doc-node-1
-      - tesler-doc-node-2
-  tesler-doc-node-1:
-    build: ./tesler-doc-app
-    image: tesler-doc-app:latest
-    environment:
-      DATABASE_DRIVER: 'org.postgresql.Driver'
-      DATABASE_URL: 'jdbc:postgresql://pgs:5432/postgres'
-      DATABASE_USER: 'postgres'
-      DATABASE_PASSWORD: 'khKJPOsfiwae'
-      JAVA_TOOL_OPTIONS: '-agentlib:jdwp=transport=dt_socket,server=y,address=8989,suspend=n'
-    expose:
-      - 8080
-    ports:
-      - 0.0.0.0:8081:8080
-      - 127.0.0.1:8981:8989
-    depends_on:
-      - pgs
-  tesler-doc-node-2:
-    build: ./tesler-doc-app
-    image: tesler-doc-app:latest
-    environment:
-      DATABASE_DRIVER: 'org.postgresql.Driver'
-      DATABASE_URL: 'jdbc:postgresql://pgs:5432/postgres'
-      DATABASE_USER: 'postgres'
-      DATABASE_PASSWORD: 'khKJPOsfiwae'
-      JAVA_TOOL_OPTIONS: '-agentlib:jdwp=transport=dt_socket,server=y,address=8989,suspend=n'
-    expose:
-      - 8080
-    ports:
-      - 0.0.0.0:8082:8080
-      - 127.0.0.1:8982:8989
-    depends_on:
-      - pgs
-  pgs:
-    image: postgres:alpine
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=khKJPOsfiwae
-    expose:
-      - 5432
-    ports:
-      - 127.0.0.1:6431:5432
-
   tesler-doc-node-jacoco:
     build: ./tesler-doc-app
     image: tesler-doc-app:latest
@@ -60,18 +9,20 @@ services:
       DATABASE_URL: 'jdbc:postgresql://pgs-qa:5432/postgres'
       DATABASE_USER: 'postgres'
       DATABASE_PASSWORD: 'khKJPOsfiwae'
-      JAVA_TOOL_OPTIONS: '-agentlib:jdwp=transport=dt_socket,server=y,address=8989,suspend=n -javaagent:/jacoco/lib/jacocoagent.jar=address=127.0.0.7,port=36320,destfile=jacoco-it.exec,output=tcpserver'
+      JAVA_TOOL_OPTIONS: '-agentlib:jdwp=transport=dt_socket,server=y,address=8989,suspend=n -javaagent:/jacoco/lib/jacocoagent.jar=address=*,port=36320,destfile=/tmp/jacoco-it.exec,output=tcpserver'
     volumes:
       - jacoco:/jacoco:ro
     expose:
       - 8080
+      - 36320
     ports:
-      - 0.0.0.0:8080:8080
-      - 127.0.0.1:8981:8989
-      - 127.0.0.7:36320:36320
+      - 8080:8080
+      - 8981:8989
+      - 36320:36320
     depends_on:
       - pgs-qa
       - jacoco
+      - sonarqube
   pgs-qa:
     image: postgres:alpine
     environment:
@@ -80,10 +31,18 @@ services:
     expose:
       - 5432
     ports:
-      - 127.0.0.1:6431:5432
+      - 6431:5432
   jacoco:
     image: ictu/jacoco-agent-docker:0.8.6
     volumes:
       - jacoco:/jacoco:ro
+  sonarqube:
+    image: sonarqube:8.7.1-community
+    expose:
+      - 9000
+    ports:
+      - 9000:9000
+    environment:
+
 volumes:
   jacoco:

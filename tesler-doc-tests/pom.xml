@@ -14,6 +14,12 @@
     <relativePath>../tesler-doc-base/pom.xml</relativePath>
   </parent>
 
+  <properties>
+    <sonar.coverage.jacoco.xmlReportPaths>
+      ${project.build.directory}/jacoco-integration-test-coverage-report/jacoco.xml
+    </sonar.coverage.jacoco.xmlReportPaths>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>io.tesler</groupId>
@@ -85,6 +91,13 @@
                       <outputDirectory>${project.build.directory}/agents</outputDirectory>
                       <destFileName>spring-instrument-${spring.version}.jar</destFileName>
                     </artifactItem>
+                    <artifactItem>
+                      <groupId>io.tesler</groupId>
+                      <artifactId>tesler-core</artifactId>
+                      <version>${tesler.version}</version>
+                      <outputDirectory>${project.build.directory}</outputDirectory>
+                      <destFileName>tesler-core-${tesler.version}.jar</destFileName>
+                    </artifactItem>
                   </artifactItems>
                 </configuration>
               </execution>
@@ -107,7 +120,6 @@
               <reuseForks>true</reuseForks>
               <trimStackTrace>false</trimStackTrace>
               <argLine>-javaagent:${project.build.directory}/agents/spring-instrument-${spring.version}.jar</argLine>
-              <argLine>${failsafe.jacoco.args}</argLine>
               <systemPropertyVariables>
                 <test.dbDriver>${jdbc.driver}</test.dbDriver>
                 <test.dbUrl>${jdbc.url}</test.dbUrl>
@@ -115,6 +127,11 @@
                 <test.dbPassword>${jdbc.password}</test.dbPassword>
               </systemPropertyVariables>
             </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.7.0.1746</version>
           </plugin>
           <plugin>
             <groupId>org.jacoco</groupId>
@@ -129,7 +146,7 @@
                 </goals>
                 <configuration>
                   <destFile>${project.build.directory}/jacoco-it.exec</destFile>
-                  <address>127.0.0.7</address>
+                  <address>localhost</address>
                   <port>36320</port>
                   <append>true</append>
                 </configuration>
