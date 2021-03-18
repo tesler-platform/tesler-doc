@@ -24,6 +24,11 @@
       "widgetName": "bankDocPickList",
       "position": 3,
       "gridWidth": 2
+    },
+    {
+      "widgetName": "bankDocPickListFilter",
+      "position": 4,
+      "gridWidth": 2
     }
   ]
 }

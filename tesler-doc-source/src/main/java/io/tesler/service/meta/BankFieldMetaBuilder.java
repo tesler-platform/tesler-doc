@@ -98,6 +98,7 @@ public class BankFieldMetaBuilder extends FieldMetaBuilder<BankDTO> {
 				country,
 				testPercent,
 				testMoney,
+				testPickList,
 				testDate
 		);
 		fieldsMeta.setAllFilterValuesByLovType(country, TDDictionaryType.COUNTRY);

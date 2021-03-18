@@ -24,6 +24,7 @@ import io.tesler.api.data.dto.DataResponseDTO;
 import io.tesler.core.dict.TDDictionaryType;
 import io.tesler.core.util.filter.SearchParameter;
 import io.tesler.core.util.filter.provider.impl.DateValueProvider;
+import io.tesler.core.util.filter.provider.impl.LongValueProvider;
 import io.tesler.core.util.filter.provider.impl.LovValueProvider;
 import io.tesler.entity.Bank;
 import lombok.Getter;
@@ -57,7 +58,7 @@ public class BankDTO extends DataResponseDTO {
 	@SearchParameter
 	private String testInput;
 
-	@SearchParameter
+	@SearchParameter(name = "id", provider = LongValueProvider.class)
 	private String testPickList;
 
 	@SearchParameter(provider = LovValueProvider.class)
