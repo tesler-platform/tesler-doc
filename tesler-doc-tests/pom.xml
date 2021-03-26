@@ -20,6 +20,10 @@
       <artifactId>tesler-doc-app</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.tesler</groupId>
+      <artifactId>tesler-doc-source</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>selenide</artifactId>
       <version>5.17.4</version>
@@ -60,6 +64,9 @@
 
     <profile>
       <id>Tests</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
       <build>
         <plugins>
           <plugin>
@@ -81,6 +88,13 @@
                       <outputDirectory>${project.build.directory}/agents</outputDirectory>
                       <destFileName>spring-instrument-${spring.version}.jar</destFileName>
                     </artifactItem>
+                    <artifactItem>
+                      <groupId>io.tesler</groupId>
+                      <artifactId>tesler-core</artifactId>
+                      <version>${tesler.version}</version>
+                      <outputDirectory>${project.build.directory}</outputDirectory>
+                      <destFileName>tesler-core-${tesler.version}.jar</destFileName>
+                    </artifactItem>
                   </artifactItems>
                 </configuration>
               </execution>
@@ -91,10 +105,9 @@
             <artifactId>maven-failsafe-plugin</artifactId>
             <executions>
               <execution>
-                <phase>test</phase>
+                <phase>integration-test</phase>
                 <goals>
                   <goal>integration-test</goal>
-                  <goal>verify</goal>
                 </goals>
               </execution>
             </executions>
@@ -110,6 +123,49 @@
                 <test.dbPassword>${jdbc.password}</test.dbPassword>
               </systemPropertyVariables>
             </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.6</version>
+            <executions>
+              <execution>
+                <id>dumpExec</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>dump</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/jacoco-it.exec</destFile>
+                  <address>localhost</address>
+                  <port>36320</port>
+                  <append>true</append>
+                </configuration>
+              </execution>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>report-aggregate</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/jacoco-integration-test-coverage-report</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.7.0.1746</version>
+            <executions>
+              <execution>
+                <id>sonar</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sonar</goal>
+                </goals>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>
