@@ -51,3 +51,25 @@ docker volume prune
 mvn clean install -PUI -U && mvn clean install -U && docker-compose up --build -d
 docker-compose ps
 ```
+
+## Run autotest
+* install dependencies and build front-end
+```
+mvn clean install -PUI
+```
+* install dependencies and build back-end
+```
+mvn clean install
+```
+* start environment
+```
+docker-compose -f docker-compose-qa.yml up --build --force-recreate -d
+```
+* Run autotests with maven profile
+```
+mvn clean install -PTests
+```
+* After a successful build, go to Sonar (login:admin password:admin)
+```
+http://localhost:9000
+```

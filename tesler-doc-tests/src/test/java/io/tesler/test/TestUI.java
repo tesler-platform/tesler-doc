@@ -31,7 +31,7 @@ import org.openqa.selenium.Keys;
 import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UIIT {
+public class TestUI {
 
 	private SelenideElement LoginInput(int index) {
 		return $(By.cssSelector(".ant-form-item-control input"), index);

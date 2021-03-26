@@ -16,6 +16,15 @@
   <properties>
     <checktyle.config>/tesler-doc-base/src/main/resources/checkstyle-checker.xml</checktyle.config>
     <skip.license>false</skip.license>
+    <sonar.host.url>http://localhost:9000</sonar.host.url>
+    <sonar.coverage.jacoco.xmlReportPaths>
+      ${user.dir}\tesler-doc-tests\target\jacoco-integration-test-coverage-report\jacoco.xml
+    </sonar.coverage.jacoco.xmlReportPaths>
+    <sonar.language>java</sonar.language>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+    <sonar.login>admin</sonar.login>
+    <sonar.password>admin</sonar.password>
   </properties>
 
   <profiles>

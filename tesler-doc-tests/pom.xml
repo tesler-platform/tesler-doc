@@ -14,12 +14,6 @@
     <relativePath>../tesler-doc-base/pom.xml</relativePath>
   </parent>
 
-  <properties>
-    <sonar.coverage.jacoco.xmlReportPaths>
-      ${project.build.directory}/jacoco-integration-test-coverage-report/jacoco.xml
-    </sonar.coverage.jacoco.xmlReportPaths>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>io.tesler</groupId>
@@ -70,6 +64,9 @@
 
     <profile>
       <id>Tests</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
       <build>
         <plugins>
           <plugin>
@@ -111,7 +108,6 @@
                 <phase>integration-test</phase>
                 <goals>
                   <goal>integration-test</goal>
-                  <goal>verify</goal>
                 </goals>
               </execution>
             </executions>
@@ -127,11 +123,6 @@
                 <test.dbPassword>${jdbc.password}</test.dbPassword>
               </systemPropertyVariables>
             </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.sonarsource.scanner.maven</groupId>
-            <artifactId>sonar-maven-plugin</artifactId>
-            <version>3.7.0.1746</version>
           </plugin>
           <plugin>
             <groupId>org.jacoco</groupId>
@@ -159,6 +150,20 @@
                 <configuration>
                   <outputDirectory>${project.build.directory}/jacoco-integration-test-coverage-report</outputDirectory>
                 </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.7.0.1746</version>
+            <executions>
+              <execution>
+                <id>sonar</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sonar</goal>
+                </goals>
               </execution>
             </executions>
           </plugin>
