@@ -116,6 +116,7 @@ public class UIIT {
 			FormWidget fw = new FormWidget();
 			fw.getInput("Name").setValue("Test record");
 			fw.clickButtonForm("Save");
+			$(By.cssSelector(".ant-spin-spinning span")).shouldBe(Condition.visible.negate());
 			FirstLevelMenu("Fields").click();
 			SecondLevelMenu("Input").click();
 		}
