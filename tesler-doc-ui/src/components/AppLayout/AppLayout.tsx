@@ -38,6 +38,7 @@ import {CustomWidget} from '@tesler-ui/core/interfaces/widget'
 import {AppState} from 'interfaces/storeSlices'
 import {TableWidget} from 'components/widgets/TableWidget/TableWidget'
 import {PhoneInput} from 'components/ui/PhoneInput/PhoneInput'
+import { useDispatch } from 'react-redux'
 
 interface LayoutProps {
     screenName: string,
@@ -84,6 +85,12 @@ export function Layout(props: LayoutProps) {
         width: isInfoPanelLayout ? '802px' : '1152px',
         maxWidth: '100%'
     }
+    const dispatch = useDispatch()
+    React.useEffect(() => {
+        if (!props.sessionActive) {
+            dispatch($do.login({ login: 'vanilla', password: 'vanilla' }))
+        }
+    }, [props.sessionActive, dispatch])
     useScroll()
     React.useEffect(() => {
         if (props.savedSessionActive) {
