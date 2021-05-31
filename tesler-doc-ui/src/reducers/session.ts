@@ -28,7 +28,7 @@ export interface TeslerSessionState extends Session {
 }
 
 export const initialState: TeslerSessionState = {
-    active: false,
+    active: true,
     savedSessionActive: false,
     loginSpin: false,
     screens: [],

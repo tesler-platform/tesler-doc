@@ -39,8 +39,10 @@ import {AppState} from 'interfaces/storeSlices'
 import {TableWidget} from 'components/widgets/TableWidget/TableWidget'
 import {PhoneInput} from 'components/ui/PhoneInput/PhoneInput'
 import { useDispatch } from 'react-redux'
+import { SessionScreen } from '@tesler-ui/core/interfaces/session'
 
 interface LayoutProps {
+    screens: SessionScreen[],
     screenName: string,
     sessionActive: boolean,
     savedSessionActive: boolean,
@@ -85,12 +87,14 @@ export function Layout(props: LayoutProps) {
         width: isInfoPanelLayout ? '802px' : '1152px',
         maxWidth: '100%'
     }
+
     const dispatch = useDispatch()
     React.useEffect(() => {
-        if (!props.sessionActive) {
+        if (props.sessionActive && !props.screens.length) {
             dispatch($do.login({ login: 'vanilla', password: 'vanilla' }))
         }
-    }, [props.sessionActive, dispatch])
+    }, [props.sessionActive, props.screens, dispatch])
+
     useScroll()
     React.useEffect(() => {
         if (props.savedSessionActive) {
@@ -179,6 +183,7 @@ export function Layout(props: LayoutProps) {
 
 function mapStateToProps(store: AppState) {
     return {
+        screens: store.session.screens,
         sessionActive: store.session.active,
         savedSessionActive: store.session.savedSessionActive,
         screenName: store.router.screenName,
