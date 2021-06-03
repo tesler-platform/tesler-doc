@@ -20,6 +20,7 @@
 
 package io.tesler.app.conf;
 
+import io.tesler.config.SitemapConfiguration;
 import io.tesler.core.config.BeanScan;
 import io.tesler.core.config.CoreApplicationConfig;
 import io.tesler.core.config.UIConfig;
@@ -31,8 +32,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
@@ -49,6 +52,8 @@ import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+@EnableConfigurationProperties(SitemapConfiguration.class)
+@ComponentScan({"io.tesler.sitemap"})
 @RequiredArgsConstructor
 @Import({
 		CoreApplicationConfig.class,
@@ -122,6 +127,11 @@ public class TESLERDOCApplicationConfig implements SchedulingConfigurer {
 	@Bean
 	public ServletRegistrationBean api() {
 		return createRegistration("api", TESLERDOCAPIConfig.class, "/api/v1/*");
+	}
+
+	@Bean
+	public ServletRegistrationBean sitemap() {
+		return createRegistration("sitemap", TESLERDOCSitemapConfig.class, "/sitemap.xml");
 	}
 
 	private ServletRegistrationBean createRegistration(String name, Class<?> configClass, String... urlMappings) {
