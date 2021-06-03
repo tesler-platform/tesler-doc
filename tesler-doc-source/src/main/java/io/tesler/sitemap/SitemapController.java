@@ -33,15 +33,13 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+//@RestController
 @Slf4j
-@CrossOrigin
-@RequestMapping({"/sitemap.xml"})
+//@CrossOrigin
+//@RequestMapping({"/sitemap.xml"})
 public class SitemapController {
 
 	private final String tempDirPath;

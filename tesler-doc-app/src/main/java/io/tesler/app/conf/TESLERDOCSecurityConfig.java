@@ -67,6 +67,7 @@ public class TESLERDOCSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/favicon.ico").permitAll()
 				.antMatchers("/sitemap.xml").permitAll()
 				.antMatchers("/robots.txt").permitAll()
+				.antMatchers("/static/**").permitAll()
 				.antMatchers(String.format("%s/**", configuration.getUiPath())).permitAll()
 				.antMatchers("/api/v1/files/**").permitAll()
 				.antMatchers("/api/v1/bc-registry/**").permitAll()

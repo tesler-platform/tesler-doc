@@ -131,7 +131,7 @@ public class TESLERDOCApplicationConfig implements SchedulingConfigurer {
 
 	@Bean
 	public ServletRegistrationBean sitemap() {
-		return createRegistration("sitemap", TESLERDOCSitemapConfig.class, "/sitemap.xml");
+		return createRegistration("sitemap", TESLERDOCSitemapConfig.class, "/static/*");
 	}
 
 	private ServletRegistrationBean createRegistration(String name, Class<?> configClass, String... urlMappings) {
