@@ -1,0 +1,38 @@
+{
+  "name": "assocListPopup",
+  "title": "AssocListPopup",
+  "template": "DashboardView",
+  "url": "/screen/components/view/assocListPopup",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "assocListPopupDocGeneral",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "/widgets/documentation/AssocListPopupDocGeneral.md"
+    },
+    {
+      "widgetName": "assocListPopupDocGeneralAssoc",
+      "position": 101,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "assocListPopupDocCustom",
+      "position": 2,
+      "gridWidth": 2,
+      "descriptionFile": "/widgets/documentation/AssocListPopupDocCustom.md"
+    },
+    {
+      "widgetName": "assocListPopupDocCustomAssoc",
+      "position": 102,
+      "gridWidth": 2
+    }
+  ],
+  "rolesAllowed": [
+    "ADMIN"
+  ]
+}

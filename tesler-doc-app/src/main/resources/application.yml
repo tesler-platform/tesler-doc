@@ -1,0 +1,49 @@
+tesler-docapp:
+  sitemap:
+    base-url: http://idocs.tesler.io/ui/#
+  ui-path: /ui
+spring:
+  main:
+    allow-bean-definition-overriding: 'true'
+  liquibase:
+    change-log: classpath:/db/migration/liquibase/master.xml
+  datasource:
+    driver-class-name: ${DATABASE_DRIVER:org.postgresql.Driver}
+    name: primaryDS
+    password: ${DATABASE_PASSWORD:postgres}
+    username: ${DATABASE_USER:postgres}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres}
+  aop:
+    proxy-target-class: 'true'
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+tesler:
+  ui:
+    path: /ui
+    use-servlet-context-path: 'false'
+  meta:
+    dev-panel-enabled: ${DEV_PANEL_ENABLED:true}
+    directory: ${META_DIRECTORY:file:./tesler-doc-app/src/main/resources/meta}
+    view-allowed-roles-enabled: true
+  widget:
+    fields:
+      include-packages: io.tesler.core.ui.model.json.field.subtypes,io.tesler.core.field.meta
+  api:
+    use-servlet-context-path: 'false'
+    path: /api/v1
+
+minio:
+  bucket:
+    name: ${MINIO_DEFAULT_BUCKETS:edcs3gnsadevb}
+  url: ${MINIO_URL:http://localhost:9000}
+  access:
+    secret: ${MINIO_SECRET_KEY:prCv8t9LGRH18FB5pLr5jqDZ/dixZkb9cFajueGW}
+    name: ${MINIO_ACCESS_KEY:4eb6a7db8b58994ea61b}
+logbook:
+  format:
+    style: http
+  filter:
+    enabled: 'true'
+  include: /api/**

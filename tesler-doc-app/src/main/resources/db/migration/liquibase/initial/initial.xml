@@ -1,0 +1,11 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd"
+                   logicalFilePath="db/migration/liquibase/initial/initial.xml">
+
+    <include file="0000100_tesler_db_prepare.xml" relativeToChangelogFile="true"/>
+    <include file="0000200_tesler_sequences.xml" relativeToChangelogFile="true"/>
+    <include file="0000300_tesler_core.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
