@@ -1,0 +1,36 @@
+{
+  "name": "pickListPopupDocCustom",
+  "title": "Custom Example",
+  "type": "Form",
+  "bc": "forPickCustomEx",
+  "showCondition": [],
+  "fields": [
+    {
+      "label": "Custom Example: Select one Name",
+      "key": "pickedName",
+      "type": "pickList",
+      "popupBcName": "pickListPopupCustomEx",
+      "pickMap": {
+        "pickedName": "name"
+      }
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {
+    },
+    "layout": {
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "pickedName",
+              "span": 16
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

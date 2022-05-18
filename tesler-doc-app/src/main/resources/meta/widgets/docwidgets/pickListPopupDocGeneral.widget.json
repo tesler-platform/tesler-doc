@@ -1,0 +1,36 @@
+{
+  "name": "pickListPopupDocGeneral",
+  "title": "General Example",
+  "type": "Form",
+  "bc": "forPickEx",
+  "showCondition": [],
+  "fields": [
+    {
+      "label": "General Example: Select one Name",
+      "key": "pickedName",
+      "type": "pickList",
+      "popupBcName": "pickListPopupEx",
+      "pickMap": {
+        "pickedName": "name"
+      }
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {
+    },
+    "layout": {
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "pickedName",
+              "span": 16
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "navigation-overview",
+  "title": "Overview",
+  "template": "DashboardView",
+  "url": "/screen/components/view/navigation-overview",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu"
+    },
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "/widgets/navigation/navigation-overview.md"
+    }
+  ],
+  "rolesAllowed": [
+    "ADMIN"
+  ]
+}

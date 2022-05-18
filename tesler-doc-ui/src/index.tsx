@@ -28,7 +28,7 @@ import 'imports/rxjs'
 import {LocaleProvider} from 'antd'
 import enUs from 'antd/es/locale-provider/en_US'
 
-const App = <Provider customReducers={reducers} customEpics={epics} axiosInstance={axiosInstance} lang="ru">
+const App = <Provider customReducers={reducers} customEpics={epics} axiosInstance={axiosInstance} lang="en">
     <LocaleProvider locale={enUs}>
         <Layout/>
     </LocaleProvider>

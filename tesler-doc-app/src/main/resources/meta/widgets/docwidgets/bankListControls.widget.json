@@ -1,0 +1,78 @@
+{
+  "name": "bankListControls",
+  "title": "On table",
+  "type": "List",
+  "bc": "bankDoc",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input",
+      "drillDown": "true"
+    },
+    {
+      "title": "Number",
+      "key": "activeProjectsAmount",
+      "type": "number"
+    },
+    {
+      "title": "Percent",
+      "key": "testPercent",
+      "type": "percent"
+    },
+    {
+      "title": "Money",
+      "key": "testMoney",
+      "type": "money"
+    },
+    {
+      "title": "Checkbox",
+      "key": "isNational",
+      "type": "checkbox"
+    },
+    {
+      "title": "Date",
+      "key": "testDate",
+      "type": "date"
+    },
+    {
+      "title": "Date and Time",
+      "key": "testDate",
+      "type": "dateTime"
+    },
+    {
+      "title": "Date and Time (with seconds)",
+      "key": "testDate",
+      "type": "dateTimeWithSeconds"
+    },
+    {
+      "title": "Test Input",
+      "key": "testInput",
+      "type": "input"
+    },
+    {
+      "title": "Pick List",
+      "key": "testPickList",
+      "type": "pickList",
+      "popupBcName": "bankDocPicklist",
+      "pickMap": {
+        "testPickList": "name",
+        "testInput": "activeProjectsAmount"
+      }
+    },
+    {
+      "title" : "Dictionary",
+      "key" : "testDictionary",
+      "type" : "dictionary"
+    },
+    {
+      "title" : "Radio",
+      "key" : "testRadio",
+      "type" : "radio"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {}
+}

@@ -1,0 +1,16 @@
+{
+  "name": "pickListPopupDocCustomPick",
+  "title": "List of names",
+  "type": "PickListPopup",
+  "bc": "pickListPopupCustomEx",
+  "showCondition": [],
+  "fields": [
+    {
+      "title": "Name",
+      "key": "name",
+      "type": "input"
+    }
+  ],
+  "axisFields": [],
+  "chart": []
+}

@@ -1,0 +1,15 @@
+{
+  "name": "api-reference",
+  "title": "API Reference",
+  "primaryViewName": "api-reference",
+  "primaryViews": [
+    "api-reference"
+  ],
+  "navigation": {
+    "menu": [
+      {
+        "viewName": "api-reference"
+      }
+    ]
+  }
+}

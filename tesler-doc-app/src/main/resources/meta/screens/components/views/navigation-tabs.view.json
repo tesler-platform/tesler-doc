@@ -1,0 +1,20 @@
+{
+  "name": "navigation-tabs",
+  "title": "Tabs",
+  "template": "DashboardView",
+  "url": "/screen/components/view/navigation-tabs",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu"
+    },
+    {
+      "widgetName": "emptyDoc",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "/widgets/navigation/navigation-tabs.md"
+    }
+  ],
+  "rolesAllowed": [
+    "ADMIN"
+  ]
+}

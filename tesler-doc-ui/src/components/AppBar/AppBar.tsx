@@ -18,35 +18,27 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Avatar, Button, Popover, Row, Icon} from 'antd'
-import {ViewMetaResponse} from '@tesler-ui/core/interfaces/view'
-import ViewNavigation, {useViewNavigation, ViewNavigationItem} from 'components/ui/ViewNavigation/ViewNavigation'
+import ViewNavigation from 'components/ui/ViewNavigation/ViewNavigation'
 import * as styles from './AppBar.less'
-import {TeslerScreenResponse, ViewNavigationGroup} from 'interfaces/navigation'
 import {$do} from '@tesler-ui/core'
 import {Dispatch} from 'redux'
-import {AppState} from '../../reducers'
+import {AppState} from 'interfaces/storeSlices'
 import cn from 'classnames'
 
 interface AppBarOwnProps {
-
+    headerWidth: React.CSSProperties,
+    onMenuVisible: (menuVisible: boolean) => void
 }
 
 interface AppBarProps extends AppBarOwnProps {
-    screenName: string,
-    views: ViewMetaResponse[],
-    activeView: string,
-    menu: ViewNavigationGroup[],
-    headerWidth: any,
     fullName: string,
     login: string,
     mobileMenu: boolean,
     menuVisible: boolean,
-    onLogout: () => void,
-    onMenuVisible: (menuVisible: boolean) => void
+    onLogout: () => void
 }
 
 export function AppBar(props: AppBarProps) {
-    const views: ViewNavigationItem[] = useViewNavigation(props.menu, props.views)
     return <Row className={styles.headerContainer} type="flex" justify="center">
         <div
             className={
@@ -67,7 +59,7 @@ export function AppBar(props: AppBarProps) {
                 })}
             />
         }
-            <ViewNavigation views={views} activeView={props.activeView}/>
+            <ViewNavigation />
         </div>
         <div className={styles.controls}>
             <Popover
@@ -94,13 +86,7 @@ function userMenu(props: AppBarProps) {
 }
 
 function mapStateToProps(state: AppState) {
-    const sessionScreen = state.session.screens.find(screen => screen.name === state.screen.screenName)
-    const teslerScreenMeta = sessionScreen && sessionScreen.meta as TeslerScreenResponse
     return {
-        screenName: state.screen.screenName,
-        menu: teslerScreenMeta && teslerScreenMeta.navigation.menu,
-        views: state.screen.views,
-        activeView: state.view.url,
         fullName: state.session.fullName,
         login: state.session.login,
         menuVisible: state.screen.menuVisible,

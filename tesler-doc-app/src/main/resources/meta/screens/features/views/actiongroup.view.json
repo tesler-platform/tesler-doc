@@ -1,0 +1,22 @@
+{
+    "name": "actiongroup",
+    "title": "Action Group",
+    "template": "DashboardView",
+    "url": "/screen/features/view/actiongroup",
+    "widgets": [
+      {
+        "widgetName": "SecondLevelMenu",
+        "position": 0,
+        "gridWidth": 2
+      },
+      {
+        "widgetName": "employeeCard",
+        "position": 1,
+        "gridWidth": 2,
+        "descriptionFile": "/widgets/features/ActionGroup.md"
+      }
+    ],
+  "rolesAllowed": [
+    "ADMIN"
+  ]
+  }

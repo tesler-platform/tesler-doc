@@ -17,7 +17,7 @@
 
 import React from 'react'
 import {Dispatch} from 'redux'
-import {AppState} from 'reducers'
+import {AppState} from 'interfaces/storeSlices'
 import {$do, connect, buildBcUrl, useWidgetOperations} from '@tesler-ui/core'
 import {Button, Dropdown, Icon, Menu} from 'antd'
 import {Operation, OperationGroup} from '@tesler-ui/core/interfaces/operation'

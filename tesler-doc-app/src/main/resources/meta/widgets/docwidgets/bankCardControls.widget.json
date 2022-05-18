@@ -1,0 +1,157 @@
+{
+  "name": "bankCardControls",
+  "title": "On form",
+  "type": "Form",
+  "bc": "bankDoc",
+  "showCondition": [],
+  "fields": [
+    {
+      "label": "Name",
+      "key": "name",
+      "type": "input"
+    },
+    {
+      "label": "Number",
+      "key": "activeProjectsAmount",
+      "type": "number"
+    },
+    {
+      "label": "Percent",
+      "key": "testPercent",
+      "type": "percent"
+    },
+    {
+      "label": "Money",
+      "key": "testMoney",
+      "type": "money"
+    },
+    {
+      "label": "Checkbox",
+      "key": "isNational",
+      "type": "checkbox"
+    },
+    {
+      "label": "Date",
+      "key": "testDate",
+      "type": "date"
+    },
+    {
+      "label": "Date and Time",
+      "key": "testDate",
+      "type": "dateTime"
+    },
+    {
+      "label": "Date and Time (with seconds)",
+      "key": "testDate",
+      "type": "dateTimeWithSeconds"
+    },
+    {
+      "label": "Test Input",
+      "key": "testInput",
+      "type": "input"
+    },
+    {
+      "label": "Pick List",
+      "key": "testPickList",
+      "type": "pickList",
+      "popupBcName": "bankDocPicklist",
+      "pickMap": {
+        "testPickList": "name",
+        "testInput": "activeProjectsAmount"
+      }
+    },
+    {
+      "label" : "Dictionary",
+      "key" : "testDictionary",
+      "type" : "dictionary"
+    },
+    {
+      "label" : "Radio",
+      "key" : "testRadio",
+      "type" : "radio"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {},
+    "layout": {
+      "actionGroups": {
+        "include": [
+          "save",
+          "cancel-create"
+        ],
+        "exclude": [
+          "create",
+          "delete"
+        ]
+      },
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "name",
+              "span": 12
+            },
+            {
+              "fieldKey": "activeProjectsAmount",
+              "span": 12
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "isNational",
+              "span": 12
+            },
+            {
+              "fieldKey": "testMoney",
+              "span": 12
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "testDate",
+              "span": 12
+            },
+            {
+              "fieldKey": "testPercent",
+              "span": 12
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "testInput",
+              "span": 12
+            },
+            {
+              "fieldKey": "testPickList",
+              "span": 12
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "testDictionary",
+              "span": 24
+            }
+          ]
+        },
+        {
+          "cols": [
+            {
+              "fieldKey": "testRadio",
+              "span": 24
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

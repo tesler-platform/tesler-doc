@@ -18,10 +18,12 @@
 import React from 'react'
 import {Menu, Icon} from 'antd'
 import {SelectParam} from 'antd/es/menu'
-import {changeLocation, connect} from '@tesler-ui/core'
+import {$do, changeLocation, connect} from '@tesler-ui/core'
 import {SessionScreen} from '@tesler-ui/core/interfaces/session'
 import * as styles from './ScreenNavigation.less'
-import {AppState} from 'reducers/index'
+import {AppState} from 'interfaces/storeSlices'
+import {DrillDownType} from '@tesler-ui/core/interfaces/router'
+import {useDispatch} from 'react-redux'
 
 export interface ScreenNavigationProps {
     items: SessionScreen[],
@@ -33,8 +35,18 @@ export interface ScreenNavigationProps {
 export function ScreenNavigation(props: ScreenNavigationProps) {
     const screens: SessionScreen[] = props.items || []
 
+    const dispatch = useDispatch()
+
     const handleScreen = (e: SelectParam) => {
-        changeLocation(e.key)
+        if (e.key === '/screen/api-reference') {
+            dispatch($do.drillDown({
+                drillDownType: DrillDownType.external,
+                url: 'https://tesler-platform.github.io/tesler-ui',
+                route: null
+            }))
+        } else {
+            changeLocation(e.key)
+        }
     }
 
     return <Menu

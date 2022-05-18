@@ -1,0 +1,5 @@
+ID;TYPE;TYPE_DESC
+1;INTERNAL_ROLE;Роли пользователей
+2;DOC_TEST;Documentation test dictionary
+3;COUNTRY;Countries
+4;LANGUAGE;Languages

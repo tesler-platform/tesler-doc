@@ -1,0 +1,32 @@
+{
+  "name": "dictionary",
+  "title": "Dictionary",
+  "template": "DashboardView",
+  "url": "/screen/components/view/dictionary",
+  "widgets": [
+    {
+      "widgetName": "SecondLevelMenu",
+      "position": 0,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "bankListControls",
+      "position": 1,
+      "gridWidth": 2,
+      "descriptionFile": "/widgets/fields/Dictionary.md"
+    },
+    {
+      "widgetName": "bankCardControls",
+      "position": 2,
+      "gridWidth": 2
+    },
+    {
+      "widgetName": "bankDocPickList",
+      "position": 3,
+      "gridWidth": 2
+    }
+  ],
+  "rolesAllowed": [
+    "ADMIN"
+  ]
+}

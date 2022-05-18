@@ -1,0 +1,67 @@
+{
+  "name": "components",
+  "title": "Components Overview",
+  "primaryViewName": "navigation-overview",
+  "primaryViews": [
+    "navigation-overview"
+  ],
+  "navigation": {
+    "menu": [
+      {
+        "title": "Navigation",
+        "child": [
+            { "viewName": "navigation-overview" },
+            { "viewName": "navigation-screens" },
+            { "viewName": "navigation-views" },
+            { "viewName": "navigation-tabs" }
+        ]
+      },
+      {
+        "title": "Widgets",
+        "child": [
+          {
+            "viewName": "list"
+          },
+          {
+            "viewName": "form"
+          },
+          {
+            "viewName": "assocListPopup"
+          },
+          {
+            "viewName": "pickListPopup"
+          }
+        ]
+      },
+      {
+        "title": "Fields",
+        "child": [
+          {
+            "viewName": "fields"
+          },
+          {
+            "viewName": "input"
+          },
+          {
+            "viewName": "number"
+          },
+          {
+            "viewName": "date"
+          },
+          {
+            "viewName": "checkbox"
+          },
+          {
+            "viewName": "dictionary"
+          },
+          {
+            "viewName": "picklist"
+          },
+          {
+            "viewName": "radio"
+          }
+        ]
+      }
+    ]
+  }
+}

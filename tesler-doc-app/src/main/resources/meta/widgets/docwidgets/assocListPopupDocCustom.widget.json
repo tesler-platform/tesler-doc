@@ -1,0 +1,35 @@
+{
+  "name": "assocListPopupDocCustom",
+  "title": "",
+  "type": "Form",
+  "bc": "forAssocCustomEx",
+  "showCondition": [],
+  "fields": [
+    {
+      "label": "Names",
+      "key": "names",
+      "type": "multivalue",
+      "popupBcName": "assocListPopupCustomExAssoc",
+      "assocValueKey": "name"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {
+    },
+    "layout": {
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "names",
+              "span": 16
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+}

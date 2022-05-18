@@ -14,23 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import testReducer, {ITestState, initialState as testReducerInitial} from 'reducers/testReducer'
-import screenReducer, {initialState as screenInitialState} from 'reducers/screen'
-import dataReducer, {initialState as dataInitialState} from 'reducers/data'
-import viewReducer, {initialState as viewInitialState} from 'reducers/view'
-import sessionReducer, {getSessionAuth, initialState as sessionInitialState, TeslerSessionState} from 'reducers/session'
-import {Store} from '@tesler-ui/core/interfaces/store'
-import {TeslerScreenState} from 'interfaces/screen'
-import {TeslerClientReducersMapObject} from 'interfaces/store'
+import screenReducer, {initialState as screenInitialState} from './screen'
+import dataReducer, {initialState as dataInitialState} from './data'
+import viewReducer, {initialState as viewInitialState} from './view'
+import sessionReducer, {initialState as sessionInitialState, getSessionAuth} from './session'
+import {AppReducers} from '../interfaces/storeSlices'
+import {RootReducer} from 'interfaces/store'
 
 const sessionInitialWithAuth = getSessionAuth()
 
-export const reducers: TeslerClientReducersMapObject<AppReducers, any> = {
-    testReducer: {
-        initialState: testReducerInitial,
-        reducer: testReducer
-    },
+export const reducers: RootReducer<AppReducers, any> = {
+
     screen: {
         initialState: screenInitialState,
         reducer: screenReducer
@@ -48,11 +42,3 @@ export const reducers: TeslerClientReducersMapObject<AppReducers, any> = {
         reducer: sessionReducer
     }
 }
-
-export interface AppReducers extends Partial<Store> {
-    testReducer: ITestState,
-    screen: TeslerScreenState,
-    session: TeslerSessionState
-}
-
-export type AppState = Store & AppReducers

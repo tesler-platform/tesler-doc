@@ -35,11 +35,13 @@ module.exports = (env = {}, options) => {
     const isProduction = options.mode === 'production'
     const indexFileName = `index.${isProduction ? 'ftl' : 'html'}`
     return {
-        entry: './src/index.tsx',
+        entry: [
+            './src/index.tsx'
+        ],
         devtool: 'source-map',
         devServer: {
             host: '0.0.0.0',
-            port: 8080,
+            port: 8081,
             disableHostCheck: true,
             publicPath: '/ui/',
             historyApiFallback: {
@@ -47,6 +49,9 @@ module.exports = (env = {}, options) => {
             },
             proxy: {
                 '/api': {
+                    target: 'http://localhost:8080'
+                },
+                '/sitemap.xml': {
                     target: 'http://localhost:8080'
                 }
             }

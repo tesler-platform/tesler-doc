@@ -1,0 +1,27 @@
+{
+  "name": "tutorial",
+  "title": "Tutorial",
+  "primaryViewName": "example-project",
+  "primaryViews": [
+    "example-project"
+  ],
+  "navigation": {
+    "menu": [
+      {
+        "viewName": "example-project"
+      },
+      {
+        "viewName": "epics-overview"
+      },
+      {
+        "viewName": "middlewares-overview"
+      },
+      {
+        "viewName": "bulk-actions-customization"
+      },
+      {
+        "viewName": "custom-fields"
+      }
+    ]
+  }
+}

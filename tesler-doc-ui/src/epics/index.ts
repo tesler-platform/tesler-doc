@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {combineEpics} from 'redux-observable'
 import {sessionEpics} from 'epics/session'
+import {viewEpics} from 'epics/view'
 
-export const epics = combineEpics(
-    sessionEpics
-)
+export const epics = {
+    sessionEpics,
+    viewEpics
+}

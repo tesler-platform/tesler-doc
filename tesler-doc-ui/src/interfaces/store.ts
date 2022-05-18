@@ -14,35 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import {AppState} from '../interfaces/storeSlices'
+import {AnyAction} from './actions'
 
-import {LoginResponse} from '@tesler-ui/core/interfaces/session'
-import * as util from '@tesler-ui/core/actions/actions-utils'
-import {ActionPayloadTypes} from '@tesler-ui/core/actions/actions'
-import {AppState} from 'reducers'
+/**
+ * Describes an application reducer
+ * 
+ */
+export type CustomReducer<ReducerState, State = AppState> = (
+    state: ReducerState,
+    action: AnyAction,
+    store?: Readonly<State>
+) => ReducerState
 
-export interface TeslerLoginResponse extends LoginResponse {
-    fullName: string,
-    login: string
-}
-
-class TeslerActionPayloadTypes extends ActionPayloadTypes {
-    loginDone: TeslerLoginResponse
-}
-
-export declare type ActionsMap = util.uActionsMap<TeslerActionPayloadTypes>
-export declare type AnyAction = util.AnyOfMap<ActionsMap> | {
-    type: ' UNKNOWN ACTION ';
-}
-
-export declare type TeslerCoreReducer<ReducerState, ClientActions, State = AppState> =
-    (state: ReducerState, action: AnyAction & ClientActions, store?: Readonly<State>) => ReducerState
-
-export interface TeslerClientReducer<ReducerState, ClientActions> {
+/**
+ * 
+ */
+export interface ReducerConfiguration<ReducerState, ClientActions> {
     initialState: ReducerState
     override?: boolean
-    reducer: TeslerCoreReducer<ReducerState, ClientActions>
+    reducer: CustomReducer<ReducerState, ClientActions>
 }
 
-export declare type TeslerClientReducersMapObject<ClientStore, ClientActions> = {
-    [reducerName in keyof ClientStore]: TeslerClientReducer<ClientStore[keyof ClientStore], ClientActions>;
+/**
+ * 
+ */
+export type RootReducer<ClientStore, ClientActions> = {
+    [reducerSliceName in keyof ClientStore]: ReducerConfiguration<ClientStore[keyof ClientStore], ClientActions>;
 }

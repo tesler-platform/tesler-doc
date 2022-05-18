@@ -16,9 +16,10 @@
  */
 
 import {coreActions} from '@tesler-ui/core'
-import {AppState} from 'reducers'
 import {Session} from '@tesler-ui/core/interfaces/session'
-import {AnyAction} from 'interfaces/store'
+import {AppState} from 'interfaces/storeSlices'
+import {actionTypes, AnyAction} from 'interfaces/actions'
+import {TeslerLoginResponse} from 'interfaces/session'
 
 export interface TeslerSessionState extends Session {
     savedSessionActive: boolean,
@@ -27,7 +28,7 @@ export interface TeslerSessionState extends Session {
 }
 
 export const initialState: TeslerSessionState = {
-    active: false,
+    active: true,
     savedSessionActive: false,
     loginSpin: false,
     screens: [],
@@ -52,11 +53,11 @@ export default function sessionReducer(
     store: Readonly<AppState>
 ): TeslerSessionState {
     switch (action.type) {
-        case coreActions.loginDone: {
+        case actionTypes.loginDone: {
             return {
                 ...state,
-                fullName: action.payload.fullName,
-                login: action.payload.login,
+                fullName: (action.payload as TeslerLoginResponse).fullName,
+                login: (action.payload as TeslerLoginResponse).login,
                 savedSessionActive: false
             }
         }

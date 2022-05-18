@@ -1,0 +1,35 @@
+{
+  "name": "assocListPopupDocGeneral",
+  "title": "",
+  "type": "Form",
+  "bc": "forAssocEx",
+  "showCondition": [],
+  "fields": [
+    {
+      "label": "Select several items",
+      "key": "names",
+      "type": "multivalue",
+      "popupBcName": "assocListPopupExAssoc",
+      "assocValueKey": "name"
+    }
+  ],
+  "axisFields": [],
+  "chart": [],
+  "options": {
+    "actionGroups": {
+    },
+    "layout": {
+      "rows": [
+        {
+          "cols": [
+            {
+              "fieldKey": "names",
+              "span": 16
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+}

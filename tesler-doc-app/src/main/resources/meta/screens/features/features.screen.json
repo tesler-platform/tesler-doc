@@ -1,0 +1,49 @@
+{
+  "name": "features",
+  "title": "Features",
+  "primaryViewName": "features",
+  "primaryViews": [
+    "features"
+  ],
+  "navigation": {
+    "menu": [
+      {
+        "title": "Filter and Sort",
+        "child": [
+          {
+            "viewName": "filter"
+          },
+          {
+            "viewName": "sort"
+          },
+          {
+            "viewName": "pfilter"
+          },
+          {
+            "viewName": "filtertypes"
+          }
+        ]
+      },
+      {
+        "title": "Actions",
+        "child": [
+          {
+            "viewName": "action"
+          },
+          {
+            "viewName": "actiongroup"
+          },
+          {
+            "viewName": "built-in-actions"
+          },
+          {
+            "viewName": "bulk-actions"
+          }
+        ]
+      },
+      {
+        "viewName": "force-active"
+      }
+    ]
+  }
+}

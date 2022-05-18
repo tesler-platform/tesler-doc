@@ -18,8 +18,7 @@
 import * as React from 'react'
 import {Dispatch} from 'redux'
 import {Layout as AntLayout, Row, Col, Spin} from 'antd'
-import {$do, connect, View} from '@tesler-ui/core'
-import {AppState} from 'reducers'
+import {connect, View} from '@tesler-ui/core'
 import AppSideMenu from 'components/AppSideMenu/AppSideMenu'
 import AppBar from 'components/AppBar/AppBar'
 import ViewHeader from 'components/ViewHeader/ViewHeader'
@@ -29,9 +28,21 @@ import Card from 'components/Card/Card'
 import {WidgetMeta, WidgetTypes} from '@tesler-ui/core/interfaces/widget'
 import Login from 'components/Login/Login'
 import {ApplicationError} from '@tesler-ui/core/interfaces/view'
-import {setMenuVisible, setMobileMenu} from 'actions/actions'
+import {$do} from 'actions/types'
+import NavEx1 from 'components/widgets/navigationExamples/NavEx1'
+import NavEx2 from 'components/widgets/navigationExamples/NavEx2'
+import {useScroll} from 'utils/useScroll'
+import AssocListPopup from '../widgets/AssocListPopup/AssocListPopup'
+import PickListPopup from '../widgets/PickListPopup/PickListPopup'
+import {CustomWidget} from '@tesler-ui/core/interfaces/widget'
+import {AppState} from 'interfaces/storeSlices'
+import {TableWidget} from 'components/widgets/TableWidget/TableWidget'
+import {PhoneInput} from 'components/ui/PhoneInput/PhoneInput'
+import { useDispatch } from 'react-redux'
+import { SessionScreen } from '@tesler-ui/core/interfaces/session'
 
 interface LayoutProps {
+    screens: SessionScreen[],
     screenName: string,
     sessionActive: boolean,
     savedSessionActive: boolean,
@@ -54,6 +65,18 @@ const skipWidgetTypes = [
     WidgetTypes.SecondLevelMenu,
 ]
 
+const customWidgets: Record<string, CustomWidget> = {
+    NavEx1,
+    NavEx2,
+    [WidgetTypes.List]: TableWidget,
+    [WidgetTypes.AssocListPopup]: AssocListPopup,
+    [WidgetTypes.PickListPopup]: PickListPopup,
+}
+
+const customFields = {
+    phone: PhoneInput
+}
+
 export function Layout(props: LayoutProps) {
     const isInfoPanelLayout = props.widgets.some(widget => widget.type !== WidgetTypes.List)
     const headerWidth = {
@@ -65,6 +88,14 @@ export function Layout(props: LayoutProps) {
         maxWidth: '100%'
     }
 
+    const dispatch = useDispatch()
+    React.useEffect(() => {
+        if (props.sessionActive && !props.screens.length) {
+            dispatch($do.login({ login: 'vanilla', password: 'vanilla' }))
+        }
+    }, [props.sessionActive, props.screens, dispatch])
+
+    useScroll()
     React.useEffect(() => {
         if (props.savedSessionActive) {
             props.onLogin()
@@ -135,7 +166,9 @@ export function Layout(props: LayoutProps) {
                             <Col style={headerWidth}>
                                 <div style={bodyWidth}>
                                     <View
-                                        card={Card as any}
+                                        card={Card}
+                                        customWidgets={customWidgets}
+                                        customFields={customFields}
                                         skipWidgetTypes={skipWidgetTypes}
                                     />
                                 </div>
@@ -150,6 +183,7 @@ export function Layout(props: LayoutProps) {
 
 function mapStateToProps(store: AppState) {
     return {
+        screens: store.session.screens,
         sessionActive: store.session.active,
         savedSessionActive: store.session.savedSessionActive,
         screenName: store.router.screenName,
@@ -177,10 +211,10 @@ function mapDispatchToProps(dispatch: Dispatch) {
             dispatch($do.closeViewError(null))
         },
         onMenuVisible: (menuVisible: boolean) => {
-            dispatch(setMenuVisible(menuVisible))
+            dispatch($do.setMenuVisible(menuVisible))
         },
         onMobileMenu: (mobileMenu: boolean) => {
-            dispatch(setMobileMenu(mobileMenu))
+            dispatch($do.setMobileMenu(mobileMenu))
         }
     }
 }
