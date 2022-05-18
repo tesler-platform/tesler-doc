@@ -13,43 +13,104 @@
     <name>Tesler</name>
   </organization>
 
+  <parent>
+    <groupId>io.tesler</groupId>
+    <artifactId>tesler-starter-parent</artifactId>
+     <version>3.0.4</version>
+  </parent>
+
+
   <properties>
-    <checktyle.config>/tesler-doc-base/src/main/resources/checkstyle-checker.xml</checktyle.config>
+
+    <checktyle.config>tesler-doc-app/src/main/resources/checkstyle-checker.xml</checktyle.config>
     <skip.license>false</skip.license>
+    <dollar.sign>$</dollar.sign>
+
+    <!-- compiler settings -->
+
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- build settings -->
+    <spring.active.profiles/>
+    <resource.filtering>false</resource.filtering>
+    <perform.build.only>true</perform.build.only>
+    <liquibase.version>4.6.1</liquibase.version>
+    <liquibase.dropfirst>false</liquibase.dropfirst>
+    <skip.docker>true</skip.docker>
+    <liquibase.changelog>db/migration/liquibase/master.xml</liquibase.changelog>
+    <docker.registry>${dockerRegistry}</docker.registry>
+    <docker.pull.newerimage>false</docker.pull.newerimage>
+    <docker.deploy.phase>verify</docker.deploy.phase>
+
+    <!--minio compatible version-->
+    <okhttp3.version>4.8.1</okhttp3.version>
+
   </properties>
 
   <profiles>
-    <profile>
-      <id>IntegrationTests</id>
-      <modules>
-        <module>tesler-doc-it</module>
-      </modules>
-    </profile>
     <profile>
       <id>UI</id>
       <modules>
         <module>tesler-doc-ui</module>
       </modules>
     </profile>
+    <profile>
+      <id>allow-snapshots</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>snapshots-repo</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <updatePolicy>always</updatePolicy>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>apache.snapshots</id>
+          <name>Apache Snapshot Repository</name>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
   </profiles>
 
   <modules>
-    <module>tesler-doc-bom</module>
-    <module>tesler-doc-base</module>
-    <module>tesler-doc-model</module>
-    <module>tesler-doc-source</module>
-    <module>tesler-doc-tests</module>
     <module>tesler-doc-app</module>
-    <module>tesler-doc-db</module>
   </modules>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
+  </dependencies>
 
   <build>
     <pluginManagement>
       <plugins>
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>3.1.1</version>
           <configuration>
             <configLocation>${checktyle.config}</configLocation>
             <encoding>UTF-8</encoding>
@@ -74,10 +135,11 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>8.8</version>
+              <version>8.38</version>
             </dependency>
           </dependencies>
         </plugin>
+
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>license-maven-plugin</artifactId>
@@ -129,6 +191,10 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>license-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
