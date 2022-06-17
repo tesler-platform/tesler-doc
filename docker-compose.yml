@@ -1,55 +1,13 @@
 version: '3.6'
 
 services:
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - 0.0.0.0:80:80
-    depends_on:
-      - tesler-doc-node-1
-      - tesler-doc-node-2
-  tesler-doc-node-1:
-    build: ./tesler-doc-app
-    image: tesler-doc-app:latest
-    environment:
-      DATABASE_DRIVER: 'org.postgresql.Driver'
-      DATABASE_URL: 'jdbc:postgresql://pgs:5432/postgres'
-      DATABASE_USER: 'postgres'
-      DATABASE_PASSWORD: 'khKJPOsfiwae'
-      JAVA_TOOL_OPTIONS: '-agentlib:jdwp=transport=dt_socket,server=y,address=8989,suspend=n'
-      META_DIRECTORY: 'classpath:meta'
-    expose:
-      - 8080
-    ports:
-      - 0.0.0.0:8081:8080
-      - 127.0.0.1:8981:8989
-    depends_on:
-      - pgs
-  tesler-doc-node-2:
-    build: ./tesler-doc-app
-    image: tesler-doc-app:latest
-    environment:
-      DATABASE_DRIVER: 'org.postgresql.Driver'
-      DATABASE_URL: 'jdbc:postgresql://pgs:5432/postgres'
-      DATABASE_USER: 'postgres'
-      DATABASE_PASSWORD: 'khKJPOsfiwae'
-      JAVA_TOOL_OPTIONS: '-agentlib:jdwp=transport=dt_socket,server=y,address=8989,suspend=n'
-      META_DIRECTORY: 'classpath:meta'
-    expose:
-      - 8080
-    ports:
-      - 0.0.0.0:8082:8080
-      - 127.0.0.1:8982:8989
-    depends_on:
-      - pgs
-  pgs:
+
+  pgs-local:
     image: postgres:alpine
     environment:
       - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=khKJPOsfiwae
+      - POSTGRES_PASSWORD=postgres
     expose:
       - 5432
     ports:
-      - 127.0.0.1:6431:5432
+      - 5432:5432
