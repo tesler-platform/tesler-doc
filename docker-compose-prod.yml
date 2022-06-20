@@ -11,8 +11,7 @@ services:
       - tesler-doc-node-1
       - tesler-doc-node-2
   tesler-doc-node-1:
-    build: ./tesler-doc-app
-    image: tesler-doc-app:latest
+    image: 'teslerplatform/doc:${APP_IMAGE_TAG}'
     environment:
       DATABASE_DRIVER: 'org.postgresql.Driver'
       DATABASE_URL: 'jdbc:postgresql://pgs:5432/postgres'
@@ -27,9 +26,10 @@ services:
       - 127.0.0.1:8981:8989
     depends_on:
       - pgs
+    restart: always
+
   tesler-doc-node-2:
-    build: ./tesler-doc-app
-    image: tesler-doc-app:latest
+    image: 'teslerplatform/doc:${APP_IMAGE_TAG}'
     environment:
       DATABASE_DRIVER: 'org.postgresql.Driver'
       DATABASE_URL: 'jdbc:postgresql://pgs:5432/postgres'
@@ -53,3 +53,4 @@ services:
       - 5432
     ports:
       - 127.0.0.1:6431:5432
+    restart: always
