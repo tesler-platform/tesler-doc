@@ -62,16 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.cors();
 		http.authorizeRequests()
-				.antMatchers("/rest/**").permitAll()
-				.antMatchers("/css/**").permitAll()
-				.antMatchers("/favicon.ico").permitAll()
-				.antMatchers("/sitemap.xml").permitAll()
-				.antMatchers("/robots.txt").permitAll()
-				.antMatchers("/ui/**").permitAll()
-				.antMatchers("/api/v1/files/**").permitAll()
-				.antMatchers("/api/v1/bc-registry/**").permitAll()
-				.antMatchers("/admin/**").hasRole("ADMIN")
-				.antMatchers("/**").authenticated();
+				.antMatchers("/**").permitAll()
+				.antMatchers("/admin/**").hasRole("ADMIN");
 		http.logout()
 				.invalidateHttpSession(true)
 				.logoutUrl("/api/v1/logout")
